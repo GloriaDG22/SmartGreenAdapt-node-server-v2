@@ -10,7 +10,7 @@ info:
   title: Smart GreenAdapt
   version: "1.0"
 servers:
-- url: https://raw.githubusercontent.com/
+- url: /
 paths:
   /airquality:
     delete:
