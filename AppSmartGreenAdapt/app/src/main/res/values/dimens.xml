@@ -1,0 +1,10 @@
+<resources>
+    <dimen name="fab_margin">58dp</dimen>
+    <dimen name="margin_vertical">30dp</dimen>
+    <dimen name="text_margin_item">5dp</dimen>
+    <dimen name="subtext_margin_item">10dp</dimen>
+    <dimen name="button_state">120dp</dimen>
+    <dimen name="ic_state">90dp</dimen>
+    <dimen name="text_size_date">20sp</dimen>
+    <dimen name="text_size_notif">25sp</dimen>
+</resources>

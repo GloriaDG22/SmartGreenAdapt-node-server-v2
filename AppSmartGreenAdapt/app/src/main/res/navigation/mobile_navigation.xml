@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_information">
+
+    <fragment
+        android:id="@+id/navigation_information"
+        android:name="es.unex.smartgreenadapt.ui.information.InformationFragment"
+        android:label="@string/title_information"
+        tools:layout="@layout/fragment_information" />
+
+    <fragment
+        android:id="@+id/navigation_state"
+        android:name="es.unex.smartgreenadapt.ui.state.StateFragment"
+        android:label="@string/title_state"
+        tools:layout="@layout/fragment_state" />
+
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="es.unex.smartgreenadapt.ui.notifications.NotificationsFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_notifications" />
+</navigation>

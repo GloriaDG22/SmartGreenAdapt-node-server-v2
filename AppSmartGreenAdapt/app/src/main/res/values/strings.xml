@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">SmartGreenAdapt</string>
+    <string name="title_information">Information</string>
+    <string name="title_state">State</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="text_no_hay_Notificaciones">No hay notificaciones</string>
+    <string name="text_temperature">Temperature</string>
+    <string name="text_feels_like">Feels like</string>
+    <string name="text_luminosity">Luminosity</string>
+    <string name="text_humidity">Humidity</string>
+    <string name="text_airquality">Air Quality</string>
+    <string name="text_wind">Wind</string>
+    <string name="text_pressure">Pressure</string>
+    <string name="text_temperature_max">Temperature Max</string>
+    <string name="text_temperature_min">Temperature Min</string>
+    <string name="text_weather">Weather</string>
+    <string name="text_date">Date</string>
+    <string name="text_state">State</string>
+</resources>
