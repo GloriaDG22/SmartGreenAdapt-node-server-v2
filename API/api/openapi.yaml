@@ -733,6 +733,610 @@ paths:
       tags:
       - Temperatura
       x-swagger-router-controller: Temperatura
+  /windows:
+    get:
+      description: Devuelve todos los datos relacionados con el estado Ventana
+      operationId: getWindows
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created
+                title: Created
+                type: string
+          description: Created
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Devuelve todas las ventanas.
+      tags:
+      - Ventana
+      x-swagger-router-controller: Ventana
+    post:
+      description: Creación de una nueva ventana
+      operationId: postWindow
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Windows'
+        required: true
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created
+                title: Created
+                type: string
+          description: Created
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Registra un nuevo dato de Ventana.
+      tags:
+      - Ventana
+      x-swagger-router-controller: Ventana
+    put:
+      description: Modifica un dato de ventana previamente registrado
+      operationId: putWindow
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Windows'
+        required: true
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created
+                title: Created
+                type: string
+          description: Created
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Modifica un dato de ventana previamente registrado
+      tags:
+      - Ventana
+      x-swagger-router-controller: Ventana
+    delete:
+      description: Eliminación un dato de ventana en la base de datos.
+      operationId: deleteWindow
+      parameters:
+        - description: Id del dato de ventana
+          explode: true
+          in: query
+          name: idWindow
+          required: true
+          schema:
+            format: int32
+            type: integer
+          style: form
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created
+                title: Created
+                type: string
+          description: Created
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Eliminación de datos de ventana.
+      tags:
+      - Ventana
+      x-swagger-router-controller: Ventana
+  /irrigation:
+    get:
+      description: Devuelve todos los datos relacionados con el riego.
+      operationId: getIrrigation
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created
+                title: Created
+                type: string
+          description: Created
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Devuelve todos los datos relacionados con el riego.
+      tags:
+        - Riego
+      x-swagger-router-controller: Riego
+    post:
+      description: Creacion de nuevos datos asociados al riego.
+      operationId: postIrrigation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Irrigation'
+        required: true
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created
+                title: Created
+                type: string
+          description: Created
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Registra un nuevo dato de riego.
+      tags:
+        - Riego
+      x-swagger-router-controller: Riego
+    put:
+      description: Modifica un dato de riego previamente registrado
+      operationId: putIrrigation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Irrigation'
+        required: true
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created
+                title: Created
+                type: string
+          description: Created
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Modifica un dato de riego previamente registrado
+      tags:
+        - Riego
+      x-swagger-router-controller: Riego
+    delete:
+      description: Eliminación un dato de riego en la base de datos.
+      operationId: deleteIrrigation
+      parameters:
+        - description: Id del dato de riego
+          explode: true
+          in: query
+          name: idIrrigation
+          required: true
+          schema:
+            format: int32
+            type: integer
+          style: form
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created
+                title: Created
+                type: string
+          description: Created
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Eliminación de datos de riego.
+      tags:
+      - Riego
+      x-swagger-router-controller: Riego
+  /sprinklers:
+    get:
+      description: Devuelve todos los datos relacionados con los aspersores.
+      operationId: getSprinklers
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created
+                title: Created
+                type: string
+          description: Created
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Devuelve todos los datos relacionados con los aspersores.
+      tags:
+        - Aspersor
+      x-swagger-router-controller: Aspersor
+    post:
+      description: Creacion de nuevos datos asociados a los aspersores.
+      operationId: postSprinklers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sprinklers'
+        required: true
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created
+                title: Created
+                type: string
+          description: Created
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Registra un nuevo dato de aspersor.
+      tags:
+        - Aspersor
+      x-swagger-router-controller: Aspersor
+    put:
+      description: Modifica un dato de aspersor previamente registrado
+      operationId: putSprinklers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sprinklers'
+        required: true
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created
+                title: Created
+                type: string
+          description: Created
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Modifica un dato de aspersor previamente registrado
+      tags:
+        - Aspersor
+      x-swagger-router-controller: Aspersor
+    delete:
+      description: Eliminación un dato de aspersores en la base de datos.
+      operationId: deleteSprinklers
+      parameters:
+        - description: Id del dato de aspersor
+          explode: true
+          in: query
+          name: idSprinklers
+          required: true
+          schema:
+            format: int32
+            type: integer
+          style: form
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created
+                title: Created
+                type: string
+          description: Created
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Eliminación de datos de aspersores.
+      tags:
+        - Aspersor
+      x-swagger-router-controller: Aspersor
+  /heatings:
+    get:
+      description: Devuelve todos los datos relacionados con los calefactores.
+      operationId: getHeatings
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created
+                title: Created
+                type: string
+          description: Created
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Devuelve todos los datos relacionados con los calefactores.
+      tags:
+        - Calefactor
+      x-swagger-router-controller: Calefactor
+    post:
+      description: Creacion de nuevos datos asociados a los calefactores.
+      operationId: postHeating
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Heating'
+        required: true
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created
+                title: Created
+                type: string
+          description: Created
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Registra un nuevo dato de calefactor.
+      tags:
+        - Calefactor
+      x-swagger-router-controller: Calefactor
+    put:
+      description: Modifica un dato de calefactor previamente registrado
+      operationId: putHeating
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Heating'
+        required: true
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created
+                title: Created
+                type: string
+          description: Created
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Modifica un dato de calefactor previamente registrado
+      tags:
+        - Calefactor
+      x-swagger-router-controller: Calefactor
+    delete:
+      description: Eliminación un dato de calefactor en la base de datos.
+      operationId: deleteHeating
+      parameters:
+        - description: Id del dato de heating
+          explode: true
+          in: query
+          name: idHeating
+          required: true
+          schema:
+            format: int32
+            type: integer
+          style: form
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created
+                title: Created
+                type: string
+          description: Created
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Eliminación de datos de calefactor.
+      tags:
+        - Calefactor
+      x-swagger-router-controller: Calefactor
 components:
   responses:
     201:
@@ -765,6 +1369,8 @@ components:
         date: "2019-01-10 13:12:35"
         amount: 45.5
         idAirQuality: 1
+        minValue: 45.5
+        maxValue: 45.5
       properties:
         idAirQuality:
           example: 1
@@ -776,12 +1382,20 @@ components:
         date:
           example: "2019-01-10 13:12:35"
           type: string
+        minValue:
+          example: 45.5
+          type: number
+        maxValue:
+          example: 45.5
+          type: number
       type: object
     Luminosity:
       example:
         idLuminosity: 1
         date: "2019-01-10 13:12:35"
         amount: 45.5
+        minValue: 45.5
+        maxValue: 45.5
       properties:
         idLuminosity:
           example: 1
@@ -793,22 +1407,36 @@ components:
         date:
           example: "2019-01-10 13:12:35"
           type: string
+        minValue:
+          example: 45.5
+          type: number
+        maxValue:
+          example: 45.5
+          type: number
       type: object
     Notification:
       example:
         date: "2019-01-10 13:12:35"
-        amount: 45.5
         idNotification: 1
+        isWarning: true
+        problem: "Temperatura"
+        status: "Low"
       properties:
         idNotification:
           example: 1
           format: int64
           type: integer
-        amount:
-          example: 45.5
-          type: number
         date:
           example: "2019-01-10 13:12:35"
+          type: string
+        isWarning:
+          example: true
+          type: boolean
+        problem:
+          example: "Temperatura"
+          type: string
+        status:
+          example: "Low"
           type: string
       type: object
     Humidity:
@@ -816,6 +1444,8 @@ components:
         date: "2019-01-10 13:12:35"
         idHumidity: 1
         amount: 45.5
+        minValue: 45.5
+        maxValue: 45.5
       properties:
         idHumidity:
           example: 1
@@ -827,12 +1457,20 @@ components:
         date:
           example: "2019-01-10 13:12:35"
           type: string
+        minValue:
+          example: 45.5
+          type: number
+        maxValue:
+          example: 45.5
+          type: number
       type: object
     Temperature:
       example:
         date: "2019-01-10 13:12:35"
         idTemperature: 1
         amount: 45.5
+        minValue: 45.5
+        maxValue: 45.5
       properties:
         idTemperature:
           example: 1
@@ -844,5 +1482,79 @@ components:
         date:
           example: "2019-01-10 13:12:35"
           type: string
+        minValue:
+          example: 45.5
+          type: number
+        maxValue:
+          example: 45.5
+          type: number
       type: object
+    Windows:
+      example:
+        idWindows: 1
+        isOn: true
+      properties:
+        idWindows:
+          example: 1
+          format: int64
+          type: integer
+        isOn:
+          example: true
+          type: boolean
+        affects:
+          type: array
+          items:
+            $ref: string
+    Irrigation:
+      example:
+        isOn: true
+        idIrrigation: 1
+      properties:
+        idIrrigation:
+          example: 1
+          format: int64
+          type: integer
+        isOn:
+          example: true
+          type: boolean
+        affects:
+          type: array
+          items:
+            $ref: string
+    Sprinklers:
+      example:
+        isOn: true
+        idSprinklers: 1
+      properties:
+        idSprinklers:
+          example: 1
+          format: int64
+          type: integer
+        isOn:
+          example: true
+          type: boolean
+        affects:
+          type: array
+          items:
+            $ref: string
+    Heating:
+      example:
+        isOn: true
+        type: "Infrarrojos"
+        idHeating: 1
+      properties:
+        idHeating:
+          example: 1
+          format: int64
+          type: integer
+        isOn:
+          example: true
+          type: boolean
+        affects:
+          type: array
+          items:
+            $ref: string
+        type:
+          type: string
+          example: "Infrarrojos"
 
