@@ -1502,9 +1502,8 @@ components:
           example: true
           type: boolean
         affects:
-          type: array
-          items:
-            $ref: string
+          type: string
+          example: "Temperatura,Viento"
     Irrigation:
       example:
         isOn: true
@@ -1518,9 +1517,8 @@ components:
           example: true
           type: boolean
         affects:
-          type: array
-          items:
-            $ref: string
+          type: string
+          example: "Temperatura,Humedad"
     Sprinklers:
       example:
         isOn: true
@@ -1534,9 +1532,8 @@ components:
           example: true
           type: boolean
         affects:
-          type: array
-          items:
-            $ref: string
+          type: string
+          example: "Temperatura,Humedad"
     Heating:
       example:
         isOn: true
@@ -1551,9 +1548,8 @@ components:
           example: true
           type: boolean
         affects:
-          type: array
-          items:
-            $ref: string
+          type: string
+          example: "Temperatura"
         type:
           type: string
           example: "Infrarrojos"
