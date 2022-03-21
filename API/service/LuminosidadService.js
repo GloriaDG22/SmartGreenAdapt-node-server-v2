@@ -81,7 +81,9 @@ module.exports.postLuminosity = function(req, res, next) {
 
     var data = {
         amount: Number((req.undefined.originalValue.amount).toFixed(2)),
-        date: date
+        date: date,
+        min_value: Number((req.undefined.originalValue.minValue).toFixed(2)),
+        max_value: Number((req.undefined.originalValue.maxValue).toFixed(2))
     }
 
     connection.query(query, [data], function (error, results) {
@@ -129,7 +131,9 @@ module.exports.putLuminosity = function(req, res, next) {
     var query = 'UPDATE luminosity SET ? WHERE id = ?';
     var data = {
         amount: Number((req.undefined.originalValue.amount).toFixed(2)),
-        date: req.undefined.originalValue.date.toString()
+        date: req.undefined.originalValue.date.toString(),
+        min_value: Number((req.undefined.originalValue.minValue).toFixed(2)),
+        max_value: Number((req.undefined.originalValue.maxValue).toFixed(2))
     }
 
     connection.query(query, [data, req.undefined.originalValue.idLuminosity], function (error, results) {

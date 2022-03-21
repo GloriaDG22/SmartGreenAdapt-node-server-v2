@@ -28,9 +28,9 @@ var client = mqtt.connect('mqtt://localhost:1883', options);
 module.exports.getNotification = function(req, res, next) {
     console.log("get notification data");
 
-    var query = 'SELECT * FROM notification WHERE date = ?';
+    var query = 'SELECT * FROM notification';
 
-    connection.query(query, [req.date.originalValue], function (error, results) {
+    connection.query(query,  function (error, results) {
         if (error) throw error;
 
         res.send({
@@ -57,9 +57,18 @@ module.exports.postNotification = function(req, res, next) {
     if (!req.undefined.originalValue.date) date = new Date();
     else date = req.undefined.originalValue.date;
 
+    var is_warning;
+    if(req.undefined.originalValue.isWarning){
+        is_warning = 1;
+    } else {
+        is_warning = 0;
+    }
+
     var data = {
-        amount: Number((req.undefined.originalValue.amount).toFixed(2)),
-        date: date
+        date: date,
+        is_warning: is_warning,
+        status: req.undefined.originalValue.status,
+        problem: req.undefined.originalValue.problem
     }
 
     connection.query(query, [data], function (error, results) {
