@@ -82,7 +82,8 @@ module.exports.postWindow = function(req, res, next) {
 
     var data = {
         affects: req.undefined.originalValue.affects,
-        is_on: is_on
+        is_on: is_on,
+        name: req.undefined.originalValue.name
     }
 
     connection.query(query, [data], function (error, results) {
@@ -138,7 +139,7 @@ module.exports.putWindow = function(req, res, next) {
     var data = {
         affects: req.undefined.originalValue.affects,
         is_on: is_on,
-        type: req.undefined.originalValue.type
+        name: req.undefined.originalValue.name
     }
 
     connection.query(query, [data, req.undefined.originalValue.idWindows], function (error, results) {
