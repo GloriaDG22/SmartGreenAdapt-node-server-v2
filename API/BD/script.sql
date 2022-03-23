@@ -88,3 +88,4 @@ CREATE TABLE Weather (
     season VARCHAR(10),
     PRIMARY KEY(id)    
 );
+

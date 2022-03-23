@@ -2,42 +2,23 @@ package es.unex.smartgreenadapt.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
+
+import es.unex.smartgreenadapt.model.information.Message;
 
 public class Notification {
 
-    @SerializedName(value = "id")
-    private int idNot;
+    @SerializedName("message")
+    public ArrayList<MessageNotification> message = new ArrayList<>();
 
-    @SerializedName("date")
-    private Date date;
-
-    @SerializedName("amount")
-    private String description;
-
-
-    public int getIdNot() {
-        return idNot;
+    public ArrayList<MessageNotification> getList() {
+        return message;
     }
 
-    public String getDate() {
-        return date.toString();
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Notification(Date date, String description) {
-        this.date = date;
-        this.description = description;
+    public void setList(ArrayList<MessageNotification> message) {
+        this.message = message;
     }
 }
+

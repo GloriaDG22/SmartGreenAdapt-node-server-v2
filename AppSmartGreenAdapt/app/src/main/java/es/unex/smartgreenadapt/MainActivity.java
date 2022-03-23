@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         // Parte superior de la pantalla
         toolbar = findViewById(R.id.toolbar_main);
         setSupportActionBar(toolbar);
+
         View logoView = toolbar.getChildAt(0);
         logoView.setOnClickListener(v -> {
             cargarFragment(new InformationFragment());

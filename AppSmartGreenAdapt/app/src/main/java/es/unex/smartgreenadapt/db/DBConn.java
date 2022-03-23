@@ -10,12 +10,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import es.unex.smartgreenadapt.model.AirQuality;
-import es.unex.smartgreenadapt.model.Humidity;
-import es.unex.smartgreenadapt.model.Luminosity;
+import es.unex.smartgreenadapt.model.information.AirQuality;
+import es.unex.smartgreenadapt.model.information.Humidity;
+import es.unex.smartgreenadapt.model.information.Luminosity;
 import es.unex.smartgreenadapt.model.Notification;
-import es.unex.smartgreenadapt.model.Temperature;
-import es.unex.smartgreenadapt.ui.notifications.ListNotificationAdapter;
+import es.unex.smartgreenadapt.model.information.Temperature;
 
 public class DBConn {
 
@@ -97,8 +96,8 @@ public class DBConn {
             String sql = "SELECT * FROM airquality"; // TODO Get those who has the date 5 minutes less than actual for example
             ResultSet rset = st.executeQuery(sql);
             while(rset.next()) {
-                AirQuality a = new AirQuality((Date) rset.getDate(3), rset.getInt(2));
-                arrAirQuality.add(a);
+                //AirQuality a = new AirQuality((Date) rset.getDate(3), rset.getInt(2));
+                //arrAirQuality.add(a);
             }
             return arrAirQuality;
         } catch (SQLException e) {
@@ -118,8 +117,8 @@ public class DBConn {
             String sql = "SELECT * FROM humidity"; // TODO Get those who has the date 5 minutes less than actual for example
             ResultSet rset = st.executeQuery(sql);
             while(rset.next()) {
-                Humidity h = new Humidity((Date) rset.getDate(3), rset.getInt(2));
-                arrHumidity.add(h);
+                //Humidity h = new Humidity((Date) rset.getDate(3), rset.getInt(2));
+                //arrHumidity.add(h);
             }
             return arrHumidity;
         } catch (SQLException e) {
@@ -139,8 +138,8 @@ public class DBConn {
             String sql = "SELECT * FROM luminosity"; // TODO Get those who has the date 5 minutes less than actual for example
             ResultSet rset = st.executeQuery(sql);
             while(rset.next()) {
-                Luminosity l = new Luminosity((Date) rset.getDate(3), rset.getInt(2));
-                arrLuminosity.add(l);
+                //Luminosity l = new Luminosity((Date) rset.getDate(3), rset.getInt(2));
+                //arrLuminosity.add(l);
             }
             return arrLuminosity;
         } catch (SQLException e) {
@@ -160,8 +159,8 @@ public class DBConn {
             String sql = "SELECT * FROM notification"; // TODO Get those who has the date 5 minutes less than actual for example
             ResultSet rset = st.executeQuery(sql);
             while(rset.next()) {
-                Notification n = new Notification(rset.getDate(3), rset.getString(2));
-                arrNoise.add(n);
+                //Notification n = new Notification(rset.getDate(3), rset.getString(2), true);
+                //arrNoise.add(n);
             }
             return arrNoise;
         } catch (SQLException e) {
@@ -181,8 +180,8 @@ public class DBConn {
             String sql = "SELECT * FROM temperature"; // TODO Get those who has the date 5 minutes less than actual for example
             ResultSet rset = st.executeQuery(sql);
             while(rset.next()) {
-                Temperature t = new Temperature((Date) rset.getDate(3), rset.getInt(2));
-                arrTemperature.add(t);
+                //Temperature t = new Temperature(rset.getDate(3), rset.getInt(2));
+                //arrTemperature.add(t);
             }
             return arrTemperature;
         } catch (SQLException e) {
