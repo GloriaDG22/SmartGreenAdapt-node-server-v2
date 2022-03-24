@@ -1485,6 +1485,7 @@ components:
         idWindows: 1
         isOn: true
         affects: "Temperatura,Viento"
+        name: "Lateral"
       properties:
         idWindows:
           example: 1
@@ -1496,6 +1497,9 @@ components:
         affects:
           type: string
           example: "Temperatura,Viento"
+        name:
+          type: string
+          example: "Lateral"
     Irrigation:
       example:
         isOn: true

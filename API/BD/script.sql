@@ -53,6 +53,7 @@ CREATE TABLE Windows (
     id INT NOT NULL AUTO_INCREMENT,
     is_on INT,
     affects VARCHAR(100),
+    name VARCHAR(100),
     PRIMARY KEY(id)
 );
 CREATE TABLE Irrigation(
