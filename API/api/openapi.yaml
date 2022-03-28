@@ -59,15 +59,6 @@ paths:
     get:
       description: Devuelve todos los datos relacionados con la calidad del aire.
       operationId: getAirQuality
-      parameters:
-      - description: Fecha de la recogida de la información
-        explode: true
-        in: query
-        name: date
-        required: true
-        schema:
-          type: string
-        style: form
       responses:
         201:
           content:
@@ -219,15 +210,6 @@ paths:
     get:
       description: Devuelve todos los datos relacionados con la luminosidad.
       operationId: getLuminosity
-      parameters:
-      - description: Fecha de la recogida de la información
-        explode: true
-        in: query
-        name: date
-        required: true
-        schema:
-          type: string
-        style: form
       responses:
         201:
           content:
@@ -450,15 +432,6 @@ paths:
     get:
       description: Devuelve todos los datos relacionados con la humedad.
       operationId: getHumidity
-      parameters:
-      - description: Fecha de la recogida de la información
-        explode: true
-        in: query
-        name: date
-        required: true
-        schema:
-          type: string
-        style: form
       responses:
         201:
           content:
@@ -610,15 +583,6 @@ paths:
     get:
       description: Devuelve todos los datos relacionados con la temperatura.
       operationId: getTemperature
-      parameters:
-      - description: Fecha de la recogida de la información
-        explode: true
-        in: query
-        name: date
-        required: true
-        schema:
-          type: string
-        style: form
       responses:
         201:
           content:
@@ -1360,8 +1324,6 @@ components:
         date: "2019-01-10 13:12:35"
         amount: 45.5
         idAirQuality: 1
-        minValue: 45.5
-        maxValue: 45.5
       properties:
         idAirQuality:
           example: 1
@@ -1373,20 +1335,12 @@ components:
         date:
           example: "2019-01-10 13:12:35"
           type: string
-        minValue:
-          example: 45.5
-          type: number
-        maxValue:
-          example: 45.5
-          type: number
       type: object
     Luminosity:
       example:
         idLuminosity: 1
         date: "2019-01-10 13:12:35"
         amount: 45.5
-        minValue: 45.5
-        maxValue: 45.5
       properties:
         idLuminosity:
           example: 1
@@ -1398,12 +1352,6 @@ components:
         date:
           example: "2019-01-10 13:12:35"
           type: string
-        minValue:
-          example: 45.5
-          type: number
-        maxValue:
-          example: 45.5
-          type: number
       type: object
     Notification:
       example:
@@ -1435,8 +1383,6 @@ components:
         date: "2019-01-10 13:12:35"
         idHumidity: 1
         amount: 45.5
-        minValue: 45.5
-        maxValue: 45.5
       properties:
         idHumidity:
           example: 1
@@ -1448,20 +1394,12 @@ components:
         date:
           example: "2019-01-10 13:12:35"
           type: string
-        minValue:
-          example: 45.5
-          type: number
-        maxValue:
-          example: 45.5
-          type: number
       type: object
     Temperature:
       example:
         date: "2019-01-10 13:12:35"
         idTemperature: 1
         amount: 45.5
-        minValue: 45.5
-        maxValue: 45.5
       properties:
         idTemperature:
           example: 1
@@ -1473,12 +1411,6 @@ components:
         date:
           example: "2019-01-10 13:12:35"
           type: string
-        minValue:
-          example: 45.5
-          type: number
-        maxValue:
-          example: 45.5
-          type: number
       type: object
     Windows:
       example:
@@ -1534,7 +1466,7 @@ components:
           example: "Temperatura,Humedad"
     Heating:
       example:
-        isOn: true
+        value: 0
         type: "Infrarrojos"
         idHeating: 1
         affects: "Temperatura"
@@ -1543,9 +1475,10 @@ components:
           example: 1
           format: int64
           type: integer
-        isOn:
-          example: true
-          type: boolean
+        value:
+          example: 0
+          format: int64
+          type: integer
         affects:
           type: string
           example: "Temperatura"
