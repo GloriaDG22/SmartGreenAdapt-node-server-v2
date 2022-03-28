@@ -7,4 +7,7 @@
     <dimen name="ic_state">90dp</dimen>
     <dimen name="text_size_date">20sp</dimen>
     <dimen name="text_size_notif">25sp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+    <dimen name="icon_notification">40dp</dimen>
+    <dimen name="text_weather">18sp</dimen>
 </resources>

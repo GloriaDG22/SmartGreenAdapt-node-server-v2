@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="green_50">#ecf3e8</color>
     <color name="green_100">#bed6b2</color>
     <color name="green_200">#7cac64</color>
     <color name="green_500">#4ca314</color>
@@ -8,4 +9,11 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="grey">#727272</color>
+
+
+    <color name="warning_500">#f79e00</color>
+    <color name="warning_200">#ffe4c7</color>
+    <color name="error_500">#ff372d</color>
+    <color name="error_200">#ffe3e0</color>
 </resources>

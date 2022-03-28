@@ -29,7 +29,6 @@ public class WeatherResponse {
         @SerializedName("cod")
         public float cod;
 
-
     public String getWeatherState() {
         return weather.get(0).main;
     }

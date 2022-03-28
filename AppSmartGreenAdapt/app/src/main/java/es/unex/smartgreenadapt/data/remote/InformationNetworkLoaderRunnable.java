@@ -7,9 +7,11 @@ public class InformationNetworkLoaderRunnable {
 
     private static InformationNetworkLoaderRunnable mInstance;
     private Retrofit mRetrofit;
-    private String URLBase = "http://127.0.0.1:8080/";
+    private String URLBase = "http://192.168.1.104:8080/"; //127.0.0.1
+    //"http://192.168.1.104:8080/temperature?idTemperature=1"
 
     public InformationNetworkLoaderRunnable(){
+
         mRetrofit = new Retrofit.Builder()
                 .baseUrl(URLBase)
                 .addConverterFactory(GsonConverterFactory.create())

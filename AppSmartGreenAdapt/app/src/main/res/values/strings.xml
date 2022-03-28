@@ -16,4 +16,7 @@
     <string name="text_weather">Weather</string>
     <string name="text_date">Date</string>
     <string name="text_state">State</string>
+    <string name="text_type">Type</string>
+    <string name="text_description">Description</string>
+    <string name="text_greenhouse">Greenhouse</string>
 </resources>
