@@ -2,10 +2,7 @@ package es.unex.smartgreenadapt.ui.notifications;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,18 +11,22 @@ import java.text.ParseException;
 
 import es.unex.smartgreenadapt.R;
 import es.unex.smartgreenadapt.model.MessageNotification;
+import es.unex.smartgreenadapt.model.information.AirQuality;
 
 public class NotificationDetailActivity extends AppCompatActivity implements ListNotificationAdapter.OnNotListener{
 
 
-    private TextView name, date, amount, type;
+    private TextView name, date, description, type;
     private MessageNotification mNotification;
+    private ListInformation mListInfo;
 
     @SuppressLint("SetTextI18n")
     @Override
     public void onCreate(Bundle saveInstanceState) {
 
         super.onCreate(saveInstanceState);
+
+        mListInfo = ListInformation.getInstance();
 
         setContentView(R.layout.activity_notification_detail);
 
@@ -38,18 +39,19 @@ public class NotificationDetailActivity extends AppCompatActivity implements Lis
 
         name = findViewById(R.id.text_notification);
         date = findViewById(R.id.value_date);
-        amount = findViewById(R.id.value_amount);
+        description = findViewById(R.id.value_description);
         type = findViewById(R.id.value_type);
 
-        name.setText("Notification " + mNotification.getIdNot());
+        name.setText(mNotification.getDescription());
         try {
             date.setText(mNotification.getDate());
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        amount.setText((mNotification.getDescription()));
+        int pos = mListInfo.getPositionTitle(mNotification.getProblem());
+        description.setText("The " + mNotification.getProblem() + " value should be between " + mListInfo.getValueMin(pos) + " and " + mListInfo.getValueMax(pos) + ".");
 
-        String stringType = null;
+        String stringType;
         if (mNotification.isWarning()) stringType = "Warning";
         else stringType = "Error";
         type.setText(stringType);

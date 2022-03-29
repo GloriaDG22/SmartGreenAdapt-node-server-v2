@@ -2,6 +2,7 @@ package es.unex.smartgreenadapt.ui.information;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,13 +80,13 @@ public class InformationFragment extends Fragment {
                     Date date = new Date((long) (currentWeather.getDt()*1000));
                     dateW.setText(date.toString());
                     stateW.setText(currentWeather.getWeatherState());
-                    temp.setText(Float.toString(currentWeather.getMainTemp()));
-                    feels_likeW.setText(Float.toString(currentWeather.getMainFeelsLike()));
-                    tempMin.setText(Float.toString(currentWeather.getMainTemp_min()));
-                    tempMax.setText(Float.toString(currentWeather.getMainTemp_max()));
-                    pressure.setText(Float.toString(currentWeather.getMainPressure()));
-                    humidityW.setText(Float.toString(currentWeather.getMainHumidity()));
-                    wind.setText(Float.toString(currentWeather.getWindSpeed()));
+                    temp.setText(currentWeather.getMainTemp() + "º");
+                    feels_likeW.setText(currentWeather.getMainFeelsLike() + "º");
+                    tempMin.setText(currentWeather.getMainTemp_min() + "º");
+                    tempMax.setText(currentWeather.getMainTemp_max() + "º");
+                    pressure.setText(currentWeather.getMainPressure() + " hPa");
+                    humidityW.setText(currentWeather.getMainHumidity() + " %");
+                    wind.setText(currentWeather.getWindSpeed() + " m/s");
                 }
             }
             @Override
@@ -99,14 +100,14 @@ public class InformationFragment extends Fragment {
         mInformNet = InformationNetworkLoaderRunnable.getInstance();
 
         //TEMPERATURE
-        Call<Temperature> responseTem = mInformNet.getApi().getCurrentTemperature(1);
+        Call<Temperature> responseTem = mInformNet.getApi().getCurrentTemperature();
         responseTem.enqueue(new Callback<Temperature>() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onResponse(@NonNull Call<Temperature> call, @NonNull Response<Temperature> response) {
                 if (response.isSuccessful()) {
                     Temperature currentTem = response.body();
-                    //temperature.setText(currentTem.getAmount());
+                    temperature.setText(currentTem.getAmount());
                 }
             }
             @Override
@@ -116,14 +117,14 @@ public class InformationFragment extends Fragment {
         });
 
         //LUMINOSITY
-        Call<Luminosity> responseLum = mInformNet.getApi().getCurrentLuminosity("2022-03-22 18:11:08");
+        Call<Luminosity> responseLum = mInformNet.getApi().getCurrentLuminosity();
         responseLum.enqueue(new Callback<Luminosity>() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onResponse(@NonNull Call<Luminosity> call, @NonNull Response<Luminosity> response) {
                 if (response.isSuccessful()) {
                     Luminosity currentLum = response.body();
-                    //luminosity.setText(currentLum.getAmount());
+                    luminosity.setText(currentLum.getAmount());
                 }
             }
 
@@ -134,14 +135,14 @@ public class InformationFragment extends Fragment {
         });
 
         //AIRQUIALITY
-        Call<AirQuality> responseAir = mInformNet.getApi().getCurrentAirQuality("2022-03-22 18:11:08");
+        Call<AirQuality> responseAir = mInformNet.getApi().getCurrentAirQuality();
         responseAir.enqueue(new Callback<AirQuality>() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onResponse(@NonNull Call<AirQuality> call, @NonNull Response<AirQuality> response) {
                 if (response.isSuccessful()) {
                     AirQuality currentAir = response.body();
-                    //airquality.setText(currentAir.getAmount());
+                    airquality.setText(currentAir.getAmount());
                 }
             }
 
@@ -152,13 +153,13 @@ public class InformationFragment extends Fragment {
         });
 
         //HUMIDITY
-        Call<Humidity> responseHum = mInformNet.getApi().getCurrentHumidity("2022-03-22 18:11:08");
+        Call<Humidity> responseHum = mInformNet.getApi().getCurrentHumidity();
         responseHum.enqueue(new Callback<Humidity>() {
             @Override
             public void onResponse(@NonNull Call<Humidity> call, @NonNull Response<Humidity> response) {
                 if (response.isSuccessful()) {
                     Humidity currentHum = response.body();
-                    //humidity.setText(currentHum.getAmount());
+                    humidity.setText(currentHum.getAmount());
                 }
             }
 

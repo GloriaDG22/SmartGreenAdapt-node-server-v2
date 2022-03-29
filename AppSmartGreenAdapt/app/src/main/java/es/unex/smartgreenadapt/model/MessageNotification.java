@@ -17,7 +17,7 @@ public class MessageNotification implements Serializable {
     @SerializedName("date")
     private String date;
     private String description;
-    @SerializedName("isWarning")
+    @SerializedName("is_warning")
     private int isWarning;
     @SerializedName("problem")
     private String problem;
@@ -46,9 +46,7 @@ public class MessageNotification implements Serializable {
     }
 
     public boolean isWarning() {
-        if (isWarning==1)
-            return true;
-        else return false;
+        return isWarning == 0;
     }
 
     public String getProblem() {

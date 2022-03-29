@@ -21,15 +21,15 @@ public interface APIService {
     Call<Notification> getNotifications();
 
     @GET("temperature")
-    Call<Temperature> getCurrentTemperature(@Query("idTemperature") int id);
+    Call<Temperature> getCurrentTemperature();
 
     @GET("luminosity")
-    Call<Luminosity> getCurrentLuminosity(@Query("date") String date);
+    Call<Luminosity> getCurrentLuminosity();
 
     @GET("airquality")
-    Call<AirQuality> getCurrentAirQuality(@Query("date") String date);
+    Call<AirQuality> getCurrentAirQuality();
 
     @GET("humidity")
-    Call<Humidity> getCurrentHumidity(@Query("date") String date);
+    Call<Humidity> getCurrentHumidity();
 }
 

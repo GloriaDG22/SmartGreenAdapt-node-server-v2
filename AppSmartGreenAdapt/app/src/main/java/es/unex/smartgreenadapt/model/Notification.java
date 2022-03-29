@@ -20,5 +20,7 @@ public class Notification {
     public void setList(ArrayList<MessageNotification> message) {
         this.message = message;
     }
+
+    public void addMessage(MessageNotification message){ this.message.add(message);}
 }
 
