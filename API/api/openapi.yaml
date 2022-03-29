@@ -59,6 +59,16 @@ paths:
     get:
       description: Devuelve todos los datos relacionados con la calidad del aire.
       operationId: getAirQuality
+      parameters:
+        - description: Id del invernadero
+          explode: true
+          in: query
+          name: idGreenhouse
+          required: true
+          schema:
+            format: int32
+            type: integer
+          style: form
       responses:
         201:
           content:
@@ -86,7 +96,7 @@ paths:
           description: Invalid input
       summary: Devuelve todos los datos relacionados con la calidad del aire.
       tags:
-      - Calidad del aire
+        - Calidad del aire
       x-swagger-router-controller: CalidadDelAire
     post:
       description: Creacion de nuevos datos asociados a la calidad del aire.
@@ -210,6 +220,16 @@ paths:
     get:
       description: Devuelve todos los datos relacionados con la luminosidad.
       operationId: getLuminosity
+      parameters:
+        - description: Id del invernadero
+          explode: true
+          in: query
+          name: idGreenhouse
+          required: true
+          schema:
+            format: int32
+            type: integer
+          style: form
       responses:
         201:
           content:
@@ -319,6 +339,16 @@ paths:
     get:
       description: Devuelve todos los datos relacionados con notificaciones.
       operationId: getNotification
+      parameters:
+        - description: Id del invernadero
+          explode: true
+          in: query
+          name: idGreenhouse
+          required: true
+          schema:
+            format: int32
+            type: integer
+          style: form
       responses:
         201:
           content:
@@ -432,6 +462,16 @@ paths:
     get:
       description: Devuelve todos los datos relacionados con la humedad.
       operationId: getHumidity
+      parameters:
+        - description: Id del invernadero
+          explode: true
+          in: query
+          name: idGreenhouse
+          required: true
+          schema:
+            format: int32
+            type: integer
+          style: form
       responses:
         201:
           content:
@@ -583,6 +623,16 @@ paths:
     get:
       description: Devuelve todos los datos relacionados con la temperatura.
       operationId: getTemperature
+      parameters:
+        - description: Id del invernadero
+          explode: true
+          in: query
+          name: idGreenhouse
+          required: true
+          schema:
+            format: int32
+            type: integer
+          style: form
       responses:
         201:
           content:
@@ -692,6 +742,16 @@ paths:
     get:
       description: Devuelve todos los datos relacionados con el estado Ventana
       operationId: getWindows
+      parameters:
+        - description: Id del invernadero
+          explode: true
+          in: query
+          name: idGreenhouse
+          required: true
+          schema:
+            format: int32
+            type: integer
+          style: form
       responses:
         201:
           content:
@@ -843,6 +903,16 @@ paths:
     get:
       description: Devuelve todos los datos relacionados con el riego.
       operationId: getIrrigation
+      parameters:
+        - description: Id del invernadero
+          explode: true
+          in: query
+          name: idGreenhouse
+          required: true
+          schema:
+            format: int32
+            type: integer
+          style: form
       responses:
         201:
           content:
@@ -913,6 +983,16 @@ paths:
     put:
       description: Modifica un dato de riego previamente registrado
       operationId: putIrrigation
+      parameters:
+        - description: Id del invernadero
+          explode: true
+          in: query
+          name: idGreenhouse
+          required: true
+          schema:
+            format: int32
+            type: integer
+          style: form
       requestBody:
         content:
           application/json:
@@ -994,6 +1074,16 @@ paths:
     get:
       description: Devuelve todos los datos relacionados con los aspersores.
       operationId: getSprinklers
+      parameters:
+        - description: Id del invernadero
+          explode: true
+          in: query
+          name: idGreenhouse
+          required: true
+          schema:
+            format: int32
+            type: integer
+          style: form
       responses:
         201:
           content:
@@ -1145,6 +1235,16 @@ paths:
     get:
       description: Devuelve todos los datos relacionados con los calefactores.
       operationId: getHeatings
+      parameters:
+        - description: Id del invernadero
+          explode: true
+          in: query
+          name: idGreenhouse
+          required: true
+          schema:
+            format: int32
+            type: integer
+          style: form
       responses:
         201:
           content:
@@ -1324,6 +1424,7 @@ components:
         date: "2019-01-10 13:12:35"
         amount: 45.5
         idAirQuality: 1
+        idInvernadero: 1
       properties:
         idAirQuality:
           example: 1
@@ -1335,12 +1436,17 @@ components:
         date:
           example: "2019-01-10 13:12:35"
           type: string
+        idInvernadero:
+          example: 1
+          format: int64
+          type: integer
       type: object
     Luminosity:
       example:
         idLuminosity: 1
         date: "2019-01-10 13:12:35"
         amount: 45.5
+        idInvernadero: 1
       properties:
         idLuminosity:
           example: 1
@@ -1360,6 +1466,7 @@ components:
         isWarning: true
         problem: "Temperatura"
         status: "Low"
+        idInvernadero: 1
       properties:
         idNotification:
           example: 1
@@ -1383,6 +1490,7 @@ components:
         date: "2019-01-10 13:12:35"
         idHumidity: 1
         amount: 45.5
+        idInvernadero: 1
       properties:
         idHumidity:
           example: 1
@@ -1400,6 +1508,7 @@ components:
         date: "2019-01-10 13:12:35"
         idTemperature: 1
         amount: 45.5
+        idInvernadero: 1
       properties:
         idTemperature:
           example: 1
@@ -1418,6 +1527,7 @@ components:
         isOn: true
         affects: "Temperatura,Viento"
         name: "Lateral"
+        idInvernadero: 1
       properties:
         idWindows:
           example: 1
@@ -1432,11 +1542,17 @@ components:
         name:
           type: string
           example: "Lateral"
+        idInvernadero:
+          example: 1
+          format: int64
+          type: integer
+      type: object
     Irrigation:
       example:
         isOn: true
         idIrrigation: 1
         affects: "Temperatura,Humedad"
+        idInvernadero: 1
       properties:
         idIrrigation:
           example: 1
@@ -1448,11 +1564,17 @@ components:
         affects:
           type: string
           example: "Temperatura,Humedad"
+        idInvernadero:
+          example: 1
+          format: int64
+          type: integer
+      type: object
     Sprinklers:
       example:
         isOn: true
         idSprinklers: 1
         affects: "Temperatura,Humedad"
+        idInvernadero: 1
       properties:
         idSprinklers:
           example: 1
@@ -1464,12 +1586,18 @@ components:
         affects:
           type: string
           example: "Temperatura,Humedad"
+        idInvernadero:
+          example: 1
+          format: int64
+          type: integer
+      type: object
     Heating:
       example:
         value: 0
         type: "Infrarrojos"
         idHeating: 1
         affects: "Temperatura"
+        idInvernadero: 1
       properties:
         idHeating:
           example: 1
@@ -1485,4 +1613,42 @@ components:
         type:
           type: string
           example: "Infrarrojos"
-
+        idInvernadero:
+          example: 1
+          format: int64
+          type: integer
+      type: object
+    Greenhouse:
+      example:
+        idUsuario: 1
+        idGreenhouse: 1
+        name: "Invernadero 1"
+      properties:
+        idGreenhouse:
+          example: 1
+          format: int64
+          type: integer
+        idUser:
+          example: 1
+          format: int64
+          type: integer
+        name:
+          example: "Invernadero 1"
+          type: string
+      type: object
+    User:
+      example:
+        idUsuario: 1
+        idGreenhouse: 1
+      properties:
+        username:
+          example: "user"
+          type: string
+        password:
+          example: "pass"
+          type: string
+        idUser:
+          example: 1
+          format: int64
+          type: integer
+      type: object
