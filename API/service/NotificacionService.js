@@ -58,7 +58,7 @@ module.exports.postNotification = function(req, res, next) {
     else date = req.undefined.originalValue.date;
 
     var is_warning;
-    if(req.undefined.originalValue.isWarning){
+    if(req.undefined.originalValue.is_warning){
         is_warning = 1;
     } else {
         is_warning = 0;

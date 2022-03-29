@@ -50,9 +50,9 @@ module.exports.deleteHumidity = function(req, res, next) {
 module.exports.getHumidity = function(req, res, next) {
     console.log("get humidity data");
 
-    var query = 'SELECT * FROM humidity WHERE date = ?';
+    var query = 'SELECT * FROM humidity order by date desc limit 1';
 
-    connection.query(query, [req.date.originalValue], function (error, results) {
+    connection.query(query, function (error, results) {
         if (error) throw error;
 
         res.send({

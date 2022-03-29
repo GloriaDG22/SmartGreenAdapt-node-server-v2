@@ -50,9 +50,9 @@ module.exports.deleteLuminosity = function(req, res, next) {
 module.exports.getLuminosity = function(req, res, next) {
     console.log("get luminosity data");
 
-    var query = 'SELECT * FROM luminosity WHERE date = ?';
+    var query = 'SELECT * FROM luminosity order by date desc limit 1';
 
-    connection.query(query, [req.date.originalValue], function (error, results) {
+    connection.query(query, function (error, results) {
         if (error) throw error;
 
         res.send({

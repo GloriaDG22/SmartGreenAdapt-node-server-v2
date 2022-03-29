@@ -102,9 +102,8 @@ module.exports.postWeather = function () {
             });
 
             client.on('error', function (error) {
-                /** TODO no fuciona mqtt
-                 *  console.log('Error, cannot connect to MQTT ' + error);
-                 */
+                 console.log('Error, cannot connect to MQTT ' + error);
+
             });
         });
 };
