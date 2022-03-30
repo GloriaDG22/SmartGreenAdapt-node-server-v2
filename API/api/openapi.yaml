@@ -1392,6 +1392,320 @@ paths:
       tags:
         - Calefactor
       x-swagger-router-controller: Calefactor
+  /greenhouse:
+    delete:
+      description: Eliminación de un dato de invernadero guardado en la base
+        de datos.
+      operationId: deleteGreenhouse
+      parameters:
+        - description: Id del invernadero
+          explode: true
+          in: query
+          name: idGreenhouse
+          required: true
+          schema:
+            format: int32
+            type: integer
+          style: form
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created
+                title: Created
+                type: string
+          description: Created
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Eliminación de datos del invernadero
+      tags:
+        - Invernadero
+      x-swagger-router-controller: Invernadero
+    get:
+      description: Devuelve todos los datos relacionados con el invernadero.
+      operationId: getInvernadero
+      parameters:
+        - description: Id del usuario
+          explode: true
+          in: query
+          name: idUsuario
+          required: true
+          schema:
+            format: int32
+            type: integer
+          style: form
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created
+                title: Created
+                type: string
+          description: Created
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Devuelve todos los datos relacionados con el invernadero.
+      tags:
+        - Invernadero
+      x-swagger-router-controller: Invernadero
+    post:
+      description: Creacion de nuevos datos asociados al invernadero.
+      operationId: postInvernadero
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Greenhouse'
+        required: true
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created
+                title: Created
+                type: string
+          description: Created
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Registra un nuevo dato del invernadero.
+      tags:
+        - Invernadero
+      x-swagger-router-controller: Invernadero
+    put:
+      description: Modifica un dato de invernadero previamente registrado
+      operationId: putInvernadero
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Greenhouse'
+        required: true
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created
+                title: Created
+                type: string
+          description: Created
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Modifica un dato de invernadero previamente registrado
+      tags:
+        - Invernadero
+      x-swagger-router-controller: Invernadero
+  /users:
+    delete:
+      description: Eliminación de un dato de usuario guardado en la base
+        de datos.
+      operationId: deleteUser
+      parameters:
+        - description: Id del user
+          explode: true
+          in: query
+          name: idUsuario
+          required: true
+          schema:
+            format: int32
+            type: integer
+          style: form
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created
+                title: Created
+                type: string
+          description: Created
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Eliminación de datos del usuario.
+      tags:
+        - Usuarios
+      x-swagger-router-controller: Usuarios
+    get:
+      description: Devuelve todos los datos relacionados con los usuarios.
+      operationId: getUsers
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created
+                title: Created
+                type: string
+          description: Created
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Devuelve todos los datos relacionados con los usuarios.
+      tags:
+        - Usuarios
+      x-swagger-router-controller: Usuarios
+    post:
+      description: Creacion de nuevos datos asociados a los usuarios.
+      operationId: postUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created
+                title: Created
+                type: string
+          description: Created
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Registra un nuevo dato de usuario.
+      tags:
+        - Usuarios
+      x-swagger-router-controller: Usuarios
+    put:
+      description: Modifica un dato de usuarios previamente registrado
+      operationId: putUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created
+                title: Created
+                type: string
+          description: Created
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Modifica un dato de usuario previamente registrado
+      tags:
+        - Usuarios
+      x-swagger-router-controller: Usuarios
 components:
   responses:
     201:
