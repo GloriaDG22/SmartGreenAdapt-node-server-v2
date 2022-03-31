@@ -1954,12 +1954,18 @@ components:
       example:
         idUsuario: 1
         idGreenhouse: 1
+        username: "name"
+        password: "pass"
+        email: "email@email.com"
       properties:
         username:
           example: "user"
           type: string
         password:
           example: "pass"
+          type: string
+        email:
+          example: "email@email.com"
           type: string
         idUser:
           example: 1

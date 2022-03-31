@@ -18,6 +18,7 @@ CREATE TABLE UserInfo(
     id INT NOT NULL AUTO_INCREMENT,
     username VARCHAR(25),
     password VARCHAR(25),
+    email VARCHAR(100),
     PRIMARY KEY(id)
 );
 
@@ -122,8 +123,8 @@ CREATE TABLE Weather (
 
 -- Creación de usuario e invernadero de prueba
 
-INSERT INTO smartgreenadapt.UserInfo(username, password)
-VALUES ('user', 'user');
+INSERT INTO smartgreenadapt.UserInfo(username, password, email)
+VALUES ('user', 'user', 'email@gmail.com');
 
 INSERT INTO smartgreenadapt.GreenHouse(idUsuario, name)
 VALUES (1, 'Invernadero 1');
