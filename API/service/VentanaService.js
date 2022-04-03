@@ -49,7 +49,7 @@ module.exports.deleteWindow = function(req, res, next) {
 module.exports.getWindows = function(req, res, next) {
     console.log("get window data");
 
-    var query = 'SELECT * FROM windows';
+    var query = 'SELECT * FROM windows  WHERE idGreenhouse = ' + req.idGreenhouse.originalValue ;
 
     connection.query(query,function (error, results) {
         if (error) throw error;
@@ -83,7 +83,8 @@ module.exports.postWindow = function(req, res, next) {
     var data = {
         affects: req.undefined.originalValue.affects,
         is_on: is_on,
-        name: req.undefined.originalValue.name
+        name: req.undefined.originalValue.name,
+        idGreenhouse : req.undefined.originalValue.idGreenhouse
     }
 
     connection.query(query, [data], function (error, results) {
@@ -139,7 +140,8 @@ module.exports.putWindow = function(req, res, next) {
     var data = {
         affects: req.undefined.originalValue.affects,
         is_on: is_on,
-        name: req.undefined.originalValue.name
+        name: req.undefined.originalValue.name,
+        idGreenhouse : req.undefined.originalValue.idGreenhouse
     }
 
     connection.query(query, [data, req.undefined.originalValue.idWindows], function (error, results) {

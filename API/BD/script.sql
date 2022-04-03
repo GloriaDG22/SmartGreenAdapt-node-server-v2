@@ -25,7 +25,7 @@ CREATE TABLE UserInfo(
 CREATE TABLE GreenHouse(
   id INT NOT NULL AUTO_INCREMENT,
   idUsuario INT,
-  name VARCHAR(25),
+  name VARCHAR(50),
   PRIMARY KEY (id),
   FOREIGN KEY (idUsuario) REFERENCES UserInfo(id)
 );
@@ -52,9 +52,10 @@ CREATE TABLE Notification (
     problem VARCHAR(100),
     status VARCHAR(10),
     date TIMESTAMP,
-    idGreenhouse INT,
+    idUsuario INT,
+    greenhouseName VARCHAR(50),
     PRIMARY KEY(id),
-    FOREIGN KEY (idGreenhouse) REFERENCES GreenHouse(id)
+    FOREIGN KEY (idUsuario) REFERENCES UserInfo(id)
 );
 CREATE TABLE Humidity (
     id INT NOT NULL AUTO_INCREMENT,
@@ -163,11 +164,11 @@ VALUES (70.00, '2022-03-24 12:10:44', 1);
 
 
 
-INSERT INTO smartgreenadapt.notification (is_warning, problem, status, date, idGreenhouse)
-VALUES (0, 'Temperature', 'low', '2022-03-22 12:10:44', 1);
-INSERT INTO smartgreenadapt.notification (is_warning, problem, status, date, idGreenhouse)
-VALUES (0, 'Humidity', 'high', '2022-03-23 12:10:44', 1);
-INSERT INTO smartgreenadapt.notification (is_warning, problem, status, date, idGreenhouse)
-VALUES (1, 'Temperature', 'error', '2022-03-24 12:10:44', 1);
+INSERT INTO smartgreenadapt.notification (is_warning, problem, status, date, idUsuario, greenhouseName)
+VALUES (0, 'Temperature', 'low', '2022-03-22 12:10:44', 1, 'Invernadero 1');
+INSERT INTO smartgreenadapt.notification (is_warning, problem, status, date, idUsuario, greenhouseName)
+VALUES (0, 'Humidity', 'high', '2022-03-23 12:10:44', 1, 'Invernadero 1');
+INSERT INTO smartgreenadapt.notification (is_warning, problem, status, date, idUsuario, greenhouseName)
+VALUES (1, 'Temperature', 'error', '2022-03-24 12:10:44', 1, 'Invernadero 1');
 
 

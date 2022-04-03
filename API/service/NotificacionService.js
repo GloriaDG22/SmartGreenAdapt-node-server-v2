@@ -28,7 +28,7 @@ var client = mqtt.connect('mqtt://localhost:1883', options);
 module.exports.getNotification = function(req, res, next) {
     console.log("get notification data");
 
-    var query = 'SELECT * FROM notification';
+    var query = 'SELECT * FROM notification WHERE idUsuario = '+ req.idUsuario.originalValue;
 
     connection.query(query,  function (error, results) {
         if (error) throw error;
@@ -68,7 +68,9 @@ module.exports.postNotification = function(req, res, next) {
         date: date,
         is_warning: is_warning,
         status: req.undefined.originalValue.status,
-        problem: req.undefined.originalValue.problem
+        problem: req.undefined.originalValue.problem,
+        idUsuario: req.undefined.originalValue.idUsuario,
+        greenhouseName: req.undefined.originalValue.greenhouseName
     }
 
     connection.query(query, [data], function (error, results) {

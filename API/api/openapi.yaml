@@ -340,13 +340,13 @@ paths:
       description: Devuelve todos los datos relacionados con notificaciones.
       operationId: getNotification
       parameters:
-        - description: Id del invernadero
+        - description: Id del usuario
           explode: true
           in: query
-          name: idGreenhouse
+          name: idUsuario
           required: true
           schema:
-            format: int32
+            format: int64
             type: integer
           style: form
       responses:
@@ -749,7 +749,7 @@ paths:
           name: idGreenhouse
           required: true
           schema:
-            format: int32
+            format: int64
             type: integer
           style: form
       responses:
@@ -1738,7 +1738,7 @@ components:
         date: "2019-01-10 13:12:35"
         amount: 45.5
         idAirQuality: 1
-        idInvernadero: 1
+        idGreenhouse: 1
       properties:
         idAirQuality:
           example: 1
@@ -1750,7 +1750,7 @@ components:
         date:
           example: "2019-01-10 13:12:35"
           type: string
-        idInvernadero:
+        idGreenhouse:
           example: 1
           format: int64
           type: integer
@@ -1760,7 +1760,7 @@ components:
         idLuminosity: 1
         date: "2019-01-10 13:12:35"
         amount: 45.5
-        idInvernadero: 1
+        idGreenhouse: 1
       properties:
         idLuminosity:
           example: 1
@@ -1780,7 +1780,8 @@ components:
         isWarning: true
         problem: "Temperatura"
         status: "Low"
-        idInvernadero: 1
+        idUsuario: 1
+        greenhouseName: "Invernadero 1"
       properties:
         idNotification:
           example: 1
@@ -1798,13 +1799,20 @@ components:
         status:
           example: "Low"
           type: string
+        idUsuario:
+          example: 1
+          format: int64
+          type: integer
+        greenhouseName:
+          example: "Invernadero 1"
+          type: string
       type: object
     Humidity:
       example:
         date: "2019-01-10 13:12:35"
         idHumidity: 1
         amount: 45.5
-        idInvernadero: 1
+        idGreenhouse: 1
       properties:
         idHumidity:
           example: 1
@@ -1822,7 +1830,7 @@ components:
         date: "2019-01-10 13:12:35"
         idTemperature: 1
         amount: 45.5
-        idInvernadero: 1
+        idGreenhouse: 1
       properties:
         idTemperature:
           example: 1
@@ -1841,7 +1849,7 @@ components:
         isOn: true
         affects: "Temperatura,Viento"
         name: "Lateral"
-        idInvernadero: 1
+        idGreenhouse: 1
       properties:
         idWindows:
           example: 1
@@ -1856,7 +1864,7 @@ components:
         name:
           type: string
           example: "Lateral"
-        idInvernadero:
+        idGreenhouse:
           example: 1
           format: int64
           type: integer
@@ -1866,7 +1874,7 @@ components:
         isOn: true
         idIrrigation: 1
         affects: "Temperatura,Humedad"
-        idInvernadero: 1
+        idGreenhouse: 1
       properties:
         idIrrigation:
           example: 1
@@ -1878,7 +1886,7 @@ components:
         affects:
           type: string
           example: "Temperatura,Humedad"
-        idInvernadero:
+        idGreenhouse:
           example: 1
           format: int64
           type: integer
@@ -1888,7 +1896,7 @@ components:
         isOn: true
         idSprinklers: 1
         affects: "Temperatura,Humedad"
-        idInvernadero: 1
+        idGreenhouse: 1
       properties:
         idSprinklers:
           example: 1
@@ -1900,7 +1908,7 @@ components:
         affects:
           type: string
           example: "Temperatura,Humedad"
-        idInvernadero:
+        idGreenhouse:
           example: 1
           format: int64
           type: integer
@@ -1911,7 +1919,7 @@ components:
         type: "Infrarrojos"
         idHeating: 1
         affects: "Temperatura"
-        idInvernadero: 1
+        idGreenhouse: 1
       properties:
         idHeating:
           example: 1
@@ -1927,7 +1935,7 @@ components:
         type:
           type: string
           example: "Infrarrojos"
-        idInvernadero:
+        idGreenhouse:
           example: 1
           format: int64
           type: integer
@@ -1942,7 +1950,7 @@ components:
           example: 1
           format: int64
           type: integer
-        idUser:
+        idUsuario:
           example: 1
           format: int64
           type: integer
@@ -1967,7 +1975,7 @@ components:
         email:
           example: "email@email.com"
           type: string
-        idUser:
+        idUsuario:
           example: 1
           format: int64
           type: integer

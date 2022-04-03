@@ -50,7 +50,7 @@ module.exports.deleteHumidity = function(req, res, next) {
 module.exports.getHumidity = function(req, res, next) {
     console.log("get humidity data");
 
-    var query = 'SELECT * FROM humidity order by date desc limit 1';
+    var query = 'SELECT * FROM humidity WHERE idGreenhouse = ' + req.idGreenhouse.originalValue + ' order by date desc limit 1';
 
     connection.query(query, function (error, results) {
         if (error) throw error;
@@ -82,8 +82,7 @@ module.exports.postHumidity = function(req, res, next) {
     var data = {
         amount: Number((req.undefined.originalValue.amount).toFixed(2)),
         date: date,
-        min_value: Number((req.undefined.originalValue.minValue).toFixed(2)),
-        max_value: Number((req.undefined.originalValue.maxValue).toFixed(2))
+        idGreenhouse : req.undefined.originalValue.idGreenhouse
     }
 
     connection.query(query, [data], function (error, results) {
@@ -132,8 +131,7 @@ module.exports.putHumidity = function(req, res, next) {
     var data = {
         amount: Number((req.undefined.originalValue.amount).toFixed(2)),
         date: req.undefined.originalValue.date.toString(),
-        min_value: Number((req.undefined.originalValue.minValue).toFixed(2)),
-        max_value: Number((req.undefined.originalValue.maxValue).toFixed(2))
+        idGreenhouse : req.undefined.originalValue.idGreenhouse
     }
 
     connection.query(query, [data, req.undefined.originalValue.idHumidity], function (error, results) {
