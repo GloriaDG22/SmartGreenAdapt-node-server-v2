@@ -340,10 +340,10 @@ paths:
       description: Devuelve todos los datos relacionados con notificaciones.
       operationId: getNotification
       parameters:
-        - description: Id del usuario
+        - description: Id del invernadero
           explode: true
           in: query
-          name: idUsuario
+          name: idGreenhouse
           required: true
           schema:
             format: int64
@@ -1780,8 +1780,7 @@ components:
         isWarning: true
         problem: "Temperatura"
         status: "Low"
-        idUsuario: 1
-        greenhouseName: "Invernadero 1"
+        idGreenhouse: 1
       properties:
         idNotification:
           example: 1
@@ -1799,13 +1798,10 @@ components:
         status:
           example: "Low"
           type: string
-        idUsuario:
+        idGreenhouse:
           example: 1
           format: int64
           type: integer
-        greenhouseName:
-          example: "Invernadero 1"
-          type: string
       type: object
     Humidity:
       example:

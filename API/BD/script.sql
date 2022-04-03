@@ -52,10 +52,9 @@ CREATE TABLE Notification (
     problem VARCHAR(100),
     status VARCHAR(10),
     date TIMESTAMP,
-    idUsuario INT,
-    greenhouseName VARCHAR(50),
+    idGreenhouse INT,
     PRIMARY KEY(id),
-    FOREIGN KEY (idUsuario) REFERENCES UserInfo(id)
+    FOREIGN KEY (idGreenhouse) REFERENCES GreenHouse(id)
 );
 CREATE TABLE Humidity (
     id INT NOT NULL AUTO_INCREMENT,
