@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.login.LoginActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.SmartGreenAdapt.AppBarOverlay"
+        tools:ignore="MissingConstraints">
+
+        <include layout="@layout/toolbar_main" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:paddingHorizontal="@dimen/margin_vertical"
+        android:paddingVertical="@dimen/text_margin"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/button_state"
+            android:layout_marginBottom="@dimen/text_margin_item"
+            android:text="@string/text_login"
+            android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/value_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/text_margin"
+            android:autofillHints="@string/text_email"
+            android:hint="@string/text_email"
+            android:inputType="textEmailAddress"
+            android:paddingVertical="@dimen/text_margin"
+            android:selectAllOnFocus="true"
+            android:drawableStart="@drawable/ic_baseline_email_24"/>
+
+        <EditText
+            android:id="@+id/value_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:autofillHints="@string/text_password"
+            android:hint="@string/text_password"
+            android:imeActionLabel="@string/action_sign_in"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"
+            android:selectAllOnFocus="true"
+            android:paddingVertical="@dimen/text_margin"
+            android:drawableStart="@drawable/ic_baseline_lock_24"/>
+
+        <Button
+            android:id="@+id/login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="@dimen/text_margin"
+            android:text="@string/action_sign_in"
+            android:paddingVertical="@dimen/text_margin"
+            app:layout_constraintVertical_bias="0.2" />
+
+        <Button
+            android:id="@+id/register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/action_register"
+            android:paddingVertical="@dimen/text_margin" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

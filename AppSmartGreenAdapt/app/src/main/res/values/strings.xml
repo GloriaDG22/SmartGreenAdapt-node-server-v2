@@ -19,4 +19,41 @@
     <string name="text_type">Type</string>
     <string name="text_description">Description</string>
     <string name="text_greenhouse">Greenhouse</string>
+
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="text_email">Email</string>
+    <string name="text_password">Password</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="welcome">Welcome</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_about">About</string>
+    <string name="action_profile">Profile</string>
+    <string name="text_project">Project:</string>
+    <string name="text_prime">Premios Cátedra Telefónica</string>
+    <string name="value_project">Smart GreenAdapt</string>
+    <string name="text_author">Author:</string>
+    <string name="value_author1">Gloria Díaz</string>
+    <string name="value_author2">Mª Victoria Morales</string>
+    <string name="text_initial_date">Initial date:</string>
+    <string name="value_initial">21/10/2021</string>
+    <string name="text_final_date">Final date:</string>
+    <string name="value_final_date">20/06/2022</string>
+    <string name="action_logout">Log out</string>
+    <string name="action_register">Register</string>
+    <string name="text_register">Don\'t have an Account?\nRegister down</string>
+    <string name="text_login">Login</string>
+    <string name="text_username">Username</string>
+    <string name="value_author3">Enrique Moguel</string>
 </resources>

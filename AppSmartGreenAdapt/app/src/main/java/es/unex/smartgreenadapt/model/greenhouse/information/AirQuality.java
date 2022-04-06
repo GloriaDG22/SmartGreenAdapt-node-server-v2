@@ -1,4 +1,4 @@
-package es.unex.smartgreenadapt.model.information;
+package es.unex.smartgreenadapt.model.greenhouse.information;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -27,6 +27,10 @@ public class AirQuality {
 
     public void setAmount(int amount) {
         message.get(0).amount = amount;
+    }
+
+    public int getIdGreenhouse() {
+        return message.get(0).idGreenhouse;
     }
 
     public AirQuality(String date, float amount) {

@@ -8,10 +8,10 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.ParseException;
+import java.util.Locale;
 
 import es.unex.smartgreenadapt.R;
-import es.unex.smartgreenadapt.model.MessageNotification;
-import es.unex.smartgreenadapt.model.information.AirQuality;
+import es.unex.smartgreenadapt.model.greenhouse.MessageNotification;
 
 public class NotificationDetailActivity extends AppCompatActivity implements ListNotificationAdapter.OnNotListener{
 
@@ -48,8 +48,12 @@ public class NotificationDetailActivity extends AppCompatActivity implements Lis
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        int pos = mListInfo.getPositionTitle(mNotification.getProblem());
-        description.setText("The " + mNotification.getProblem() + " value should be between " + mListInfo.getValueMin(pos) + " and " + mListInfo.getValueMax(pos) + ".");
+
+        if(mNotification.isWarning()) {
+            int pos = mListInfo.getPositionTitle(mNotification.getProblem());
+            description.setText("The " + mNotification.getProblem().toLowerCase(Locale.ROOT) + " value should be between " + mListInfo.getValueMin(pos) + " and " + mListInfo.getValueMax(pos) + ".");
+        }else
+            description.setText("The value is wrong. You need to contact the support team.");
 
         String stringType;
         if (mNotification.isWarning()) stringType = "Warning";

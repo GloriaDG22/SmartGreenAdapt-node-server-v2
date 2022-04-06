@@ -17,8 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import es.unex.smartgreenadapt.R;
-import es.unex.smartgreenadapt.model.MessageNotification;
-import es.unex.smartgreenadapt.model.Notification;
+import es.unex.smartgreenadapt.model.greenhouse.MessageNotification;
 
 public class ListNotificationAdapter extends RecyclerView.Adapter<ListNotificationAdapter.ViewHolder> {
 
@@ -67,8 +66,8 @@ public class ListNotificationAdapter extends RecyclerView.Adapter<ListNotificati
         }
         holder.textNotification.setText(notification.getDescription());
 
-        int image = 0;
-        int color = 0;
+        int image;
+        int color;
         if(notification.isWarning()) {
             image = R.drawable.ic_baseline_warning_24;
             color = R.color.warning_200;
@@ -85,10 +84,6 @@ public class ListNotificationAdapter extends RecyclerView.Adapter<ListNotificati
     @Override
     public int getItemCount() {
         return this.mNotificationList.size();
-    }
-
-    public void setmOnNotificationListener(OnNotListener onNotListener) {
-        this.mOnNotListener = onNotListener;
     }
 
     public void allListNotifications(ArrayList<MessageNotification> listNotifications) {

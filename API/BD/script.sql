@@ -123,11 +123,20 @@ CREATE TABLE Weather (
 
 -- Creación de usuario e invernadero de prueba
 
-INSERT INTO smartgreenadapt.UserInfo(username, password, email)
-VALUES ('user', 'user', 'email@gmail.com');
+INSERT INTO smartgreenadapt.UserInfo(id, username, password, email)
+VALUES (1, 'Juan', 'qqqqqq', 'j@g.c');
+INSERT INTO smartgreenadapt.GreenHouse(id, idUsuario, name)
+VALUES (1, 1, 'Greenhouse potatoes');
+INSERT INTO smartgreenadapt.GreenHouse(id, idUsuario, name)
+VALUES (2, 1, 'Greenhouse strawberries');
 
-INSERT INTO smartgreenadapt.GreenHouse(idUsuario, name)
-VALUES (1, 'Invernadero 1');
+
+INSERT INTO smartgreenadapt.UserInfo(id, username, password, email)
+VALUES (2, 'Petra', '111111', 'p@g.c');
+INSERT INTO smartgreenadapt.GreenHouse(id, idUsuario, name)
+VALUES (3, 2, 'Greenhouse sunflower');
+
+
 
 -- Prueba 1 - Warning humidity y error luminosity
 INSERT INTO smartgreenadapt.temperature (amount, date, idGreenhouse)
@@ -159,15 +168,39 @@ VALUES (30.00, '2022-03-24 12:10:44', 1);
 INSERT INTO smartgreenadapt.humidity (amount, date, idGreenhouse)
 VALUES (70.00, '2022-03-24 12:10:44', 1);
 
+-- Datos invernaderos
+INSERT INTO smartgreenadapt.temperature (amount, date, idGreenhouse)
+VALUES (30.00, '2022-03-24 12:10:44', 2);
+INSERT INTO smartgreenadapt.luminosity (amount, date, idGreenhouse)
+VALUES (300.00, '2022-03-24 12:10:44', 2);
+INSERT INTO smartgreenadapt.airquality (amount, date, idGreenhouse)
+VALUES (30.00, '2022-03-24 12:10:44', 2);
+INSERT INTO smartgreenadapt.humidity (amount, date, idGreenhouse)
+VALUES (70.00, '2022-03-24 12:10:44', 2);
+
+-- Datos invernaderos
+INSERT INTO smartgreenadapt.temperature (amount, date, idGreenhouse)
+VALUES (40.00, '2022-03-24 12:10:44', 3);
+INSERT INTO smartgreenadapt.luminosity (amount, date, idGreenhouse)
+VALUES (1000.00, '2022-03-24 12:10:44', 3);
+INSERT INTO smartgreenadapt.airquality (amount, date, idGreenhouse)
+VALUES (10.00, '2022-03-24 12:10:44', 3);
+INSERT INTO smartgreenadapt.humidity (amount, date, idGreenhouse)
+VALUES (10.00, '2022-03-24 12:10:44', 3);
 
 
 
-
-INSERT INTO smartgreenadapt.notification (is_warning, problem, status, date, idUsuario, greenhouseName)
-VALUES (0, 'Temperature', 'low', '2022-03-22 12:10:44', 1, 'Invernadero 1');
-INSERT INTO smartgreenadapt.notification (is_warning, problem, status, date, idUsuario, greenhouseName)
-VALUES (0, 'Humidity', 'high', '2022-03-23 12:10:44', 1, 'Invernadero 1');
-INSERT INTO smartgreenadapt.notification (is_warning, problem, status, date, idUsuario, greenhouseName)
-VALUES (1, 'Temperature', 'error', '2022-03-24 12:10:44', 1, 'Invernadero 1');
+INSERT INTO smartgreenadapt.notification (is_warning, problem, status, date, idGreenhouse)
+VALUES (0, 'Temperature', 'low', '2022-03-22 12:10:44', 2);
+INSERT INTO smartgreenadapt.notification (is_warning, problem, status, date, idGreenhouse)
+VALUES (0, 'Humidity', 'high', '2022-03-23 12:10:44', 2);
+INSERT INTO smartgreenadapt.notification (is_warning, problem, status, date, idGreenhouse)
+VALUES (1, 'Temperature', 'error', '2022-03-24 12:10:44', 2);
+INSERT INTO smartgreenadapt.notification (is_warning, problem, status, date, idGreenhouse)
+VALUES (0, 'Temperature', 'high', '2022-03-22 12:10:44', 3);
+INSERT INTO smartgreenadapt.notification (is_warning, problem, status, date, idGreenhouse)
+VALUES (0, 'Humidity', 'low', '2022-03-23 12:10:44', 3);
+INSERT INTO smartgreenadapt.notification (is_warning, problem, status, date, idGreenhouse)
+VALUES (1, 'Temperature', 'error', '2022-03-24 12:10:44', 3);
 
 

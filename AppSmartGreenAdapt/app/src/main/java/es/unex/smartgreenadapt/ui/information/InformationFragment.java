@@ -2,7 +2,6 @@ package es.unex.smartgreenadapt.ui.information;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +12,19 @@ import androidx.fragment.app.Fragment;
 
 import java.sql.Date;
 
+import es.unex.smartgreenadapt.GreenhouseActivity;
 import es.unex.smartgreenadapt.R;
 import es.unex.smartgreenadapt.data.remote.InformationNetworkLoaderRunnable;
 import es.unex.smartgreenadapt.data.remote.WeatherNetworkLoaderRunnable;
-import es.unex.smartgreenadapt.model.information.AirQuality;
-import es.unex.smartgreenadapt.model.information.Humidity;
-import es.unex.smartgreenadapt.model.information.Luminosity;
-import es.unex.smartgreenadapt.model.WeatherResponse;
-import es.unex.smartgreenadapt.model.information.Temperature;
+import es.unex.smartgreenadapt.model.greenhouse.Greenhouse;
+import es.unex.smartgreenadapt.model.greenhouse.MessageGreenhouse;
+import es.unex.smartgreenadapt.model.greenhouse.MessageNotification;
+import es.unex.smartgreenadapt.model.greenhouse.information.AirQuality;
+import es.unex.smartgreenadapt.model.greenhouse.information.Humidity;
+import es.unex.smartgreenadapt.model.greenhouse.information.Luminosity;
+import es.unex.smartgreenadapt.model.greenhouse.WeatherResponse;
+import es.unex.smartgreenadapt.model.greenhouse.information.Temperature;
+import es.unex.smartgreenadapt.ui.notifications.NotificationsFragment;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,6 +36,7 @@ public class InformationFragment extends Fragment {
     private WeatherNetworkLoaderRunnable mWheatherNet;
     private InformationNetworkLoaderRunnable mInformNet;
 
+    private MessageGreenhouse mGreenhouse;
 
     private static String lat = "39.4789255";
     private static String lon= "-6.3423358";
@@ -58,6 +63,11 @@ public class InformationFragment extends Fragment {
         pressure = root.findViewById(R.id.value_pressure);
         humidityW = root.findViewById(R.id.value_humidityW);
         wind = root.findViewById(R.id.value_wind);
+
+        Bundle bundle = getActivity().getIntent().getExtras();
+        mGreenhouse = (MessageGreenhouse) bundle.getSerializable(GreenhouseActivity.EXTRA_GREENHOUSE);
+
+        getActivity().setTitle(mGreenhouse.getName());
 
         //call API weather
         getCurrentWeather();
@@ -100,7 +110,7 @@ public class InformationFragment extends Fragment {
         mInformNet = InformationNetworkLoaderRunnable.getInstance();
 
         //TEMPERATURE
-        Call<Temperature> responseTem = mInformNet.getApi().getCurrentTemperature();
+        Call<Temperature> responseTem = mInformNet.getApi().getCurrentTemperature(mGreenhouse.getId());
         responseTem.enqueue(new Callback<Temperature>() {
             @SuppressLint("SetTextI18n")
             @Override
@@ -117,7 +127,7 @@ public class InformationFragment extends Fragment {
         });
 
         //LUMINOSITY
-        Call<Luminosity> responseLum = mInformNet.getApi().getCurrentLuminosity();
+        Call<Luminosity> responseLum = mInformNet.getApi().getCurrentLuminosity(mGreenhouse.getId());
         responseLum.enqueue(new Callback<Luminosity>() {
             @SuppressLint("SetTextI18n")
             @Override
@@ -135,7 +145,7 @@ public class InformationFragment extends Fragment {
         });
 
         //AIRQUIALITY
-        Call<AirQuality> responseAir = mInformNet.getApi().getCurrentAirQuality();
+        Call<AirQuality> responseAir = mInformNet.getApi().getCurrentAirQuality(mGreenhouse.getId());
         responseAir.enqueue(new Callback<AirQuality>() {
             @SuppressLint("SetTextI18n")
             @Override
@@ -153,7 +163,7 @@ public class InformationFragment extends Fragment {
         });
 
         //HUMIDITY
-        Call<Humidity> responseHum = mInformNet.getApi().getCurrentHumidity();
+        Call<Humidity> responseHum = mInformNet.getApi().getCurrentHumidity(mGreenhouse.getId());
         responseHum.enqueue(new Callback<Humidity>() {
             @Override
             public void onResponse(@NonNull Call<Humidity> call, @NonNull Response<Humidity> response) {

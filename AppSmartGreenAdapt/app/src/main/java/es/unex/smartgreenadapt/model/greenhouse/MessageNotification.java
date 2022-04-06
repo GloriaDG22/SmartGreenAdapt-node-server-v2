@@ -1,4 +1,4 @@
-package es.unex.smartgreenadapt.model;
+package es.unex.smartgreenadapt.model.greenhouse;
 
 import android.annotation.SuppressLint;
 
@@ -23,6 +23,8 @@ public class MessageNotification implements Serializable {
     private String problem;
     @SerializedName("status")
     private String status;
+    @SerializedName("idGreenhouse")
+    public int idGreenhouse;
 
     public int getIdNot() {
         return idNot;
@@ -55,6 +57,10 @@ public class MessageNotification implements Serializable {
 
     public String getStatus() {
         return status;
+    }
+
+    public int getIdGreenhouse() {
+        return idGreenhouse;
     }
 
     @SuppressLint("SimpleDateFormat")

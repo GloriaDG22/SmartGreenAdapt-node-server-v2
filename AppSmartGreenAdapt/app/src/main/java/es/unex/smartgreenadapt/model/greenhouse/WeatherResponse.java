@@ -1,4 +1,4 @@
-package es.unex.smartgreenadapt.model;
+package es.unex.smartgreenadapt.model.greenhouse;
 
 import com.google.gson.annotations.SerializedName;
 
