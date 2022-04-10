@@ -19,7 +19,7 @@
     <style name="Theme.SmartGreenAdapt.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="titleLarge" parent="@style/Base.TextAppearance.AppCompat.Title">
-        <item name="android:textSize">27dp</item>
+        <item name="android:textSize">27sp</item>
     </style>
 
     <style name="Theme.SmartGreenAdapt.NoActionBar">
@@ -28,23 +28,29 @@
     </style>
 
     <style name="textNoNotif" >
-        <item name="android:textSize">23dp</item>
+        <item name="android:textSize">23sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/black</item>
     </style>
 
-    <style name="textDetalleNotification" >
-        <item name="android:textSize">40dp</item>
+    <style name="textDetailNotification" >
+        <item name="android:textSize">40sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/green_700</item>
     </style>
 
-    <style name="textDetalle" >
-        <item name="android:textSize">20dp</item>
+    <style name="textDetail" >
+        <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/grey</item>
     </style>
-    <style name="textValueDetalle" >
-        <item name="android:textSize">20dp</item>
+    <style name="textValueDetail" >
+        <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="textButton" parent="@style/Widget.AppCompat.Button.Borderless">
+        <item name="android:textSize">25sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 </resources>

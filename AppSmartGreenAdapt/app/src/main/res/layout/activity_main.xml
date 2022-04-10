@@ -5,14 +5,14 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".GreenhouseActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/Theme.SmartGreenAdapt.AppBarOverlay">
 
-        <include layout="@layout/toolbar_main" />
+        <include layout="@layout/toolbar_general" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -47,7 +47,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_gravity="bottom"
         app:menu="@menu/bottom_nav_menu" />
-
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

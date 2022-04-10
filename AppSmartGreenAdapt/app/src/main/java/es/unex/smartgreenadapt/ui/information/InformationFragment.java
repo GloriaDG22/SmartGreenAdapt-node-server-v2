@@ -12,14 +12,19 @@ import androidx.fragment.app.Fragment;
 
 import java.sql.Date;
 
+import es.unex.smartgreenadapt.GreenhouseActivity;
 import es.unex.smartgreenadapt.R;
 import es.unex.smartgreenadapt.data.remote.InformationNetworkLoaderRunnable;
 import es.unex.smartgreenadapt.data.remote.WeatherNetworkLoaderRunnable;
-import es.unex.smartgreenadapt.model.information.AirQuality;
-import es.unex.smartgreenadapt.model.information.Humidity;
-import es.unex.smartgreenadapt.model.information.Luminosity;
-import es.unex.smartgreenadapt.model.WeatherResponse;
-import es.unex.smartgreenadapt.model.information.Temperature;
+import es.unex.smartgreenadapt.model.greenhouse.Greenhouse;
+import es.unex.smartgreenadapt.model.greenhouse.MessageGreenhouse;
+import es.unex.smartgreenadapt.model.greenhouse.MessageNotification;
+import es.unex.smartgreenadapt.model.greenhouse.information.AirQuality;
+import es.unex.smartgreenadapt.model.greenhouse.information.Humidity;
+import es.unex.smartgreenadapt.model.greenhouse.information.Luminosity;
+import es.unex.smartgreenadapt.model.greenhouse.WeatherResponse;
+import es.unex.smartgreenadapt.model.greenhouse.information.Temperature;
+import es.unex.smartgreenadapt.ui.notifications.NotificationsFragment;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -31,6 +36,7 @@ public class InformationFragment extends Fragment {
     private WeatherNetworkLoaderRunnable mWheatherNet;
     private InformationNetworkLoaderRunnable mInformNet;
 
+    private MessageGreenhouse mGreenhouse;
 
     private static String lat = "39.4789255";
     private static String lon= "-6.3423358";
@@ -58,6 +64,11 @@ public class InformationFragment extends Fragment {
         humidityW = root.findViewById(R.id.value_humidityW);
         wind = root.findViewById(R.id.value_wind);
 
+        Bundle bundle = getActivity().getIntent().getExtras();
+        mGreenhouse = (MessageGreenhouse) bundle.getSerializable(GreenhouseActivity.EXTRA_GREENHOUSE);
+
+        getActivity().setTitle(mGreenhouse.getName());
+
         //call API weather
         getCurrentWeather();
         getCurrentInformation();
@@ -79,13 +90,13 @@ public class InformationFragment extends Fragment {
                     Date date = new Date((long) (currentWeather.getDt()*1000));
                     dateW.setText(date.toString());
                     stateW.setText(currentWeather.getWeatherState());
-                    temp.setText(Float.toString(currentWeather.getMainTemp()));
-                    feels_likeW.setText(Float.toString(currentWeather.getMainFeelsLike()));
-                    tempMin.setText(Float.toString(currentWeather.getMainTemp_min()));
-                    tempMax.setText(Float.toString(currentWeather.getMainTemp_max()));
-                    pressure.setText(Float.toString(currentWeather.getMainPressure()));
-                    humidityW.setText(Float.toString(currentWeather.getMainHumidity()));
-                    wind.setText(Float.toString(currentWeather.getWindSpeed()));
+                    temp.setText(currentWeather.getMainTemp() + "º");
+                    feels_likeW.setText(currentWeather.getMainFeelsLike() + "º");
+                    tempMin.setText(currentWeather.getMainTemp_min() + "º");
+                    tempMax.setText(currentWeather.getMainTemp_max() + "º");
+                    pressure.setText(currentWeather.getMainPressure() + " hPa");
+                    humidityW.setText(currentWeather.getMainHumidity() + " %");
+                    wind.setText(currentWeather.getWindSpeed() + " m/s");
                 }
             }
             @Override
@@ -99,14 +110,14 @@ public class InformationFragment extends Fragment {
         mInformNet = InformationNetworkLoaderRunnable.getInstance();
 
         //TEMPERATURE
-        Call<Temperature> responseTem = mInformNet.getApi().getCurrentTemperature(1);
+        Call<Temperature> responseTem = mInformNet.getApi().getCurrentTemperature(mGreenhouse.getId());
         responseTem.enqueue(new Callback<Temperature>() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onResponse(@NonNull Call<Temperature> call, @NonNull Response<Temperature> response) {
                 if (response.isSuccessful()) {
                     Temperature currentTem = response.body();
-                    //temperature.setText(currentTem.getAmount());
+                    temperature.setText(currentTem.getAmount());
                 }
             }
             @Override
@@ -116,14 +127,14 @@ public class InformationFragment extends Fragment {
         });
 
         //LUMINOSITY
-        Call<Luminosity> responseLum = mInformNet.getApi().getCurrentLuminosity("2022-03-22 18:11:08");
+        Call<Luminosity> responseLum = mInformNet.getApi().getCurrentLuminosity(mGreenhouse.getId());
         responseLum.enqueue(new Callback<Luminosity>() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onResponse(@NonNull Call<Luminosity> call, @NonNull Response<Luminosity> response) {
                 if (response.isSuccessful()) {
                     Luminosity currentLum = response.body();
-                    //luminosity.setText(currentLum.getAmount());
+                    luminosity.setText(currentLum.getAmount());
                 }
             }
 
@@ -134,14 +145,14 @@ public class InformationFragment extends Fragment {
         });
 
         //AIRQUIALITY
-        Call<AirQuality> responseAir = mInformNet.getApi().getCurrentAirQuality("2022-03-22 18:11:08");
+        Call<AirQuality> responseAir = mInformNet.getApi().getCurrentAirQuality(mGreenhouse.getId());
         responseAir.enqueue(new Callback<AirQuality>() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onResponse(@NonNull Call<AirQuality> call, @NonNull Response<AirQuality> response) {
                 if (response.isSuccessful()) {
                     AirQuality currentAir = response.body();
-                    //airquality.setText(currentAir.getAmount());
+                    airquality.setText(currentAir.getAmount());
                 }
             }
 
@@ -152,13 +163,13 @@ public class InformationFragment extends Fragment {
         });
 
         //HUMIDITY
-        Call<Humidity> responseHum = mInformNet.getApi().getCurrentHumidity("2022-03-22 18:11:08");
+        Call<Humidity> responseHum = mInformNet.getApi().getCurrentHumidity(mGreenhouse.getId());
         responseHum.enqueue(new Callback<Humidity>() {
             @Override
             public void onResponse(@NonNull Call<Humidity> call, @NonNull Response<Humidity> response) {
                 if (response.isSuccessful()) {
                     Humidity currentHum = response.body();
-                    //humidity.setText(currentHum.getAmount());
+                    humidity.setText(currentHum.getAmount());
                 }
             }
 

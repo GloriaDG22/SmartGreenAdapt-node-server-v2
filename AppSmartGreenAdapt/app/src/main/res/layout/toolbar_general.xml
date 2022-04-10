@@ -16,6 +16,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:titleTextAppearance="@style/titleLarge"
-        app:popupTheme="@style/Theme.SmartGreenAdapt.PopupOverlay"/>
+        app:titleTextAppearance="@style/Base.TextAppearance.AppCompat.Title"
+        app:popupTheme="@style/Theme.SmartGreenAdapt.PopupOverlay"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -48,7 +48,7 @@ module.exports.deleteHeating = function(req, res, next) {
 module.exports.getHeatings = function(req, res, next) {
     console.log("get heatings data");
 
-    var query = 'SELECT * FROM heatings';
+    var query = 'SELECT * FROM heatings WHERE idGreenhouse = ' + req.idGreenhouse.originalValue;
 
     connection.query(query, function (error, results) {
         if (error) throw error;
@@ -82,7 +82,8 @@ module.exports.postHeating = function(req, res, next) {
     var data = {
         affects: req.undefined.originalValue.affects,
         is_on: is_on,
-        type: req.undefined.originalValue.type
+        type: req.undefined.originalValue.type,
+        idGreenhouse : req.undefined.originalValue.idGreenhouse
     }
 
     connection.query(query, [data], function (error, results) {
@@ -138,7 +139,8 @@ module.exports.putHeating = function(req, res, next) {
     var data = {
         affects: req.undefined.originalValue.affects,
         is_on: is_on,
-        type: req.undefined.originalValue.type
+        type: req.undefined.originalValue.type,
+        idGreenhouse : req.undefined.originalValue.idGreenhouse
     }
 
     connection.query(query, [data, req.undefined.originalValue.idHeating], function (error, results) {

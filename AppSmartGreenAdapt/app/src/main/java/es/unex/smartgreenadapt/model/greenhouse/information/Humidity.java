@@ -1,18 +1,17 @@
-package es.unex.smartgreenadapt.model.information;
+package es.unex.smartgreenadapt.model.greenhouse.information;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.sql.Date;
 import java.util.ArrayList;
 
+public class Humidity {
 
-public class Temperature {
     @SerializedName("message")
     public ArrayList<Message> message = new ArrayList<>();
 
 
     public int getIdTem() {
-        return message.get(0).idTem;
+        return message.get(0).id;
     }
 
     public String getDate() {
@@ -31,7 +30,11 @@ public class Temperature {
         message.get(0).amount = amount;
     }
 
-    public Temperature(String date, int amount) {
+    public int getIdGreenhouse() {
+        return message.get(0).idGreenhouse;
+    }
+
+    public Humidity(String date, float amount) {
         message.get(0).date = date;
         message.get(0).amount = amount;
     }

@@ -1,22 +1,16 @@
-package es.unex.smartgreenadapt.model.information;
+package es.unex.smartgreenadapt.model.greenhouse.information;
 
-import androidx.room.Entity;
-import androidx.room.Index;
-import androidx.room.PrimaryKey;
-
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.sql.Date;
 import java.util.ArrayList;
+
 
 public class AirQuality {
     @SerializedName("message")
     public ArrayList<Message> message = new ArrayList<>();
 
-
     public int getIdTem() {
-        return message.get(0).idTem;
+        return message.get(0).id;
     }
 
     public String getDate() {
@@ -35,7 +29,11 @@ public class AirQuality {
         message.get(0).amount = amount;
     }
 
-    public AirQuality(String date, int amount) {
+    public int getIdGreenhouse() {
+        return message.get(0).idGreenhouse;
+    }
+
+    public AirQuality(String date, float amount) {
         message.get(0).date = date;
         message.get(0).amount = amount;
     }

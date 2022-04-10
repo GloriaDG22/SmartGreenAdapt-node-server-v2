@@ -18,10 +18,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import es.unex.smartgreenadapt.GreenhouseActivity;
 import es.unex.smartgreenadapt.R;
 import es.unex.smartgreenadapt.data.remote.InformationNetworkLoaderRunnable;
-import es.unex.smartgreenadapt.model.MessageNotification;
-import es.unex.smartgreenadapt.model.Notification;
+import es.unex.smartgreenadapt.model.greenhouse.MessageGreenhouse;
+import es.unex.smartgreenadapt.model.greenhouse.MessageNotification;
+import es.unex.smartgreenadapt.model.greenhouse.Notification;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -37,6 +39,7 @@ public class NotificationsFragment extends Fragment implements ListNotificationA
     Notification mListNotifications = new Notification();
 
     MessageNotification mNotification;
+    MessageGreenhouse mGreenhouse;
 
     private InformationNetworkLoaderRunnable mInformNet;
 
@@ -49,13 +52,10 @@ public class NotificationsFragment extends Fragment implements ListNotificationA
 
         mRecyclerView = root.findViewById(R.id.notificationRV);
 
-
-        //listNot = new ArrayList<>();
-/*        listNot.add(new Notification(Date.valueOf("2022-02-22"), true, "Humidity", "high"));
-        listNot.add(new Notification(Date.valueOf("2022-02-21"), true, "Temperature", "low"));
-        listNot.add(new Notification(Date.valueOf("2022-02-21"), false, "Temperature", "error"));
-*/
         listNotificationAdapter = ListNotificationAdapter.getInstance(inflater, this.getContext(), this);
+
+        Bundle bundle = getActivity().getIntent().getExtras();
+        mGreenhouse = (MessageGreenhouse) bundle.getSerializable(GreenhouseActivity.EXTRA_GREENHOUSE);
 
         getNotifications();
 
@@ -94,9 +94,8 @@ public class NotificationsFragment extends Fragment implements ListNotificationA
     public void getNotifications(){
         mInformNet = InformationNetworkLoaderRunnable.getInstance();
 
-        Call<Notification> notifications = mInformNet.getApi().getNotifications();
+        Call<Notification> notifications = mInformNet.getApi().getNotifications(mGreenhouse.getId());
 
-        Log.println(Log.ASSERT, "info", "Ha ejecutado: " + notifications.isExecuted());
         notifications.enqueue(new Callback<Notification>() {
             @SuppressLint("SimpleDateFormat")
             @Override

@@ -49,7 +49,7 @@ module.exports.deleteIrrigation = function(req, res, next) {
 module.exports.getIrrigation = function(req, res, next) {
     console.log("get irrigation data");
 
-    var query = 'SELECT * FROM irrigation ';
+    var query = 'SELECT * FROM irrigation  WHERE idGreenhouse = ' + req.idGreenhouse.originalValue;
 
     connection.query(query, function (error, results) {
         if (error) throw error;
@@ -82,7 +82,8 @@ module.exports.postIrrigation = function(req, res, next) {
 
     var data = {
         affects: req.undefined.originalValue.affects,
-        is_on: is_on
+        is_on: is_on,
+        idGreenhouse : req.undefined.originalValue.idGreenhouse
     }
 
     connection.query(query, [data], function (error, results) {
@@ -138,7 +139,8 @@ module.exports.putIrrigation = function(req, res, next) {
     var data = {
         affects: req.undefined.originalValue.affects,
         is_on: is_on,
-        type: req.undefined.originalValue.type
+        type: req.undefined.originalValue.type,
+        idGreenhouse : req.undefined.originalValue.idGreenhouse
     }
 
     connection.query(query, [data, req.undefined.originalValue.idIrrigation], function (error, results) {

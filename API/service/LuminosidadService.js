@@ -50,9 +50,9 @@ module.exports.deleteLuminosity = function(req, res, next) {
 module.exports.getLuminosity = function(req, res, next) {
     console.log("get luminosity data");
 
-    var query = 'SELECT * FROM luminosity WHERE date = ?';
+    var query = 'SELECT * FROM luminosity  WHERE idGreenhouse = ' + req.idGreenhouse.originalValue +' order by date desc limit 1';
 
-    connection.query(query, [req.date.originalValue], function (error, results) {
+    connection.query(query, function (error, results) {
         if (error) throw error;
 
         res.send({
@@ -82,8 +82,7 @@ module.exports.postLuminosity = function(req, res, next) {
     var data = {
         amount: Number((req.undefined.originalValue.amount).toFixed(2)),
         date: date,
-        min_value: Number((req.undefined.originalValue.minValue).toFixed(2)),
-        max_value: Number((req.undefined.originalValue.maxValue).toFixed(2))
+        idGreenhouse : req.undefined.originalValue.idGreenhouse
     }
 
     connection.query(query, [data], function (error, results) {
@@ -132,8 +131,7 @@ module.exports.putLuminosity = function(req, res, next) {
     var data = {
         amount: Number((req.undefined.originalValue.amount).toFixed(2)),
         date: req.undefined.originalValue.date.toString(),
-        min_value: Number((req.undefined.originalValue.minValue).toFixed(2)),
-        max_value: Number((req.undefined.originalValue.maxValue).toFixed(2))
+        idGreenhouse : req.undefined.originalValue.idGreenhouse
     }
 
     connection.query(query, [data, req.undefined.originalValue.idLuminosity], function (error, results) {

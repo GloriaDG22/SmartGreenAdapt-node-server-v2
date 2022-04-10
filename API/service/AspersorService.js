@@ -50,7 +50,7 @@ module.exports.deleteSprinklers = function(req, res, next) {
 module.exports.getSprinklers = function(req, res, next) {
     console.log("get sprinklers data");
 
-    var query = 'SELECT * FROM sprinklers';
+    var query = 'SELECT * FROM sprinklers WHERE idGreenhouse = ' + req.idGreenhouse.originalValue;
 
     connection.query(query, function (error, results) {
         if (error) throw error;
@@ -83,7 +83,8 @@ module.exports.postSprinklers = function(req, res, next) {
 
     var data = {
         affects: req.undefined.originalValue.affects,
-        is_on: is_on
+        is_on: is_on,
+        idGreenhouse : req.undefined.originalValue.idGreenhouse
     }
 
     connection.query(query, [data], function (error, results) {
@@ -136,7 +137,8 @@ module.exports.putSprinklers = function(req, res, next) {
 
     var data = {
         affects: req.undefined.originalValue.affects,
-        is_on: is_on
+        is_on: is_on,
+        idGreenhouse : req.undefined.originalValue.idGreenhouse
     }
 
     connection.query(query, [data, req.undefined.originalValue.idSprinklers], function (error, results) {

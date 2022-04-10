@@ -1,12 +1,14 @@
-package es.unex.smartgreenadapt.model.information;
+package es.unex.smartgreenadapt.model.greenhouse.information;
 
 import com.google.gson.annotations.SerializedName;
 
 public class Message {
     @SerializedName("id")
-    public int idTem;
+    public int id;
     @SerializedName("amount")
     public float amount;
     @SerializedName("date")
     public String date;
+    @SerializedName("idGreenhouse")
+    public int idGreenhouse;
 }
