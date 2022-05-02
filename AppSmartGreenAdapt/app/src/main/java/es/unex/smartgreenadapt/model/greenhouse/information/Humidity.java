@@ -23,7 +23,8 @@ public class Humidity {
     }
 
     public String getAmount() {
-        return Float.toString(message.get(0).amount);
+        String humidity = message == null ? "-" : Float.toString(message.get(0).amount);
+        return humidity;
     }
 
     public void setAmount(int amount) {

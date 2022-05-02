@@ -23,7 +23,8 @@ public class Luminosity {
     }
 
     public String getAmount() {
-        return Float.toString(message.get(0).amount);
+        String luminosity = message == null ? "-" : Float.toString(message.get(0).amount);
+        return luminosity;
     }
 
     public void setAmount(int amount) {

@@ -22,7 +22,8 @@ public class AirQuality {
     }
 
     public String getAmount() {
-        return Float.toString(message.get(0).amount);
+        String airq = message == null ? "-" : Float.toString(message.get(0).amount);
+        return airq;
     }
 
     public void setAmount(int amount) {

@@ -1,23 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/button_state"
-    android:padding="@dimen/text_margin_item">
+    android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/ic_state"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/ic_state"
-
-        android:gravity="center"
-        android:icon="@drawable/ic_baseline_wb_incandescent_24"
-        android:title="@string/title_information" />
-
-    <TextView
-        android:id="@+id/text_state"
+    <LinearLayout
+        android:id="@+id/linearLayoutState"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/ic_state"
-        />
+        android:layout_marginBottom="32dp"
+        android:orientation="horizontal"
+        android:paddingVertical="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
-</RelativeLayout>
+        <ImageView
+            android:id="@+id/ic_itemState"
+            android:layout_width="@dimen/icon_notification"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/text_margin"
+            android:layout_marginEnd="@dimen/text_margin"
+            android:contentDescription="@string/imagen_que_visualiza_el_tipo_de_actuador" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/text_margin_item"
+
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_date"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/moreInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="@dimen/text_margin_item"
+
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:textSize="@dimen/text_margin" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/dividerState"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayoutState"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -56,4 +56,6 @@
     <string name="text_login">Login</string>
     <string name="text_username">Username</string>
     <string name="value_author3">Enrique Moguel</string>
+    <string name="text_No_States">No hay actuadores</string>
+    <string name="imagen_que_visualiza_el_tipo_de_actuador">Imagen que visualiza el tipo de actuador</string>
 </resources>

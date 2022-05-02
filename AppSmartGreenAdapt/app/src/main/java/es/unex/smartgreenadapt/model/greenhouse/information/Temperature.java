@@ -23,7 +23,8 @@ public class Temperature {
     }
 
     public String getAmount() {
-        return Float.toString(message.get(0).amount);
+        String temperature = message == null ? "-" : Float.toString(message.get(0).amount);
+        return temperature;
     }
 
     public void setAmount(int amount) {

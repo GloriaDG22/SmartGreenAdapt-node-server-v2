@@ -25,6 +25,9 @@
         <activity android:name=".ListGreenhousesActivity" />
         <activity android:name=".Profile" />
         <activity android:name=".About" />
+        <activity android:name=".ui.state.StateWindowDetail" />
+        <activity android:name=".ui.state.StateHeatingDetail" />
+        <activity android:name=".ui.state.StateIrrigationSprinklersDetail" />
         <activity
             android:name=".ui.notifications.NotificationDetailActivity"
             android:theme="@style/Theme.SmartGreenAdapt.NoActionBar" />
