@@ -2,7 +2,9 @@ package es.unex.smartgreenadapt.ui.state;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -11,7 +13,9 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import org.w3c.dom.Text;
 
@@ -27,7 +31,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class StateHeatingDetail extends AppCompatActivity {
+public class StateHeatingDetail extends Fragment {
 
     public static final String EXTRA_GREENHOUSE = "ID_GREENHOUSE";
     private ActuatorAllData heatingData;
@@ -39,26 +43,24 @@ public class StateHeatingDetail extends AppCompatActivity {
 
     private InformationNetworkLoaderRunnable mInformNet;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState){
-        super.onCreate(savedInstanceState);
+
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+        View root = inflater.inflate(R.layout.activity_heating_detail, container, false);;
         System.out.println(" Entra en el detalle de ventana ");
         mInformNet = InformationNetworkLoaderRunnable.getInstance();
 
-        Bundle bundle = getIntent().getExtras();
+        Bundle args = getArguments();
+        heatingData = (ActuatorAllData) args.getSerializable(StateFragment.EXTRA_STATE);
+        mGreenhouse = (MessageGreenhouse) args.getSerializable("GREENHOUSE");
+        titulo = (TextView) root.findViewById(R.id.textViewTituloHD);
+        imagen = root.findViewById(R.id.imageViewHD);
 
-        setContentView(R.layout.activity_heating_detail);
-        heatingData = (ActuatorAllData) bundle.getSerializable(StateFragment.EXTRA_STATE);
-        mGreenhouse = (MessageGreenhouse) bundle.getSerializable("GREENHOUSE");
-        titulo = (TextView) findViewById(R.id.textViewTituloHD);
-        imagen = findViewById(R.id.imageViewHD);
-
-        temp = findViewById(R.id.checkBoxHD);
-        calidad = findViewById(R.id.checkBox2HD);
-        lum = findViewById(R.id.checkBox3HD);
-        hum = findViewById(R.id.checkBox4HD);
-        tipo = (EditText) findViewById(R.id.tipoEdittext);
-        potencia = (EditText) findViewById(R.id.potenciaHeating);
+        temp = root.findViewById(R.id.checkBoxHD);
+        calidad = root.findViewById(R.id.checkBox2HD);
+        lum = root.findViewById(R.id.checkBox3HD);
+        hum = root.findViewById(R.id.checkBox4HD);
+        tipo = (EditText) root.findViewById(R.id.tipoEdittext);
+        potencia = (EditText) root.findViewById(R.id.potenciaHeating);
 
         //email@gmail.com
 
@@ -91,20 +93,24 @@ public class StateHeatingDetail extends AppCompatActivity {
             hum.setChecked(Boolean.FALSE);
         }
 
-        Button cancelar = findViewById(R.id.buttonHD);
+        Button cancelar = root.findViewById(R.id.buttonHD);
         // Funcionalidad boton de cancelar
         cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Cambios cancelados", Toast.LENGTH_SHORT);
-                Intent intent = new Intent(StateHeatingDetail.this, StateFragment.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable(EXTRA_GREENHOUSE, heatingData.getIdGreenhouse());
-                intent.putExtras(bundle);
-                finish();
+                Toast.makeText(getActivity(), "Cambios cancelados", Toast.LENGTH_SHORT);
+                Bundle args = new Bundle();
+                args.putSerializable(GreenhouseActivity.EXTRA_GREENHOUSE, mGreenhouse);
+
+                Fragment toFragment = new StateFragment();
+                toFragment.setArguments(args);
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.nav_host_fragment, toFragment)
+                        .commit();
             }
         });
-        Button guardar = findViewById(R.id.button2HD);
+        Button guardar = root.findViewById(R.id.button2HD);
         guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -136,12 +142,15 @@ public class StateHeatingDetail extends AppCompatActivity {
                         public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {
                             MessageResponse mgResponse = response.body();
                             if(mgResponse.getAffectedRows() == 1) {
-                                Bundle bundle = new Bundle();
-                                bundle.putSerializable(GreenhouseActivity.EXTRA_GREENHOUSE, mGreenhouse);
-                                Intent intent = new Intent(StateHeatingDetail.this, GreenhouseActivity.class);
-                                intent.putExtras(bundle);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                startActivity(intent);
+                                Bundle args = new Bundle();
+                                args.putSerializable(GreenhouseActivity.EXTRA_GREENHOUSE, mGreenhouse);
+
+                                Fragment toFragment = new StateFragment();
+                                toFragment.setArguments(args);
+                                getFragmentManager()
+                                        .beginTransaction()
+                                        .replace(R.id.nav_host_fragment, toFragment)
+                                        .commit();
                             }
 
                         }
@@ -152,10 +161,12 @@ public class StateHeatingDetail extends AppCompatActivity {
                         }
                     });
                 } else {
-                    Toast.makeText(getApplicationContext(), "La potencia debe tener un valor entre 0 y 100", Toast.LENGTH_SHORT);
+                    Toast.makeText(getActivity(), "La potencia debe tener un valor entre 0 y 100", Toast.LENGTH_SHORT);
                 }
 
             }
         });
+
+        return root;
     }
 }

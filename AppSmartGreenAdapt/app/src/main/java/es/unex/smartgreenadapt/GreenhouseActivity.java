@@ -13,16 +13,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
+import es.unex.smartgreenadapt.model.greenhouse.MessageGreenhouse;
+import es.unex.smartgreenadapt.model.greenhouse.actuators.ActuatorAllData;
 import es.unex.smartgreenadapt.ui.information.InformationFragment;
 import es.unex.smartgreenadapt.ui.login.LoginActivity;
 import es.unex.smartgreenadapt.ui.notifications.NotificationsFragment;
 import es.unex.smartgreenadapt.ui.state.StateFragment;
+import es.unex.smartgreenadapt.ui.state.StateHeatingDetail;
+import es.unex.smartgreenadapt.ui.state.StateIrrigationSprinklersDetail;
+import es.unex.smartgreenadapt.ui.state.StateWindowDetail;
 
 
 public class GreenhouseActivity extends AppCompatActivity {
     public static final String EXTRA_GREENHOUSE = "ID_GREENHOUSE";
     Toolbar toolbar;
     BottomNavigationView bottomBar;
+    InformationFragment informationFragment = new InformationFragment();
+    StateFragment stateFragment = new StateFragment();
+    NotificationsFragment notificationFragment = new NotificationsFragment();
 
     @SuppressLint("NonConstantResourceId")
     @Override
@@ -47,15 +55,15 @@ public class GreenhouseActivity extends AppCompatActivity {
             Fragment fragment = null;
             switch (menuItem.getItemId()) {
                 case R.id.navigation_information:
-                    fragment = new InformationFragment();
+                    fragment = informationFragment;
                     break;
 
                 case R.id.navigation_state:
-                    fragment = new StateFragment();
+                    fragment = stateFragment;
                     break;
 
                 case R.id.navigation_notifications:
-                    fragment = new NotificationsFragment();
+                    fragment = notificationFragment;
                     break;
             }
             return cargarFragment(fragment);
@@ -68,6 +76,7 @@ public class GreenhouseActivity extends AppCompatActivity {
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.nav_host_fragment, fragment)
+                .addToBackStack(null    )
                 .commit();
         return true;
     }
@@ -119,5 +128,46 @@ public class GreenhouseActivity extends AppCompatActivity {
 
         finish();
         finish();
+    }
+
+    public void onClickDetalleState(ActuatorAllData mActuatorData, MessageGreenhouse mGreenhouse){
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("STATE", mActuatorData);
+        bundle.putSerializable("GREENHOUSE", mGreenhouse);
+        Intent intent;
+
+        Bundle args = new Bundle();
+        args.putSerializable("STATE", mActuatorData);
+        args.putSerializable("GREENHOUSE", mGreenhouse);
+
+        Fragment toFragment;
+        if("Window".equals(mActuatorData.getClassType())){
+            toFragment = new StateWindowDetail();
+
+
+        } else if("Heating".equals(mActuatorData.getClassType())){
+            toFragment = new StateHeatingDetail();
+        } else if("Sprinklers".equals(mActuatorData.getClassType())){
+            toFragment = new StateIrrigationSprinklersDetail();
+        } else {
+            toFragment = new StateIrrigationSprinklersDetail();
+        }
+
+        toFragment.setArguments(args);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.nav_host_fragment, toFragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    public void volverAlListado(MessageGreenhouse mGreenhouse){
+        Bundle args = new Bundle();
+        args.putSerializable(GreenhouseActivity.EXTRA_GREENHOUSE, mGreenhouse);
+
+        Fragment toFragment = new StateFragment();
+        toFragment.setArguments(args);
+        getSupportFragmentManager()
+                .popBackStack();
     }
 }

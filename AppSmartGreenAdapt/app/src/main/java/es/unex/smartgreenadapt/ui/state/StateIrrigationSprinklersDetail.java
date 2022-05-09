@@ -2,7 +2,9 @@ package es.unex.smartgreenadapt.ui.state;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -11,7 +13,9 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import es.unex.smartgreenadapt.GreenhouseActivity;
 import es.unex.smartgreenadapt.R;
@@ -25,7 +29,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class StateIrrigationSprinklersDetail extends AppCompatActivity {
+public class StateIrrigationSprinklersDetail extends Fragment {
 
     public static final String EXTRA_GREENHOUSE = "ID_GREENHOUSE";
     private ActuatorAllData actuatorData;
@@ -38,24 +42,23 @@ public class StateIrrigationSprinklersDetail extends AppCompatActivity {
     private InformationNetworkLoaderRunnable mInformNet;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
-        super.onCreate(savedInstanceState);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+
         System.out.println(" Entra en el detalle de riego y aspersores ");
         mInformNet = InformationNetworkLoaderRunnable.getInstance();
+        View root = inflater.inflate(R.layout.activity_sprinklers_irrigation_detail, container, false);
+        Bundle bundle = getArguments();
 
-        Bundle bundle = getIntent().getExtras();
-
-        setContentView(R.layout.activity_sprinklers_irrigation_detail);
         actuatorData = (ActuatorAllData) bundle.getSerializable(StateFragment.EXTRA_STATE);
         mGreenhouse = (MessageGreenhouse) bundle.getSerializable("GREENHOUSE");
 
-        titulo = findViewById(R.id.textViewTituloSID);
-        imagen = findViewById(R.id.imageViewSID);
-        switchAbierto = findViewById(R.id.isOnSwitchSID);
-        temp = findViewById(R.id.checkBoxSID);
-        calidad = findViewById(R.id.checkBox2SID);
-        lum = findViewById(R.id.checkBox3SID);
-        hum = findViewById(R.id.checkBox4SID);
+        titulo = root.findViewById(R.id.textViewTituloSID);
+        imagen = root.findViewById(R.id.imageViewSID);
+        switchAbierto = root.findViewById(R.id.isOnSwitchSID);
+        temp = root.findViewById(R.id.checkBoxSID);
+        calidad = root.findViewById(R.id.checkBox2SID);
+        lum = root.findViewById(R.id.checkBox3SID);
+        hum = root.findViewById(R.id.checkBox4SID);
 
         // seteo de datos
         if(actuatorData.getClassType().equals("Sprinklers")){
@@ -94,20 +97,23 @@ public class StateIrrigationSprinklersDetail extends AppCompatActivity {
             hum.setChecked(Boolean.FALSE);
         }
 
-        Button cancelar = findViewById(R.id.buttonSID);
+        Button cancelar = root.findViewById(R.id.buttonSID);
         // Funcionalidad boton de cancelar
         cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Cambios cancelados", Toast.LENGTH_SHORT);
-                Intent intent = new Intent(StateIrrigationSprinklersDetail.this, StateFragment.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable(EXTRA_GREENHOUSE, actuatorData.getIdGreenhouse());
-                intent.putExtras(bundle);
-                finish();
+                Bundle args = new Bundle();
+                args.putSerializable(GreenhouseActivity.EXTRA_GREENHOUSE, mGreenhouse);
+
+                Fragment toFragment = new StateFragment();
+                toFragment.setArguments(args);
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.nav_host_fragment, toFragment)
+                        .commit();
             }
         });
-        Button guardar = findViewById(R.id.button2SID);
+        Button guardar = root.findViewById(R.id.button2SID);
         guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -144,13 +150,15 @@ public class StateIrrigationSprinklersDetail extends AppCompatActivity {
                     public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {
                         MessageResponse mgResponse = response.body();
                         if(mgResponse.getAffectedRows() == 1) {
+                            Bundle args = new Bundle();
+                            args.putSerializable(GreenhouseActivity.EXTRA_GREENHOUSE, mGreenhouse);
 
-                            Bundle bundle = new Bundle();
-                            bundle.putSerializable(GreenhouseActivity.EXTRA_GREENHOUSE, mGreenhouse);
-                            Intent intent = new Intent(StateIrrigationSprinklersDetail.this, GreenhouseActivity.class);
-                            intent.putExtras(bundle);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(intent);
+                            Fragment toFragment = new StateFragment();
+                            toFragment.setArguments(args);
+                            getFragmentManager()
+                                    .beginTransaction()
+                                    .replace(R.id.nav_host_fragment, toFragment)
+                                    .commit();
                         }
 
                     }
@@ -163,5 +171,8 @@ public class StateIrrigationSprinklersDetail extends AppCompatActivity {
 
             }
         });
+
+        return root;
     }
+
 }

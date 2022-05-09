@@ -9,7 +9,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -78,6 +80,7 @@ public class StateFragment extends Fragment implements StateAdapter.OnStateListe
         Bundle bundle = getActivity().getIntent().getExtras();
         mGreenhouse = (MessageGreenhouse) bundle.getSerializable(GreenhouseActivity.EXTRA_GREENHOUSE);
         idUsuario = mGreenhouse.getIdUsername();
+        allData.clear();
         getStates();
 
         return root;
@@ -235,27 +238,13 @@ public class StateFragment extends Fragment implements StateAdapter.OnStateListe
     public void onStateClick(int position) {
         mActuatorData = allData.get(position);
 
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(EXTRA_STATE, mActuatorData);
-        bundle.putSerializable("GREENHOUSE", mGreenhouse);
-        Intent intent;
-
-        if("Window".equals(mActuatorData.getClassType())){
-            System.out.println("Entró en el if de ventana");
-            intent = new Intent(getContext(), StateWindowDetail.class);
-            intent.putExtras(bundle);
-        } else if("Heating".equals(mActuatorData.getClassType())){
-            intent = new Intent(getContext(), StateHeatingDetail.class);
-            intent.putExtras(bundle);
-        } else if("Sprinklers".equals(mActuatorData.getClassType())){
-            intent = new Intent(getContext(), StateIrrigationSprinklersDetail.class);
-            intent.putExtras(bundle);
-        } else {
-            intent = new Intent(getContext(), StateIrrigationSprinklersDetail.class);
-            intent.putExtras(bundle);
+        if(isAdded()){
+            GreenhouseActivity activity = (GreenhouseActivity) requireActivity();
+            activity.onClickDetalleState(mActuatorData, mGreenhouse);
         }
 
-        getContext().startActivity(intent);
-        System.out.println("Después del startActivity");
     }
+// email@gmail.com
+
+
 }

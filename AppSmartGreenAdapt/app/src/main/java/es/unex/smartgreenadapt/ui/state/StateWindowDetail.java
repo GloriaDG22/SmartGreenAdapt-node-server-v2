@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -14,7 +16,9 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import es.unex.smartgreenadapt.GreenhouseActivity;
 import es.unex.smartgreenadapt.ListGreenhousesActivity;
@@ -29,7 +33,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class StateWindowDetail extends AppCompatActivity {
+public class StateWindowDetail extends Fragment {
 
     public static final String EXTRA_GREENHOUSE = "ID_GREENHOUSE";
     private ActuatorAllData windowData;
@@ -42,26 +46,23 @@ public class StateWindowDetail extends AppCompatActivity {
 
     private InformationNetworkLoaderRunnable mInformNet;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState){
-        super.onCreate(savedInstanceState);
-        System.out.println(" Entra en el detalle de ventana ");
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View root = inflater.inflate(R.layout.activity_window_detail, container, false);
         mInformNet = InformationNetworkLoaderRunnable.getInstance();
+        Bundle args = getArguments();
+        windowData = (ActuatorAllData) args
+                .getSerializable(StateFragment.EXTRA_STATE);
+        mGreenhouse = (MessageGreenhouse) args
+                .getSerializable("GREENHOUSE");
 
-        Bundle bundle = getIntent().getExtras();
-
-        setContentView(R.layout.activity_window_detail);
-        windowData = (ActuatorAllData) bundle.getSerializable(StateFragment.EXTRA_STATE);
-        mGreenhouse = (MessageGreenhouse) bundle.getSerializable("GREENHOUSE");
-
-        titulo = findViewById(R.id.textViewTituloWD);
-        imagen = findViewById(R.id.imageViewWD);
-        switchAbierto = findViewById(R.id.isOnSwitchWD);
-        temp = findViewById(R.id.checkBoxWD);
-        calidad = findViewById(R.id.checkBox2WD);
-        lum = findViewById(R.id.checkBox3WD);
-        hum = findViewById(R.id.checkBox4WD);
-        nombre = findViewById(R.id.windowNameEditText);
+        titulo = root.findViewById(R.id.textViewTituloWD);
+        imagen = root.findViewById(R.id.imageViewWD);
+        switchAbierto = root.findViewById(R.id.isOnSwitchWD);
+        temp = root.findViewById(R.id.checkBoxWD);
+        calidad = root.findViewById(R.id.checkBox2WD);
+        lum = root.findViewById(R.id.checkBox3WD);
+        hum = root.findViewById(R.id.checkBox4WD);
+        nombre = root.findViewById(R.id.windowNameEditText);
 
         // seteo de datos
         titulo.setText("Ventana");
@@ -96,20 +97,24 @@ public class StateWindowDetail extends AppCompatActivity {
 
         nombre.setText(windowData.getName());
 
-        Button cancelar = findViewById(R.id.buttonWD);
+        Button cancelar = root.findViewById(R.id.buttonWD);
         // Funcionalidad boton de cancelar
         cancelar.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-               Toast.makeText(getApplicationContext(), "Cambios cancelados", Toast.LENGTH_SHORT);
-               Intent intent = new Intent(StateWindowDetail.this, StateFragment.class);
-               Bundle bundle = new Bundle();
-               bundle.putSerializable(EXTRA_GREENHOUSE, windowData.getIdGreenhouse());
-               intent.putExtras(bundle);
-               finish();
-           }
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(), "Cambios cancelados", Toast.LENGTH_SHORT);
+               Bundle args = new Bundle();
+                            args.putSerializable(GreenhouseActivity.EXTRA_GREENHOUSE, mGreenhouse);
+
+                            Fragment toFragment = new StateFragment();
+                            toFragment.setArguments(args);
+                            getFragmentManager()
+                                    .beginTransaction()
+                                    .replace(R.id.nav_host_fragment, toFragment)
+                                    .commit();
+            }
         });
-        Button guardar = findViewById(R.id.button2WD);
+        Button guardar = root.findViewById(R.id.button2WD);
         guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -142,13 +147,10 @@ public class StateWindowDetail extends AppCompatActivity {
                     public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {
                         MessageResponse mgResponse = response.body();
                         if(mgResponse.getAffectedRows() == 1) {
+                            System.out.println("Se ha guardado");
 
-                            Bundle bundle = new Bundle();
-                            bundle.putSerializable(GreenhouseActivity.EXTRA_GREENHOUSE, mGreenhouse);
-                            Intent intent = new Intent(StateWindowDetail.this, GreenhouseActivity.class);
-                            intent.putExtras(bundle);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(intent);
+                            GreenhouseActivity activity = (GreenhouseActivity) requireActivity();
+                            activity.volverAlListado(mGreenhouse);
                         }
 
                     }
@@ -161,5 +163,9 @@ public class StateWindowDetail extends AppCompatActivity {
 
             }
         });
+
+        return root;
     }
+
+
 }
