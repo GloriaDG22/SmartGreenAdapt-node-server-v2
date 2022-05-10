@@ -1392,6 +1392,49 @@ paths:
       tags:
         - Calefactor
       x-swagger-router-controller: Calefactor
+  /greenhouse#user:
+    get:
+      description: Devuelve todos los datos relacionados con el invernadero.
+      operationId: getGreenhouses
+      parameters:
+        - description: Id del usuario
+          explode: true
+          in: query
+          name: idUsuario
+          required: true
+          schema:
+            format: int32
+            type: integer
+          style: form
+      responses:
+        201:
+          content:
+            text/plain:
+              schema:
+                example: Created
+                title: Created
+                type: string
+          description: Created
+        404:
+          content:
+            text/plain:
+              schema:
+                example: Not found
+                title: Endpoint not found
+                type: string
+          description: Not found response
+        405:
+          content:
+            text/plain:
+              schema:
+                example: The format is not valid
+                title: Invalid input
+                type: string
+          description: Invalid input
+      summary: Devuelve todos los datos relacionados con el invernadero.
+      tags:
+        - Invernadero
+    x-swagger-router-controller: Invernadero
   /greenhouse:
     delete:
       description: Eliminación de un dato de invernadero guardado en la base
@@ -1437,13 +1480,13 @@ paths:
         - Invernadero
       x-swagger-router-controller: Invernadero
     get:
-      description: Devuelve todos los datos relacionados con el invernadero.
-      operationId: getInvernadero
+      description: Devuelve el dato de invernadero de la base de datos
+      operationId: getGreenhouse
       parameters:
-        - description: Id del usuario
+        - description: Id del invernadero
           explode: true
           in: query
-          name: idUsuario
+          name: idGreenhouse
           required: true
           schema:
             format: int32
@@ -1474,13 +1517,13 @@ paths:
                 title: Invalid input
                 type: string
           description: Invalid input
-      summary: Devuelve todos los datos relacionados con el invernadero.
+      summary: Eliminación de datos del invernadero
       tags:
         - Invernadero
       x-swagger-router-controller: Invernadero
     post:
       description: Creacion de nuevos datos asociados al invernadero.
-      operationId: postInvernadero
+      operationId: postGreenhouse
       requestBody:
         content:
           application/json:
@@ -1518,7 +1561,7 @@ paths:
       x-swagger-router-controller: Invernadero
     put:
       description: Modifica un dato de invernadero previamente registrado
-      operationId: putInvernadero
+      operationId: putGreenhouses
       requestBody:
         content:
           application/json:
@@ -1560,14 +1603,13 @@ paths:
         de datos.
       operationId: deleteUser
       parameters:
-        - description: Id del user
+        - description: email del user
           explode: true
           in: query
-          name: idUsuario
+          name: email
           required: true
           schema:
-            format: int32
-            type: integer
+            type: string
           style: form
       responses:
         201:
