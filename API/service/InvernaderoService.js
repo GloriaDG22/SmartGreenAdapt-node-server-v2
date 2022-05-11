@@ -26,7 +26,7 @@ var client = mqtt.connect('mqtt://localhost:1883', options);
  * returns String
  **/
 module.exports.deleteGreenhouse = function(req, res, next) {
-    //Parameters
+   //Parameters
     console.log("Delete greenhouse data");
 
     var query = 'DELETE FROM GreenHouse WHERE id = ?';
@@ -40,6 +40,32 @@ module.exports.deleteGreenhouse = function(req, res, next) {
     });
 };
 
+/**
+ * Devuelve el dato de invernadero de la base de datos
+ * Devuelve el dato de invernadero de la base de datos
+ *
+ * idGreenhouse Integer Id del invernadero
+
+ * returns String
+ **/
+/*
+module.exports.getGreenhouse = function(req, res, next) {
+    //Parameters
+    console.log(req);
+
+    var query = 'SELECT * FROM greenhouse  WHERE id = ' + req.id.originalValue ;
+
+    connection.query(query,function (error, results) {
+        if (error) throw error;
+
+        res.send({
+            message: results
+        });
+    });
+};
+
+ */
+
 
 /**
  * Devuelve todos los datos relacionados con el invernadero.
@@ -49,7 +75,7 @@ module.exports.deleteGreenhouse = function(req, res, next) {
 
  * returns String
  **/
-module.exports.getInvernadero = function(req, res, next) {
+module.exports.getGreenhouses = function(req, res, next) {
     //Parameters
     console.log("Get greenhouse data");
     var query =  'SELECT * FROM GreenHouse WHERE idUsuario = ' + req.idUsuario.originalValue;
@@ -72,7 +98,7 @@ module.exports.getInvernadero = function(req, res, next) {
 
  * returns String
  **/
-module.exports.postInvernadero = function(req, res, next) {
+module.exports.postGreenhouse = function(req, res, next) {
     //Parameters
     console.log("Post a new greenhouse data");
     var query = 'INSERT INTO GreenHouse SET ?';
@@ -120,9 +146,10 @@ module.exports.postInvernadero = function(req, res, next) {
 
  * returns String
  **/
-module.exports.putInvernadero = function(req, res, next) {
+module.exports.putGreenhouses = function(req, res, next) {
     //Parameters
     console.log("Update greenhouse data");
+    console.log(req);
     var query = 'UPDATE GreenHouse SET ? where id = ?';
 
     var data = {
@@ -130,7 +157,7 @@ module.exports.putInvernadero = function(req, res, next) {
         name: req.undefined.originalValue.name
     }
 
-    connection.query(query, [data, req.undefined.originalValue.idGreenhouse], function (error, results) {
+    connection.query(query, [data, req.undefined.originalValue.id], function (error, results) {
         if (error) throw error;
 
         res.send({

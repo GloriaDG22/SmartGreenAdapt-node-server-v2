@@ -31,7 +31,6 @@ import retrofit2.Response;
 
 public class StateIrrigationSprinklersDetail extends Fragment {
 
-    public static final String EXTRA_GREENHOUSE = "ID_GREENHOUSE";
     private ActuatorAllData actuatorData;
     private TextView titulo;
     private ImageView imagen;
@@ -160,7 +159,6 @@ public class StateIrrigationSprinklersDetail extends Fragment {
                                     .replace(R.id.nav_host_fragment, toFragment)
                                     .commit();
                         }
-
                     }
 
                     @Override

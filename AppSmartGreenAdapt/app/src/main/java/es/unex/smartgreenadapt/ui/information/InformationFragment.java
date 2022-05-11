@@ -16,15 +16,12 @@ import es.unex.smartgreenadapt.GreenhouseActivity;
 import es.unex.smartgreenadapt.R;
 import es.unex.smartgreenadapt.data.remote.InformationNetworkLoaderRunnable;
 import es.unex.smartgreenadapt.data.remote.WeatherNetworkLoaderRunnable;
-import es.unex.smartgreenadapt.model.greenhouse.Greenhouse;
 import es.unex.smartgreenadapt.model.greenhouse.MessageGreenhouse;
-import es.unex.smartgreenadapt.model.greenhouse.MessageNotification;
 import es.unex.smartgreenadapt.model.greenhouse.information.AirQuality;
 import es.unex.smartgreenadapt.model.greenhouse.information.Humidity;
 import es.unex.smartgreenadapt.model.greenhouse.information.Luminosity;
 import es.unex.smartgreenadapt.model.greenhouse.WeatherResponse;
 import es.unex.smartgreenadapt.model.greenhouse.information.Temperature;
-import es.unex.smartgreenadapt.ui.notifications.NotificationsFragment;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -54,7 +51,7 @@ public class InformationFragment extends Fragment {
         airquality = root.findViewById(R.id.value_airquality);
 
         //Table horizontal (weather)
-        dateW = root.findViewById(R.id.value_date);
+        dateW = root.findViewById(R.id.value_recommendations);
         stateW = root.findViewById(R.id.value_state);
         temp= root.findViewById(R.id.value_temp);
         feels_likeW = root.findViewById(R.id.value_thermal_sensationW);
@@ -112,13 +109,17 @@ public class InformationFragment extends Fragment {
         //TEMPERATURE
         Call<Temperature> responseTem = mInformNet.getApi().getCurrentTemperature(mGreenhouse.getId());
         responseTem.enqueue(new Callback<Temperature>() {
-            @SuppressLint("SetTextI18n")
+            @SuppressLint({"SetTextI18n", "ResourceAsColor"})
             @Override
             public void onResponse(@NonNull Call<Temperature> call, @NonNull Response<Temperature> response) {
                 if (response.isSuccessful()) {
-                    Temperature currentTem = response.body();
-                    temperature.setText(currentTem.getAmount());
+                    if (!response.body().message.isEmpty()) {
+                        Temperature currentTem = response.body();
+                        temperature.setText(currentTem.getAmount());
+                    }else
+                        temperature.setText("No data");
                 }
+
             }
             @Override
             public void onFailure(Call<Temperature> call, Throwable t) {
@@ -133,8 +134,11 @@ public class InformationFragment extends Fragment {
             @Override
             public void onResponse(@NonNull Call<Luminosity> call, @NonNull Response<Luminosity> response) {
                 if (response.isSuccessful()) {
-                    Luminosity currentLum = response.body();
-                    luminosity.setText(currentLum.getAmount());
+                    if (!response.body().message.isEmpty()) {
+                        Luminosity currentLum = response.body();
+                        luminosity.setText(currentLum.getAmount());
+                    }else
+                        luminosity.setText("No data");
                 }
             }
 
@@ -151,8 +155,11 @@ public class InformationFragment extends Fragment {
             @Override
             public void onResponse(@NonNull Call<AirQuality> call, @NonNull Response<AirQuality> response) {
                 if (response.isSuccessful()) {
-                    AirQuality currentAir = response.body();
-                    airquality.setText(currentAir.getAmount());
+                    if (!response.body().message.isEmpty()) {
+                        AirQuality currentAir = response.body();
+                        airquality.setText(currentAir.getAmount());
+                    }else
+                        airquality.setText("No data");
                 }
             }
 
@@ -168,8 +175,12 @@ public class InformationFragment extends Fragment {
             @Override
             public void onResponse(@NonNull Call<Humidity> call, @NonNull Response<Humidity> response) {
                 if (response.isSuccessful()) {
-                    Humidity currentHum = response.body();
-                    humidity.setText(currentHum.getAmount());
+                    if (!response.body().message.isEmpty()) {
+                        Humidity currentHum = response.body();
+                        humidity.setText(currentHum.getAmount());
+                    }else
+                        humidity.setText("No data");
+
                 }
             }
 

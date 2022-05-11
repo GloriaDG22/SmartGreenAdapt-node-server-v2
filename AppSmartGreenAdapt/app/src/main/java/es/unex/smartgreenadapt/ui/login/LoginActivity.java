@@ -26,8 +26,6 @@ import retrofit2.Response;
 import android.util.Patterns;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
-
-
     public static final String EXTRA_USER = "USER";
     private EditText editTextEmail;
     private EditText editTextPassword;
@@ -133,7 +131,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     //onBackPressed();
 
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable(LoginActivity.EXTRA_USER, userAux.getId());
+                    bundle.putSerializable(LoginActivity.EXTRA_USER, userAux);
                     Intent intent = new Intent(LoginActivity.this, ListGreenhousesActivity.class);
                     intent.putExtras(bundle);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -143,17 +141,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     editTextPassword.setError("Password wrong");
                     editTextPassword.requestFocus();
                 }
-
             }
         }
     }
 
     //Create user
     private void userRegister() {
-        MessageUser newUser = new MessageUser(editTextEmail.getText().toString(), null, editTextPassword.getText().toString());
+        MessageUser newUser = new MessageUser(0, editTextEmail.getText().toString(), null, editTextPassword.getText().toString());
         Call<MessageResponse> login = mInformNet.getApi().postUser(newUser);
-
-        Log.println(Log.ASSERT, "info", "Ha ejecutado en user: " + login.isExecuted());
 
         login.enqueue(new Callback<MessageResponse>() {
             @Override
@@ -174,9 +169,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                     chargePreferences();
 
-
+                    newUser.setId(mgResponse.getInsertId());
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable(LoginActivity.EXTRA_USER, mgResponse.getInsertId());
+                    bundle.putSerializable(LoginActivity.EXTRA_USER, newUser);
                     Intent intent = new Intent(LoginActivity.this, ListGreenhousesActivity.class);
                     intent.putExtras(bundle);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

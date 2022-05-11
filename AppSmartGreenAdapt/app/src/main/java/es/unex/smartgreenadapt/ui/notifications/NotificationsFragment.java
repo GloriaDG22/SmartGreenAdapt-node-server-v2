@@ -1,6 +1,7 @@
 package es.unex.smartgreenadapt.ui.notifications;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,6 +41,7 @@ public class NotificationsFragment extends Fragment implements ListNotificationA
 
     MessageNotification mNotification;
     MessageGreenhouse mGreenhouse;
+    Context mContext;
 
     private InformationNetworkLoaderRunnable mInformNet;
 
@@ -57,6 +59,7 @@ public class NotificationsFragment extends Fragment implements ListNotificationA
         Bundle bundle = getActivity().getIntent().getExtras();
         mGreenhouse = (MessageGreenhouse) bundle.getSerializable(GreenhouseActivity.EXTRA_GREENHOUSE);
 
+        mContext = getContext();
         getNotifications();
 
         return root;
@@ -86,12 +89,13 @@ public class NotificationsFragment extends Fragment implements ListNotificationA
         Bundle bundle = new Bundle();
         bundle.putSerializable(EXTRA_NOTIFICATION, mNotification);
 
-        Intent intent = new Intent(getContext(), NotificationDetailActivity.class);
+        Intent intent = new Intent(mContext, NotificationDetailActivity.class);
         intent.putExtras(bundle);
-        getContext().startActivity(intent);
+        mContext.startActivity(intent);
     }
 
     public void getNotifications(){
+        mListNotifications.getList().clear();
         mInformNet = InformationNetworkLoaderRunnable.getInstance();
 
         Call<Notification> notifications = mInformNet.getApi().getNotifications(mGreenhouse.getId());

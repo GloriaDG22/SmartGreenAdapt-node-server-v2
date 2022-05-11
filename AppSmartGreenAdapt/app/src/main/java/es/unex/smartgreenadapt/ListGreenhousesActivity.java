@@ -1,13 +1,15 @@
 package es.unex.smartgreenadapt;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -16,11 +18,12 @@ import es.unex.smartgreenadapt.ui.login.LoginActivity;
 
 
 public class ListGreenhousesActivity extends AppCompatActivity {
-
-    public static final String EXTRA_GREENHOUSE = "ID_GREENHOUSE";
-
     private ActivityListGreenhousesBinding binding;
     Toolbar toolbar;
+
+    String username = null;
+
+    SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +39,19 @@ public class ListGreenhousesActivity extends AppCompatActivity {
         Fragment fragment = new ButtonFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_buttons, fragment).commit();
 
-        binding.fab.setOnClickListener(view ->
-                //TODO Crear nuevo invernadero
+        preferences = getSharedPreferences("DatesUser", MODE_PRIVATE);
+        username = preferences.getString("Username", "Username");
+
+        if(username.equals("admin")) {
+            binding.fab.setVisibility(View.VISIBLE);
+            binding.fab.setOnClickListener(view -> {
+                Intent i = new Intent(view.getContext(), EditGreenhouse.class);
+                startActivity(i);
+
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show());
+                        .setAction("Action", null).show();
+            });
+        }
     }
 
 
@@ -47,6 +59,7 @@ public class ListGreenhousesActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
         return true;
     }
 
@@ -64,8 +77,6 @@ public class ListGreenhousesActivity extends AppCompatActivity {
             case (R.id.action_about):
                 executeAbout();
                 return true;
-            case (android.R.id.home):
-                onBackPressed();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -84,7 +95,8 @@ public class ListGreenhousesActivity extends AppCompatActivity {
 
     //Activity login
     private void executeLogout() {
-        //TODO logout
+        preferences.edit().clear().apply();
+
         Intent i = new Intent(this, LoginActivity.class);
         startActivity(i);
 

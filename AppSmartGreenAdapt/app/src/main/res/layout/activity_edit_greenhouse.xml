@@ -32,80 +32,84 @@
             android:orientation="vertical"
             android:fitsSystemWindows="true">
             <TextView
-                android:id="@+id/text_username"
+                android:id="@+id/text_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/text_margin"
                 android:layout_marginTop="@dimen/button_state"
                 android:paddingTop="@dimen/text_margin"
                 android:selectAllOnFocus="true"
-                android:text="@string/text_username"
+                android:text="@string/text_name_gh"
                 android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
                 android:textColor="@color/grey" />
 
-            <TextView
-                android:id="@+id/value_username"
+            <EditText
+                android:id="@+id/value_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/subtext_margin_item"
-                android:clickable="false"
                 android:gravity="center"
                 android:singleLine="true"
+                android:hint="@string/text_name_gh"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
             <TextView
-                android:id="@+id/text_email"
+                android:id="@+id/text_id_user"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/text_margin"
                 android:layout_marginTop="@dimen/button_state"
                 android:paddingTop="@dimen/text_margin"
                 android:selectAllOnFocus="true"
-                android:text="@string/text_email"
+                android:text="@string/text_id_user"
                 android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
                 android:textColor="@color/grey" />
 
-            <TextView
-                android:id="@+id/value_email"
+            <EditText
+                android:id="@+id/value_id_user"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/subtext_margin_item"
-                android:clickable="false"
                 android:gravity="center"
                 android:singleLine="true"
+                android:hint="@string/text_id_user"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
-            <TextView
-                android:id="@+id/text_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
                 android:layout_marginVertical="@dimen/text_margin"
                 android:layout_marginTop="@dimen/button_state"
                 android:paddingTop="@dimen/text_margin"
-                android:selectAllOnFocus="true"
-                android:text="@string/text_password"
-                android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
-                android:textColor="@color/grey" />
+                >
+                <TextView
+                    android:id="@+id/text_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_username"
+                    android:layout_weight="1"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+                    android:textColor="@color/grey"
+                    android:visibility="invisible" />
 
-            <TextView
-                android:id="@+id/value_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/subtext_margin_item"
-                android:clickable="false"
-                android:gravity="center"
-                android:inputType="textPassword"
-                android:selectAllOnFocus="true"
-                android:singleLine="true"
-                android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
-
+                <TextView
+                    android:id="@+id/value_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/text_username"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    android:visibility="invisible"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+            </LinearLayout>
             <Button
-                android:id="@+id/delete_account"
+                android:id="@+id/save"
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                android:backgroundTint="@color/error_500"
+                android:backgroundTint="@color/green_700"
                 android:textColor="@color/white"
-                android:text="@string/delete_account">
+                android:text="@string/save">
 
             </Button>
         </LinearLayout>

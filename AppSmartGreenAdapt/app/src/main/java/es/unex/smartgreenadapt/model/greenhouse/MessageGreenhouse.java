@@ -11,11 +11,18 @@ public class MessageGreenhouse implements Serializable {
     @SerializedName("name")
     private String name;
 
-    @SerializedName("idUsername")
+    @SerializedName("idUsuario")
     private int idUsername;
+
+    @SerializedName("idInformation")
+    private int idInformation;
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -26,9 +33,14 @@ public class MessageGreenhouse implements Serializable {
         return idUsername;
     }
 
-    public MessageGreenhouse(int id, String name, int idUsername) {
+    public int getIdInformation() {
+        return idInformation;
+    }
+
+    public MessageGreenhouse(int id, String name, int idUsername, int idInformation) {
         this.id = id;
         this.name = name;
         this.idUsername = idUsername;
+        this.idInformation = idInformation;
     }
 }

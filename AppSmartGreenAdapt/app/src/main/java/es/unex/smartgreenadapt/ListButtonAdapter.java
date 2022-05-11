@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,18 +62,15 @@ public class ListButtonAdapter extends RecyclerView.Adapter<ListButtonAdapter.Vi
         MessageGreenhouse greenhouse = mButtons.get(position);
         holder.mButton.setText(greenhouse.getName());
 
-        holder.mButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle bundle = new Bundle();
-                bundle.putSerializable(ListGreenhousesActivity.EXTRA_GREENHOUSE, greenhouse);
+        holder.mButton.setOnClickListener(view -> {
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(GreenhouseActivity.EXTRA_GREENHOUSE, greenhouse);
 
-                Intent intent = new Intent(mContext, GreenhouseActivity.class);
-                intent.putExtras(bundle);
-                mContext.startActivity(intent);
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
+            Log.println(Log.ASSERT, "Result Greenhouse adapter", greenhouse.getName());
+
+            Intent intent = new Intent(mContext, GreenhouseActivity.class);
+            intent.putExtras(bundle);
+            mContext.startActivity(intent);
         });
     }
 
@@ -89,7 +87,7 @@ public class ListButtonAdapter extends RecyclerView.Adapter<ListButtonAdapter.Vi
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private Button mButton;
+        private final Button mButton;
 
         public ViewHolder(View view) {
             super(view);

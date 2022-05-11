@@ -17,6 +17,9 @@ public class Greenhouse implements Serializable {
     public void setList(ArrayList<MessageGreenhouse> message) {
         this.message = message;
     }
+    public void addList(ArrayList<MessageGreenhouse> message) {
+        this.message.addAll(message);
+    }
 
     public void addMessage(MessageGreenhouse message){ this.message.add(message);}
 }

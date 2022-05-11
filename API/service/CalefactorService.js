@@ -28,7 +28,7 @@ module.exports.deleteHeating = function(req, res, next) {
     console.log("Delete heating data");
     var query = 'DELETE FROM heating WHERE id = ?';
 
-    connection.query(query, [req.idHeating.originalValue], function (error, result) {
+    connection.query(query, [req.id.originalValue], function (error, result) {
         if (error) throw error;
 
         res.send({
@@ -48,7 +48,7 @@ module.exports.deleteHeating = function(req, res, next) {
 module.exports.getHeatings = function(req, res, next) {
     console.log("get heatings data");
 
-    var query = 'SELECT * FROM heatings WHERE idGreenhouse = ' + req.idGreenhouse.originalValue;
+    var query = 'SELECT * FROM heating WHERE idGreenhouse = ' + req.idGreenhouse.originalValue;
 
     connection.query(query, function (error, results) {
         if (error) throw error;
@@ -72,16 +72,11 @@ module.exports.postHeating = function(req, res, next) {
     console.log("Post heating data");
 
     var query = 'INSERT INTO heating SET ?';
-    var is_on;
-    if(req.undefined.originalValue.isOn){
-        is_on = 1;
-    } else {
-        is_on = 0;
-    }
+
 
     var data = {
         affects: req.undefined.originalValue.affects,
-        is_on: is_on,
+        value : req.undefined.originalValue.value,
         type: req.undefined.originalValue.type,
         idGreenhouse : req.undefined.originalValue.idGreenhouse
     }
@@ -128,22 +123,17 @@ module.exports.postHeating = function(req, res, next) {
 module.exports.putHeating = function(req, res, next) {
     console.log("Put heating data");
 
-    var query = 'UPDATE heating SET ?';
-    var is_on;
-    if(req.undefined.originalValue.isOn){
-        is_on = 1;
-    } else {
-        is_on = 0;
-    }
+    var query = 'UPDATE heating SET ? WHERE id = ?';
+
 
     var data = {
         affects: req.undefined.originalValue.affects,
-        is_on: is_on,
         type: req.undefined.originalValue.type,
-        idGreenhouse : req.undefined.originalValue.idGreenhouse
+        idGreenhouse : req.undefined.originalValue.idGreenhouse,
+        value : req.undefined.originalValue.value
     }
 
-    connection.query(query, [data, req.undefined.originalValue.idHeating], function (error, results) {
+    connection.query(query, [data, req.undefined.originalValue.id], function (error, results) {
         if (error) throw error;
 
         res.send({

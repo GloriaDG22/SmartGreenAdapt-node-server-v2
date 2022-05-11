@@ -1,20 +1,41 @@
 package es.unex.smartgreenadapt;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+
+import com.google.android.material.snackbar.Snackbar;
+
+import es.unex.smartgreenadapt.data.remote.InformationNetworkLoaderRunnable;
+import es.unex.smartgreenadapt.model.MessageResponse;
+import es.unex.smartgreenadapt.ui.information.InformationFragment;
+import es.unex.smartgreenadapt.ui.login.LoginActivity;
+import es.unex.smartgreenadapt.ui.notifications.NotificationsFragment;
+import es.unex.smartgreenadapt.ui.state.StateFragment;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Profile extends AppCompatActivity {
 
     TextView mEmail, mPassword, mUsername;
+    Button mDeleteAccount;
 
     String email, password, username = null;
     private Toolbar toolbar;
+
+    InformationNetworkLoaderRunnable mInformNet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +61,47 @@ public class Profile extends AppCompatActivity {
         mEmail.setHint(email);
         mPassword.setHint(password);
 
+        mDeleteAccount = findViewById(R.id.delete_account);
+        mDeleteAccount.setOnClickListener(menuItem -> {
+            onClick(menuItem);
+
+            Snackbar.make(menuItem, "The account has been deleted.", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+
+            preferences.edit().clear().apply();
+
+            Intent i = new Intent(this, LoginActivity.class);
+            startActivity(i);
+
+            finish();
+
+        });
     }
+
+    private void onClick(View menuItem) {
+        mInformNet = InformationNetworkLoaderRunnable.getInstance();
+
+        Call<MessageResponse> responseCall = mInformNet.getApi().deleteUser(email);
+
+        responseCall.enqueue(new Callback<MessageResponse>() {
+            @SuppressLint("SimpleDateFormat")
+            @Override
+            public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {
+                if (response.isSuccessful()) {
+                    MessageResponse mgResponse = response.body();
+                    if (mgResponse.getAffectedRows() == 1)
+                        Log.println(Log.INFO, "Result", "The account has been deleted.");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MessageResponse> call, Throwable t) {
+
+            }
+        });
+
+    }
+
     // Seleción del menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

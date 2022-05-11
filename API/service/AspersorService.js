@@ -28,9 +28,9 @@ var client = mqtt.connect('mqtt://localhost:1883', options);
 module.exports.deleteSprinklers = function(req, res, next) {
     //Parameters
     console.log("Delete sprinklers data");
-    var query = 'DELETE FROM airquality WHERE id = ?';
+    var query = 'DELETE FROM sprinklers WHERE id = ?';
 
-    connection.query(query, [req.idSprinklers.originalValue], function (error, result) {
+    connection.query(query, [req.id.originalValue], function (error, result) {
         if (error) throw error;
 
         res.send({
@@ -75,7 +75,7 @@ module.exports.postSprinklers = function(req, res, next) {
 
     var query = 'INSERT INTO sprinklers SET ?';
     var is_on;
-    if(req.undefined.originalValue.isOn){
+    if(req.undefined.originalValue.is_on){
         is_on = 1;
     } else {
         is_on = 0;
@@ -129,7 +129,7 @@ module.exports.postSprinklers = function(req, res, next) {
 module.exports.putSprinklers = function(req, res, next) {
     var query = 'UPDATE airquality SET ? WHERE id = ?';
     var is_on;
-    if(req.undefined.originalValue.isOn){
+    if(req.undefined.originalValue.is_on){
         is_on = 1;
     } else {
         is_on = 0;
@@ -141,7 +141,7 @@ module.exports.putSprinklers = function(req, res, next) {
         idGreenhouse : req.undefined.originalValue.idGreenhouse
     }
 
-    connection.query(query, [data, req.undefined.originalValue.idSprinklers], function (error, results) {
+    connection.query(query, [data, req.undefined.originalValue.id], function (error, results) {
         if (error) throw error;
 
         res.send({
