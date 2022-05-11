@@ -42,8 +42,8 @@
                 android:layout_height="wrap_content"
                 android:paddingVertical="@dimen/text_margin_item"
 
-                android:textSize="@dimen/text_size_date"
-                android:textAppearance="?android:attr/textAppearanceListItem" />
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:textSize="@dimen/text_size_date" />
 
         </LinearLayout>
     </LinearLayout>

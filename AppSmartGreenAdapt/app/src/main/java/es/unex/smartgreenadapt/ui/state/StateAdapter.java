@@ -56,18 +56,36 @@ public class StateAdapter extends RecyclerView.Adapter<StateAdapter.ViewHolder>{
         ActuatorAllData data = mAllData.get(i);
 
         view.type.setText(data.getClassType());
+        view.infoEstado.setText("Estado:");
         if("Window".equals(data.getClassType())){
             view.moreInfo.setText(data.getName());
             view.img.setImageResource(R.drawable.ic_window_svgrepo_com);
+            if(data.getIsOn() == 1){
+                view.estadoState.setText("Abierta");
+            } else {
+                view.estadoState.setText("Cerrada");
+            }
         } else if("Heating".equals(data.getClassType())){
             view.moreInfo.setText(data.getHeatingType());
             view.img.setImageResource(R.drawable.ic_heating_svgrepo_com);
+            view.infoEstado.setText("Potencia:");
+            view.estadoState.setText(Integer.toString(data.getValue()));
         } else if("Sprinklers".equals(data.getClassType())){
             view.moreInfo.setText("");
             view.img.setImageResource(R.drawable.ic_irrigation_svgrepo_com);
+            if(data.getIsOn() == 1){
+                view.estadoState.setText("Encendido");
+            } else {
+                view.estadoState.setText("Apagado");
+            }
         } else {
             view.moreInfo.setText("");
             view.img.setImageResource(R.drawable.ic_irrigation);
+            if(data.getIsOn() == 1){
+                view.estadoState.setText("Encendido");
+            } else {
+                view.estadoState.setText("Apagado");
+            }
         }
     }
 
@@ -87,7 +105,7 @@ public class StateAdapter extends RecyclerView.Adapter<StateAdapter.ViewHolder>{
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView type, moreInfo;
+        private TextView type, moreInfo, infoEstado, estadoState;
         private ImageView img;
         private LinearLayout linearLayout;
         OnStateListener onStateListener;
@@ -97,6 +115,8 @@ public class StateAdapter extends RecyclerView.Adapter<StateAdapter.ViewHolder>{
             type = view.findViewById(R.id.type);
             moreInfo = view.findViewById(R.id.moreInfo);
             img = view.findViewById(R.id.ic_itemState);
+            infoEstado = view.findViewById(R.id.infoEstadoTV);
+            estadoState = view.findViewById(R.id.estadoStateTV);
 
             linearLayout = view.findViewById(R.id.linearLayoutState);
 

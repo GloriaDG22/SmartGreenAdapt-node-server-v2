@@ -32,26 +32,52 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/type"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/text_margin_item"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_date"
-                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/type"
+                    android:layout_width="169dp"
+                    android:layout_height="wrap_content"
 
+                    android:paddingTop="@dimen/text_margin_item"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_date"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/moreInfo"
+                <TextView
+                    android:id="@+id/moreInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="@dimen/text_margin_item"
+
+                    android:textAppearance="?android:attr/textAppearanceListItem"
+                    android:textSize="@dimen/text_margin" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingVertical="@dimen/text_margin_item"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-                android:textAppearance="?android:attr/textAppearanceListItem"
-                android:textSize="@dimen/text_margin" />
+                <TextView
+                    android:id="@+id/infoEstadoTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="TextView" />
+
+                <TextView
+                    android:id="@+id/estadoStateTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="TextView" />
+            </LinearLayout>
+
 
         </LinearLayout>
     </LinearLayout>
@@ -61,10 +87,10 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayoutState"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.67" />
 </androidx.constraintlayout.widget.ConstraintLayout>
