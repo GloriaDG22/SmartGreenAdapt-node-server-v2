@@ -14,10 +14,10 @@
     <string name="text_temperature_max">Temperature Max</string>
     <string name="text_temperature_min">Temperature Min</string>
     <string name="text_weather">Weather</string>
-    <string name="text_date">Date</string>
+    <string name="text_recommendations">Recommendations</string>
     <string name="text_state">State</string>
     <string name="text_type">Type</string>
-    <string name="text_description">Description</string>
+    <string name="text_valid_values">Valid values</string>
     <string name="text_greenhouse">Greenhouse</string>
 
     <!-- Strings used for fragments for navigation -->
@@ -54,8 +54,16 @@
     <string name="action_register">Register</string>
     <string name="text_register">Don\'t have an Account?\nRegister down</string>
     <string name="text_login">Login</string>
-    <string name="text_username">Username</string>
+    <string name="text_username">Username: </string>
     <string name="value_author3">Enrique Moguel</string>
+    <string name="delete_account">Delete account</string>
     <string name="text_No_States">No hay actuadores</string>
     <string name="imagen_que_visualiza_el_tipo_de_actuador">Imagen que visualiza el tipo de actuador</string>
+    <string name="action_edit">Edit GH</string>
+    <string name="action_delete">Delete GH</string>
+    <string name="text_id_user">ID user</string>
+    <string name="text_name_gh">Name greenhouse</string>
+    <string name="save">Save</string>
+    <string name="action_add">Add GH</string>
+    <string name="text_date">Date</string>
 </resources>

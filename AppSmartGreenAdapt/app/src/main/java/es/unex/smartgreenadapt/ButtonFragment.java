@@ -29,6 +29,8 @@ import es.unex.smartgreenadapt.model.greenhouse.Greenhouse;
 import es.unex.smartgreenadapt.model.greenhouse.MessageGreenhouse;
 import es.unex.smartgreenadapt.model.greenhouse.MessageNotification;
 import es.unex.smartgreenadapt.model.greenhouse.Notification;
+import es.unex.smartgreenadapt.model.login.MessageUser;
+import es.unex.smartgreenadapt.model.login.User;
 import es.unex.smartgreenadapt.ui.login.LoginActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -40,7 +42,8 @@ public class ButtonFragment extends Fragment {
 
     private ListButtonAdapter listButtonAdapter;
     Greenhouse mListButtons = new Greenhouse();
-    private int idUser;
+    private MessageUser mUser;
+    private User listUsers = new User();
 
     private InformationNetworkLoaderRunnable mInformNet;
 
@@ -53,18 +56,19 @@ public class ButtonFragment extends Fragment {
         listButtonAdapter = ListButtonAdapter.getInstance(inflater, this.getContext());
 
         Bundle bundle = getActivity().getIntent().getExtras();
-        idUser = (int) bundle.getSerializable(LoginActivity.EXTRA_USER);
-
-/*
-        mListButtons.add(new Greenhouse(1,"Greenhouse 1",1));
-        mListButtons.add("Greenhouse 2");
-        mListButtons.add("Greenhouse 3");
-        mListButtons.add("Greenhouse 4");*/
-
-        getGreenhouses();
+        mUser = (MessageUser) bundle.getSerializable(LoginActivity.EXTRA_USER);
 
         return root;
     }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+
+        mListButtons.getList().clear();
+        getGreenhouses();
+    }
+
 
     @Override
     public void onResume(){
@@ -82,26 +86,52 @@ public class ButtonFragment extends Fragment {
     public void getGreenhouses(){
         mInformNet = InformationNetworkLoaderRunnable.getInstance();
 
-        Call<Greenhouse> greenhouseCall = mInformNet.getApi().getGreenhouses(idUser);
+        if(!mUser.getUsername().equals("admin")) {
+            listUsers.getList().clear();
+            listUsers.addMessage(new MessageUser(mUser.getId(), mUser.email, mUser.username, mUser.password));
 
-        greenhouseCall.enqueue(new Callback<Greenhouse>() {
-            @SuppressLint("SimpleDateFormat")
-            @Override
-            public void onResponse(Call<Greenhouse> call, Response<Greenhouse> response) {
-                if (response.isSuccessful()) {
-                    Greenhouse responseGreen = response.body();
-                    mListButtons.setList(responseGreen.getList());
+            callGreenhouse();
 
-                    onResume();
+        }else {
+            Call<User> register = mInformNet.getApi().users();
+            register.enqueue(new Callback<User>() {
+                @Override
+                public void onResponse(Call<User> call, Response<User> response) {
+                    listUsers = response.body();
+
+                    callGreenhouse();
                 }
-            }
 
-            @Override
-            public void onFailure (Call <Greenhouse> call, Throwable t){
+                @Override
+                public void onFailure(Call<User> call, Throwable t) {
 
-            }
+                }
+            });
+        }
+    }
 
-        });
+    public void callGreenhouse(){
+        Call<Greenhouse> greenhouseCall;
+        for (MessageUser user: listUsers.getList()) {
+            greenhouseCall = mInformNet.getApi().getGreenhouses(user.getId());
 
+            greenhouseCall.enqueue(new Callback<Greenhouse>() {
+                @Override
+                public void onResponse(Call<Greenhouse> call, Response<Greenhouse> response) {
+                    if (response.isSuccessful()) {
+                        Greenhouse responseGreen = response.body();
+                        mListButtons.addList(responseGreen.getList());
+
+                        onResume();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Greenhouse> call, Throwable t) {
+
+                }
+
+            });
+        }
     }
 }

@@ -1,10 +1,8 @@
 package es.unex.smartgreenadapt.data.remote;
 
-import java.util.List;
-
-import es.unex.smartgreenadapt.data.LoginResponse;
 import es.unex.smartgreenadapt.model.MessageResponse;
 import es.unex.smartgreenadapt.model.greenhouse.Greenhouse;
+import es.unex.smartgreenadapt.model.greenhouse.MessageGreenhouse;
 import es.unex.smartgreenadapt.model.greenhouse.Notification;
 import es.unex.smartgreenadapt.model.greenhouse.actuators.ActuatorMessage;
 import es.unex.smartgreenadapt.model.greenhouse.actuators.Heating;
@@ -22,6 +20,7 @@ import es.unex.smartgreenadapt.model.login.MessageUser;
 import es.unex.smartgreenadapt.model.login.User;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -53,8 +52,23 @@ public interface APIService {
     @POST("users")
     Call<MessageResponse> postUser(@Body MessageUser user);
 
-    @GET("greenhouse")
+    @DELETE("users")
+    Call<MessageResponse> deleteUser(@Query("email") String email);
+
+    @GET("greenhouse#user")
     Call<Greenhouse> getGreenhouses(@Query("idUsuario") int idUsuario);
+
+    @GET("greenhouse")
+    Call<Greenhouse> getGreenhouse(@Query("idGreenhouse") int idGreenhouse);
+
+    @PUT("greenhouse")
+    Call<MessageResponse> putGreenhouse(@Body MessageGreenhouse greenhouse);
+
+    @POST("greenhouse")
+    Call<MessageResponse> postGreenhouse(@Body MessageGreenhouse greenhouse);
+
+    @DELETE("greenhouse")
+    Call<MessageResponse> deleteGreenhouse(@Query("idGreenhouse") int idGreenhouse);
 
     @GET("windows")
     Call<Windows> getWindows(@Query("idGreenhouse") int idGreenhouse);

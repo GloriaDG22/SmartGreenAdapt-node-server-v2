@@ -2,7 +2,9 @@ package es.unex.smartgreenadapt.model.login;
 
 import com.google.gson.annotations.SerializedName;
 
-public class MessageUser {
+import java.io.Serializable;
+
+public class MessageUser implements Serializable {
 
     @SerializedName("id")
     public int id;
@@ -16,7 +18,8 @@ public class MessageUser {
     @SerializedName("email")
     public String email;
 
-    public MessageUser(String email, String username, String password) {
+    public MessageUser(int id, String email, String username, String password) {
+        this.id = id;
         this.email = email;
 
         if(username==null)
@@ -29,6 +32,9 @@ public class MessageUser {
 
     public int getId() {
         return id;
+    }
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getEmail() {

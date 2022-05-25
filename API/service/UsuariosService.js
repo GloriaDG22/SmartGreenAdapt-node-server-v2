@@ -27,9 +27,9 @@ var client = mqtt.connect('mqtt://localhost:1883', options);
 module.exports.deleteUser = function(req, res, next) {
     //Parameters
     console.log("Delete user data");
-    var query = 'DELETE FROM UserInfo WHERE id = ' + req.idUsuario.originalValue
+    var query = "DELETE FROM UserInfo WHERE email = '" + req.email.originalValue + "'"
 
-    connection.query(query, [req.idUsuario.originalValue], function (error, result) {
+    connection.query(query, function (error, result) {
         if (error) throw error;
 
         res.send({

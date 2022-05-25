@@ -134,7 +134,7 @@ module.exports.putAirQuality = function(req, res, next) {
         idGreenhouse : req.undefined.originalValue.idGreenhouse
     }
 
-    connection.query(query, [data, req.undefined.originalValue.idAirQuality], function (error, results) {
+    connection.query(query, [data, req.undefined.originalValue.id], function (error, results) {
         if (error) throw error;
 
         res.send({

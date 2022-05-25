@@ -1,6 +1,5 @@
 package es.unex.smartgreenadapt.ui.state;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,17 +7,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import es.unex.smartgreenadapt.GreenhouseActivity;
 import es.unex.smartgreenadapt.R;
@@ -32,7 +25,6 @@ import es.unex.smartgreenadapt.model.greenhouse.actuators.Irrigation;
 import es.unex.smartgreenadapt.model.greenhouse.actuators.Sprinklers;
 import es.unex.smartgreenadapt.model.greenhouse.actuators.WindowMessage;
 import es.unex.smartgreenadapt.model.greenhouse.actuators.Windows;
-import es.unex.smartgreenadapt.ui.notifications.NotificationDetailActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -230,8 +222,6 @@ public class StateFragment extends Fragment implements StateAdapter.OnStateListe
                 //vacio
             }
         });
-
-
     }
 
     @Override
@@ -244,7 +234,4 @@ public class StateFragment extends Fragment implements StateAdapter.OnStateListe
         }
 
     }
-// email@gmail.com
-
-
 }

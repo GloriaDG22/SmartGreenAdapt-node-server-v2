@@ -40,6 +40,8 @@ for item in information:
 
     if problem: 
         data['problem'] = 'Temperature'
+        data['date'] = item['date']
+        data['idInformation'] = item['id']
 
         print("problem temp")
         # Notification

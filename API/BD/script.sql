@@ -27,7 +27,7 @@ CREATE TABLE GreenHouse(
   idUsuario INT,
   name VARCHAR(50),
   PRIMARY KEY (id),
-  FOREIGN KEY (idUsuario) REFERENCES UserInfo(id)
+  FOREIGN KEY (idUsuario) REFERENCES UserInfo(id) ON DELETE CASCADE
 );
 
 CREATE TABLE AirQuality (
@@ -36,7 +36,7 @@ CREATE TABLE AirQuality (
     date TIMESTAMP,
     idGreenhouse INT,
 	PRIMARY KEY(id),
-    FOREIGN KEY (idGreenhouse) REFERENCES GreenHouse(id)
+    FOREIGN KEY (idGreenhouse) REFERENCES GreenHouse(id) ON DELETE CASCADE
 );
 CREATE TABLE Luminosity (
     id INT NOT NULL AUTO_INCREMENT,
@@ -44,7 +44,7 @@ CREATE TABLE Luminosity (
     date TIMESTAMP,
     idGreenhouse INT,
     PRIMARY KEY(id),
-    FOREIGN KEY (idGreenhouse) REFERENCES GreenHouse(id)
+    FOREIGN KEY (idGreenhouse) REFERENCES GreenHouse(id) ON DELETE CASCADE
 );
 CREATE TABLE Notification (
     id INT NOT NULL AUTO_INCREMENT,
@@ -54,7 +54,7 @@ CREATE TABLE Notification (
     date TIMESTAMP,
     idGreenhouse INT,
     PRIMARY KEY(id),
-    FOREIGN KEY (idGreenhouse) REFERENCES GreenHouse(id)
+    FOREIGN KEY (idGreenhouse) REFERENCES GreenHouse(id) ON DELETE CASCADE
 );
 CREATE TABLE Humidity (
     id INT NOT NULL AUTO_INCREMENT,
@@ -62,7 +62,7 @@ CREATE TABLE Humidity (
     date TIMESTAMP,
     idGreenhouse INT,
     PRIMARY KEY(id),
-    FOREIGN KEY (idGreenhouse) REFERENCES GreenHouse(id)
+    FOREIGN KEY (idGreenhouse) REFERENCES GreenHouse(id) ON DELETE CASCADE
 );
 CREATE TABLE Temperature (
 	id INT NOT NULL AUTO_INCREMENT,
@@ -70,7 +70,7 @@ CREATE TABLE Temperature (
     date TIMESTAMP,
     idGreenhouse INT,
     PRIMARY KEY(id),
-    FOREIGN KEY (idGreenhouse) REFERENCES GreenHouse(id)
+    FOREIGN KEY (idGreenhouse) REFERENCES GreenHouse(id) ON DELETE CASCADE
 );
 CREATE TABLE Windows (
     id INT NOT NULL AUTO_INCREMENT,
@@ -79,7 +79,7 @@ CREATE TABLE Windows (
     name VARCHAR(100),
     idGreenhouse INT,
     PRIMARY KEY(id),
-    FOREIGN KEY (idGreenhouse) REFERENCES GreenHouse(id)
+    FOREIGN KEY (idGreenhouse) REFERENCES GreenHouse(id) ON DELETE CASCADE
 );
 CREATE TABLE Irrigation(
    id INT NOT NULL AUTO_INCREMENT,
@@ -87,7 +87,7 @@ CREATE TABLE Irrigation(
    affects VARCHAR(100),
    idGreenhouse INT,
    PRIMARY KEY(id),
-   FOREIGN KEY (idGreenhouse) REFERENCES GreenHouse(id)
+   FOREIGN KEY (idGreenhouse) REFERENCES GreenHouse(id) ON DELETE CASCADE
 );
 CREATE TABLE Sprinklers(
    id INT NOT NULL AUTO_INCREMENT,
@@ -95,7 +95,7 @@ CREATE TABLE Sprinklers(
    affects VARCHAR(100),
    idGreenhouse INT,
    PRIMARY KEY(id),
-   FOREIGN KEY (idGreenhouse) REFERENCES GreenHouse(id)
+   FOREIGN KEY (idGreenhouse) REFERENCES GreenHouse(id) ON DELETE CASCADE
 );
 CREATE TABLE Heating(
     id INT NOT NULL AUTO_INCREMENT,
@@ -104,7 +104,7 @@ CREATE TABLE Heating(
     value INT,
     idGreenhouse INT,
     PRIMARY KEY(id),
-    FOREIGN KEY (idGreenhouse) REFERENCES GreenHouse(id)
+    FOREIGN KEY (idGreenhouse) REFERENCES GreenHouse(id) ON DELETE CASCADE
 );
 CREATE TABLE Weather (
 	id INT NOT NULL AUTO_INCREMENT,
@@ -122,6 +122,9 @@ CREATE TABLE Weather (
 );
 
 -- Creación de usuario e invernadero de prueba
+INSERT INTO smartgreenadapt.UserInfo(id, username, password, email)
+VALUES (3, 'admin', 'adminadmin', 'a@g.c');
+
 
 INSERT INTO smartgreenadapt.UserInfo(id, username, password, email)
 VALUES (1, 'Juan', 'qqqqqq', 'j@g.c');
@@ -137,14 +140,13 @@ INSERT INTO smartgreenadapt.GreenHouse(id, idUsuario, name)
 VALUES (3, 2, 'Greenhouse sunflower');
 
 
-
 -- Prueba 1 - Warning humidity y error luminosity
 INSERT INTO smartgreenadapt.temperature (amount, date, idGreenhouse)
 VALUES (30.00, '2022-03-22 12:10:44', 1);
 INSERT INTO smartgreenadapt.luminosity (amount, date, idGreenhouse)
 VALUES (1600.00, '2022-03-22 12:10:44', 1);
 INSERT INTO smartgreenadapt.airquality (amount, date, idGreenhouse)
-VALUES (10.00, '2022-03-28 12:10:44', 1);
+VALUES (10.00, '2022-03-22 12:10:44', 1);
 INSERT INTO smartgreenadapt.humidity (amount, date, idGreenhouse)
 VALUES (40.00, '2022-03-22 12:10:44', 1);
 
@@ -170,37 +172,67 @@ VALUES (70.00, '2022-03-24 12:10:44', 1);
 
 -- Datos invernaderos
 INSERT INTO smartgreenadapt.temperature (amount, date, idGreenhouse)
-VALUES (30.00, '2022-03-24 12:10:44', 2);
+VALUES (5.00, '2022-03-25 12:10:44', 1);                                -- Warning
 INSERT INTO smartgreenadapt.luminosity (amount, date, idGreenhouse)
-VALUES (300.00, '2022-03-24 12:10:44', 2);
+VALUES (1000.00, '2022-03-25 12:10:44', 1);
 INSERT INTO smartgreenadapt.airquality (amount, date, idGreenhouse)
-VALUES (30.00, '2022-03-24 12:10:44', 2);
+VALUES (10.00, '2022-03-25 12:10:44', 1);
 INSERT INTO smartgreenadapt.humidity (amount, date, idGreenhouse)
-VALUES (70.00, '2022-03-24 12:10:44', 2);
+VALUES (10.00, '2022-03-25 12:10:44', 1);
 
 -- Datos invernaderos
 INSERT INTO smartgreenadapt.temperature (amount, date, idGreenhouse)
-VALUES (40.00, '2022-03-24 12:10:44', 3);
+VALUES (30.00, '2022-03-25 12:10:44', 2);
 INSERT INTO smartgreenadapt.luminosity (amount, date, idGreenhouse)
-VALUES (1000.00, '2022-03-24 12:10:44', 3);
+VALUES (1200.00, '2022-03-25 12:10:44', 2);                                -- Warning
 INSERT INTO smartgreenadapt.airquality (amount, date, idGreenhouse)
-VALUES (10.00, '2022-03-24 12:10:44', 3);
+VALUES (30.00, '2022-03-25 12:10:44', 2);
+INSERT INTO smartgreenadapt.humidity (amount, date, idGreenhouse) -- Sin valor
+VALUES (70.00, '2022-03-25 12:10:44', 2);
+
+-- Datos invernaderos
+INSERT INTO smartgreenadapt.temperature (amount, date, idGreenhouse)
+VALUES (40.00, '2022-03-25 12:10:44', 3);
+INSERT INTO smartgreenadapt.luminosity (amount, date, idGreenhouse)
+VALUES (1000.00, '2022-03-25 12:10:44', 3);
+INSERT INTO smartgreenadapt.airquality (amount, date, idGreenhouse)
+VALUES (70.00, '2022-03-25 12:10:44', 3);                                -- Warning
 INSERT INTO smartgreenadapt.humidity (amount, date, idGreenhouse)
-VALUES (10.00, '2022-03-24 12:10:44', 3);
+VALUES (95.00, '2022-03-25 12:10:44', 3);                                -- Warning
 
 
-
 INSERT INTO smartgreenadapt.notification (is_warning, problem, status, date, idGreenhouse)
-VALUES (0, 'Temperature', 'low', '2022-03-22 12:10:44', 2);
+VALUES (0, 'Temperature', 'low', '2022-03-25 12:10:44', 1);
 INSERT INTO smartgreenadapt.notification (is_warning, problem, status, date, idGreenhouse)
-VALUES (0, 'Humidity', 'high', '2022-03-23 12:10:44', 2);
+VALUES (0, 'Luminosity', 'high', '2022-03-25 12:10:44', 2);
 INSERT INTO smartgreenadapt.notification (is_warning, problem, status, date, idGreenhouse)
-VALUES (1, 'Temperature', 'error', '2022-03-24 12:10:44', 2);
+VALUES (1, 'Airquality', 'error', '2022-03-25 12:10:44', 3);
 INSERT INTO smartgreenadapt.notification (is_warning, problem, status, date, idGreenhouse)
-VALUES (0, 'Temperature', 'high', '2022-03-22 12:10:44', 3);
-INSERT INTO smartgreenadapt.notification (is_warning, problem, status, date, idGreenhouse)
-VALUES (0, 'Humidity', 'low', '2022-03-23 12:10:44', 3);
-INSERT INTO smartgreenadapt.notification (is_warning, problem, status, date, idGreenhouse)
-VALUES (1, 'Temperature', 'error', '2022-03-24 12:10:44', 3);
+VALUES (0, 'Humidity', 'high', '2022-03-25 12:10:44', 3);
 
 
+INSERT INTO smartgreenadapt.irrigation (id, is_on, affects, idGreenhouse)
+VALUES (1, 0, 'Humidity,', 1);
+INSERT INTO smartgreenadapt.windows (id, is_on, affects, name, idGreenhouse)
+VALUES (1, 1, 'Temperature,Airquality,Luminosity,Humidity,', 'Lateral', 1);
+INSERT INTO smartgreenadapt.sprinklers (id, is_on, affects, idGreenhouse)
+VALUES (1, 1, 'Humidity,Temperature,', 1);
+INSERT INTO smartgreenadapt.heating (id, affects, type, value, idGreenhouse)
+VALUES (1, 'Temperature,Humidity,', 'Infrared', 20, 1);
+
+INSERT INTO smartgreenadapt.irrigation (id, is_on, affects, idGreenhouse)
+VALUES (2, 1, 'Humidity,', 2);
+INSERT INTO smartgreenadapt.windows (id, is_on, affects, name, idGreenhouse)
+VALUES (2, 1, 'Temperature,Airquality,Luminosity,Humidity', 'Lateral', 2);
+INSERT INTO smartgreenadapt.windows (id, is_on, affects, name, idGreenhouse)
+VALUES (3, 0, 'Temperature,Airquality,Luminosity,Humidity,', 'Frontal', 2);
+INSERT INTO smartgreenadapt.sprinklers (id, is_on, affects, idGreenhouse)
+VALUES (2, 0, 'Temperature,Humidity,', 2);
+
+
+INSERT INTO smartgreenadapt.irrigation (id, is_on, affects, idGreenhouse)
+VALUES (3, 0, 'Humidity,', 3);
+INSERT INTO smartgreenadapt.windows (id, is_on, affects, name, idGreenhouse)
+VALUES (4, 1, 'Temperature,Airquality,Luminosity,Humidity,', 'Frontal', 3);
+INSERT INTO smartgreenadapt.heating (id, affects, type, value, idGreenhouse)
+VALUES (3, 'Temperature,Humidity,', 'Ventilate', 28, 3);

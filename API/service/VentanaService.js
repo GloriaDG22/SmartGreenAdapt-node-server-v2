@@ -29,7 +29,7 @@ module.exports.deleteWindow = function(req, res, next) {
     console.log("Delete window data");
     var query = 'DELETE FROM airquality WHERE id = ?';
 
-    connection.query(query, [req.idWindows.originalValue], function (error, result) {
+    connection.query(query, [req.id.originalValue], function (error, result) {
         if (error) throw error;
 
         res.send({
@@ -74,7 +74,7 @@ module.exports.postWindow = function(req, res, next) {
 
     var query = 'INSERT INTO windows SET ?';
     var is_on;
-    if(req.undefined.originalValue.isOn){
+    if(req.undefined.originalValue.is_on){
         is_on = 1;
     } else {
         is_on = 0;
@@ -131,7 +131,7 @@ module.exports.putWindow = function(req, res, next) {
 
     var query = 'UPDATE windows SET ? WHERE id = ?';
     var is_on;
-    if(req.undefined.originalValue.isOn){
+    if(req.undefined.originalValue.is_on){
         is_on = 1;
     } else {
         is_on = 0;
@@ -144,7 +144,7 @@ module.exports.putWindow = function(req, res, next) {
         idGreenhouse : req.undefined.originalValue.idGreenhouse
     }
 
-    connection.query(query, [data, req.undefined.originalValue.idWindows], function (error, results) {
+    connection.query(query, [data, req.undefined.originalValue.id], function (error, results) {
         if (error) throw error;
 
         res.send({

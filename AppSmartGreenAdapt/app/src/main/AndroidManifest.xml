@@ -23,6 +23,7 @@
         </activity>
         <activity android:name=".GreenhouseActivity" />
         <activity android:name=".ListGreenhousesActivity" />
+        <activity android:name=".EditGreenhouse" />
         <activity android:name=".Profile" />
         <activity android:name=".About" />
         <activity android:name=".ui.state.StateWindowDetail" />

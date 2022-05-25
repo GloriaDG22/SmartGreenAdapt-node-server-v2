@@ -29,7 +29,7 @@ module.exports.deleteIrrigation = function(req, res, next) {
     console.log("Delete air quality data");
     var query = 'DELETE FROM Irrigation WHERE id = ?';
 
-    connection.query(query, [req.idIrrigation.originalValue], function (error, result) {
+    connection.query(query, [req.id.originalValue], function (error, result) {
         if (error) throw error;
 
         res.send({
@@ -74,7 +74,7 @@ module.exports.postIrrigation = function(req, res, next) {
 
     var query = 'INSERT INTO irrigation SET ?';
     var is_on;
-    if(req.undefined.originalValue.isOn){
+    if(req.undefined.originalValue.is_on){
         is_on = 1;
     } else {
         is_on = 0;
@@ -105,7 +105,7 @@ module.exports.postIrrigation = function(req, res, next) {
             qos: 1
         };
         if (client.connected === true) {
-            client.publish('irrigation', req.undefined.originalValue.isOn.toString(), options);
+            client.publish('irrigation', req.undefined.originalValue.is_on.toString(), options);
         }
     });
 
@@ -128,9 +128,9 @@ module.exports.postIrrigation = function(req, res, next) {
 module.exports.putIrrigation = function(req, res, next) {
     console.log("Put air quality data");
 
-    var query = 'UPDATE airquality SET ? WHERE id = ?';
+    var query = 'UPDATE irrigation SET ? WHERE id = ?';
     var is_on;
-    if(req.undefined.originalValue.isOn){
+    if(req.undefined.originalValue.is_on){
         is_on = 1;
     } else {
         is_on = 0;
@@ -139,11 +139,10 @@ module.exports.putIrrigation = function(req, res, next) {
     var data = {
         affects: req.undefined.originalValue.affects,
         is_on: is_on,
-        type: req.undefined.originalValue.type,
         idGreenhouse : req.undefined.originalValue.idGreenhouse
     }
 
-    connection.query(query, [data, req.undefined.originalValue.idIrrigation], function (error, results) {
+    connection.query(query, [data, req.undefined.originalValue.id], function (error, results) {
         if (error) throw error;
 
         res.send({

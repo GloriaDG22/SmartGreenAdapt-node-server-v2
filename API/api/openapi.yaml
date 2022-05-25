@@ -1438,7 +1438,7 @@ paths:
       x-swagger-router-controller: Invernadero
     get:
       description: Devuelve todos los datos relacionados con el invernadero.
-      operationId: getInvernadero
+      operationId: getGreenhouses
       parameters:
         - description: Id del usuario
           explode: true
@@ -1477,10 +1477,11 @@ paths:
       summary: Devuelve todos los datos relacionados con el invernadero.
       tags:
         - Invernadero
-      x-swagger-router-controller: Invernadero
+      x-swagger-router-controller:
+        Invernadero
     post:
       description: Creacion de nuevos datos asociados al invernadero.
-      operationId: postInvernadero
+      operationId: postGreenhouse
       requestBody:
         content:
           application/json:
@@ -1518,7 +1519,7 @@ paths:
       x-swagger-router-controller: Invernadero
     put:
       description: Modifica un dato de invernadero previamente registrado
-      operationId: putInvernadero
+      operationId: putGreenhouses
       requestBody:
         content:
           application/json:
@@ -1560,14 +1561,13 @@ paths:
         de datos.
       operationId: deleteUser
       parameters:
-        - description: Id del user
+        - description: email del user
           explode: true
           in: query
-          name: idUsuario
+          name: email
           required: true
           schema:
-            format: int32
-            type: integer
+            type: string
           style: form
       responses:
         201:
