@@ -38,7 +38,6 @@ public class StateHeatingDetail extends Fragment {
     private MessageGreenhouse mGreenhouse;
     private TextView titulo;
     private ImageView imagen;
-    private CheckBox temp, calidad, lum, hum;
     private EditText potencia, tipo;
 
     private InformationNetworkLoaderRunnable mInformNet;
@@ -55,10 +54,6 @@ public class StateHeatingDetail extends Fragment {
         titulo = (TextView) root.findViewById(R.id.textViewTituloHD);
         imagen = root.findViewById(R.id.imageViewHD);
 
-        temp = root.findViewById(R.id.checkBoxHD);
-        calidad = root.findViewById(R.id.checkBox2HD);
-        lum = root.findViewById(R.id.checkBox3HD);
-        hum = root.findViewById(R.id.checkBox4HD);
         tipo = (EditText) root.findViewById(R.id.tipoEdittext);
         potencia = (EditText) root.findViewById(R.id.potenciaHeating);
 
@@ -72,61 +67,22 @@ public class StateHeatingDetail extends Fragment {
         tipo.setText(tipoS);
         imagen.setImageResource(R.drawable.ic_heating_svgrepo_com);
 
-        if(heatingData.getAffects().contains("Temperature")){
-            temp.setChecked(Boolean.TRUE);
-        } else {
-            temp.setChecked(Boolean.FALSE);
-        }
-        if(heatingData.getAffects().contains("Luminosity")){
-            lum.setChecked(Boolean.TRUE);
-        } else {
-            lum.setChecked(Boolean.FALSE);
-        }
-        if(heatingData.getAffects().contains("Air Quality")){
-            calidad.setChecked(Boolean.TRUE);
-        } else {
-            calidad.setChecked(Boolean.FALSE);
-        }
-        if(heatingData.getAffects().contains("Humidity")){
-            hum.setChecked(Boolean.TRUE);
-        } else {
-            hum.setChecked(Boolean.FALSE);
-        }
-
         Button cancelar = root.findViewById(R.id.buttonHD);
         // Funcionalidad boton de cancelar
         cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getActivity(), "Cambios cancelados", Toast.LENGTH_SHORT);
-                Bundle args = new Bundle();
-                args.putSerializable(GreenhouseActivity.EXTRA_GREENHOUSE, mGreenhouse);
-
-                Fragment toFragment = new StateFragment();
-                toFragment.setArguments(args);
-                getFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.nav_host_fragment, toFragment)
-                        .commit();
+                GreenhouseActivity activity = (GreenhouseActivity) requireActivity();
+                activity.volverAlListado(mGreenhouse);
             }
         });
         Button guardar = root.findViewById(R.id.button2HD);
         guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String affects  = "";
-                if(temp.isChecked()){
-                    affects = affects + "Temperature,";
-                }
-                if(lum.isChecked()){
-                    affects = affects + "Luminosity,";
-                }
-                if(calidad.isChecked()){
-                    affects = affects + "Air Quality,";
-                }
-                if(hum.isChecked()){
-                    affects = affects + "Humidity,";
-                }
+
+                String affects = "Temperatura, Humedad";
 
                 String tipoH = tipo.getText().toString();
                 int potenciaH = Integer.parseInt(potencia.getText().toString());
@@ -142,15 +98,8 @@ public class StateHeatingDetail extends Fragment {
                         public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {
                             MessageResponse mgResponse = response.body();
                             if(mgResponse.getAffectedRows() == 1) {
-                                Bundle args = new Bundle();
-                                args.putSerializable(GreenhouseActivity.EXTRA_GREENHOUSE, mGreenhouse);
-
-                                Fragment toFragment = new StateFragment();
-                                toFragment.setArguments(args);
-                                getFragmentManager()
-                                        .beginTransaction()
-                                        .replace(R.id.nav_host_fragment, toFragment)
-                                        .commit();
+                                GreenhouseActivity activity = (GreenhouseActivity) requireActivity();
+                                activity.volverAlListado(mGreenhouse);
                             }
 
                         }

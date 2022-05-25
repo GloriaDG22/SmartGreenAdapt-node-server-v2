@@ -36,7 +36,6 @@ public class StateIrrigationSprinklersDetail extends Fragment {
     private TextView titulo;
     private ImageView imagen;
     private Switch switchAbierto;
-    private CheckBox temp, calidad, lum, hum;
     private MessageGreenhouse mGreenhouse;
 
     private InformationNetworkLoaderRunnable mInformNet;
@@ -55,10 +54,6 @@ public class StateIrrigationSprinklersDetail extends Fragment {
         titulo = root.findViewById(R.id.textViewTituloSID);
         imagen = root.findViewById(R.id.imageViewSID);
         switchAbierto = root.findViewById(R.id.isOnSwitchSID);
-        temp = root.findViewById(R.id.checkBoxSID);
-        calidad = root.findViewById(R.id.checkBox2SID);
-        lum = root.findViewById(R.id.checkBox3SID);
-        hum = root.findViewById(R.id.checkBox4SID);
 
         // seteo de datos
         if(actuatorData.getClassType().equals("Sprinklers")){
@@ -76,60 +71,21 @@ public class StateIrrigationSprinklersDetail extends Fragment {
             switchAbierto.setChecked(Boolean.FALSE);
         }
 
-        if(actuatorData.getAffects().contains("Temperature")){
-            temp.setChecked(Boolean.TRUE);
-        } else {
-            temp.setChecked(Boolean.FALSE);
-        }
-        if(actuatorData.getAffects().contains("Luminosity")){
-            lum.setChecked(Boolean.TRUE);
-        } else {
-            lum.setChecked(Boolean.FALSE);
-        }
-        if(actuatorData.getAffects().contains("Air Quality")){
-            calidad.setChecked(Boolean.TRUE);
-        } else {
-            calidad.setChecked(Boolean.FALSE);
-        }
-        if(actuatorData.getAffects().contains("Humidity")){
-            hum.setChecked(Boolean.TRUE);
-        } else {
-            hum.setChecked(Boolean.FALSE);
-        }
-
         Button cancelar = root.findViewById(R.id.buttonSID);
         // Funcionalidad boton de cancelar
         cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Bundle args = new Bundle();
-                args.putSerializable(GreenhouseActivity.EXTRA_GREENHOUSE, mGreenhouse);
-
-                Fragment toFragment = new StateFragment();
-                toFragment.setArguments(args);
-                getFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.nav_host_fragment, toFragment)
-                        .commit();
+                GreenhouseActivity activity = (GreenhouseActivity) requireActivity();
+                activity.volverAlListado(mGreenhouse);
             }
         });
         Button guardar = root.findViewById(R.id.button2SID);
         guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String affects  = "";
-                if(temp.isChecked()){
-                    affects = affects + "Temperature,";
-                }
-                if(lum.isChecked()){
-                    affects = affects + "Luminosity,";
-                }
-                if(calidad.isChecked()){
-                    affects = affects + "Air Quality,";
-                }
-                if(hum.isChecked()){
-                    affects = affects + "Humidity,";
-                }
+                String affects  = "Humedad";
+
                 int ison = 0;
                 if(switchAbierto.isChecked()){
                     ison = 1;
@@ -150,15 +106,8 @@ public class StateIrrigationSprinklersDetail extends Fragment {
                     public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {
                         MessageResponse mgResponse = response.body();
                         if(mgResponse.getAffectedRows() == 1) {
-                            Bundle args = new Bundle();
-                            args.putSerializable(GreenhouseActivity.EXTRA_GREENHOUSE, mGreenhouse);
-
-                            Fragment toFragment = new StateFragment();
-                            toFragment.setArguments(args);
-                            getFragmentManager()
-                                    .beginTransaction()
-                                    .replace(R.id.nav_host_fragment, toFragment)
-                                    .commit();
+                            GreenhouseActivity activity = (GreenhouseActivity) requireActivity();
+                            activity.volverAlListado(mGreenhouse);
                         }
 
                     }

@@ -41,7 +41,6 @@ public class StateWindowDetail extends Fragment {
     private TextView titulo;
     private ImageView imagen;
     private Switch switchAbierto;
-    private CheckBox temp, calidad, lum, hum;
     private EditText nombre;
 
     private InformationNetworkLoaderRunnable mInformNet;
@@ -58,10 +57,7 @@ public class StateWindowDetail extends Fragment {
         titulo = root.findViewById(R.id.textViewTituloWD);
         imagen = root.findViewById(R.id.imageViewWD);
         switchAbierto = root.findViewById(R.id.isOnSwitchWD);
-        temp = root.findViewById(R.id.checkBoxWD);
-        calidad = root.findViewById(R.id.checkBox2WD);
-        lum = root.findViewById(R.id.checkBox3WD);
-        hum = root.findViewById(R.id.checkBox4WD);
+
         nombre = root.findViewById(R.id.windowNameEditText);
 
         // seteo de datos
@@ -74,26 +70,7 @@ public class StateWindowDetail extends Fragment {
             switchAbierto.setChecked(Boolean.FALSE);
         }
 
-        if(windowData.getAffects().contains("Temperature")){
-            temp.setChecked(Boolean.TRUE);
-        } else {
-            temp.setChecked(Boolean.FALSE);
-        }
-        if(windowData.getAffects().contains("Luminosity")){
-            lum.setChecked(Boolean.TRUE);
-        } else {
-            lum.setChecked(Boolean.FALSE);
-        }
-        if(windowData.getAffects().contains("Air Quality")){
-            calidad.setChecked(Boolean.TRUE);
-        } else {
-            calidad.setChecked(Boolean.FALSE);
-        }
-        if(windowData.getAffects().contains("Humidity")){
-            hum.setChecked(Boolean.TRUE);
-        } else {
-            hum.setChecked(Boolean.FALSE);
-        }
+
 
         nombre.setText(windowData.getName());
 
@@ -103,34 +80,16 @@ public class StateWindowDetail extends Fragment {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getActivity(), "Cambios cancelados", Toast.LENGTH_SHORT);
-               Bundle args = new Bundle();
-                            args.putSerializable(GreenhouseActivity.EXTRA_GREENHOUSE, mGreenhouse);
-
-                            Fragment toFragment = new StateFragment();
-                            toFragment.setArguments(args);
-                            getFragmentManager()
-                                    .beginTransaction()
-                                    .replace(R.id.nav_host_fragment, toFragment)
-                                    .commit();
+                GreenhouseActivity activity = (GreenhouseActivity) requireActivity();
+                activity.volverAlListado(mGreenhouse);
             }
         });
         Button guardar = root.findViewById(R.id.button2WD);
         guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String affects  = "";
-                if(temp.isChecked()){
-                    affects = affects + "Temperature,";
-                }
-                if(lum.isChecked()){
-                    affects = affects + "Luminosity,";
-                }
-                if(calidad.isChecked()){
-                    affects = affects + "Air Quality,";
-                }
-                if(hum.isChecked()){
-                    affects = affects + "Humidity,";
-                }
+                String affects  = "Luminosidad, Calidad de Aire, Temperatura";
+
 
                 String nameW = nombre.getText().toString();
                 int ison = 0;
