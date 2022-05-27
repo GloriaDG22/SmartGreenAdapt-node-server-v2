@@ -19,11 +19,13 @@ import androidx.fragment.app.Fragment;
 import es.unex.smartgreenadapt.data.remote.InformationNetworkLoaderRunnable;
 import es.unex.smartgreenadapt.model.MessageResponse;
 import es.unex.smartgreenadapt.model.greenhouse.MessageGreenhouse;
+import es.unex.smartgreenadapt.model.greenhouse.MessageNotification;
 import es.unex.smartgreenadapt.model.login.MessageUser;
 import es.unex.smartgreenadapt.model.greenhouse.MessageGreenhouse;
 import es.unex.smartgreenadapt.model.greenhouse.actuators.ActuatorAllData;
 import es.unex.smartgreenadapt.ui.information.InformationFragment;
 import es.unex.smartgreenadapt.ui.login.LoginActivity;
+import es.unex.smartgreenadapt.ui.notifications.NotificationDetailActivity;
 import es.unex.smartgreenadapt.ui.notifications.NotificationsFragment;
 import es.unex.smartgreenadapt.ui.state.StateFragment;
 import es.unex.smartgreenadapt.ui.state.StateHeatingDetail;
@@ -215,6 +217,18 @@ public class GreenhouseActivity extends AppCompatActivity {
             toFragment = new StateIrrigationSprinklersDetail();
         }
 
+        toFragment.setArguments(args);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.nav_host_fragment, toFragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    public void onClickNotificacionDetalle(MessageNotification mNotification){
+        Bundle args = new Bundle();
+        args.putSerializable("NOTIFICATION", mNotification);
+        Fragment toFragment = new NotificationDetailActivity();
         toFragment.setArguments(args);
         getSupportFragmentManager()
                 .beginTransaction()

@@ -2,12 +2,15 @@ package es.unex.smartgreenadapt.ui.notifications;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import java.sql.Date;
 import java.text.ParseException;
@@ -27,7 +30,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class NotificationDetailActivity extends AppCompatActivity implements ListNotificationAdapter.OnNotListener{
+public class NotificationDetailActivity extends Fragment {
 
 
     private TextView name, recommendations, valid_value, type, text_recommendations;
@@ -36,28 +39,26 @@ public class NotificationDetailActivity extends AppCompatActivity implements Lis
 
     private InformationNetworkLoaderRunnable mInformNet;
 
-    @SuppressLint("SetTextI18n")
-    @Override
-    public void onCreate(Bundle saveInstanceState) {
-
-        super.onCreate(saveInstanceState);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        System.out.println("Entra en el detalle notificacion");
+        //super.onCreate(saveInstanceState);
 
         mListInfo = ListInformation.getInstance();
+        View root = inflater.inflate(R.layout.activity_notification_detail, container, false);
+        //setContentView(R.layout.activity_notification_detail);
 
-        setContentView(R.layout.activity_notification_detail);
+        //((AppCompatActivity)getActivity()).setSupportActionBar(root.findViewById(R.id.toolbar_general));
+        //((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Detail notification");
 
-        setSupportActionBar(findViewById(R.id.toolbar_general));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Detail notification");
-
-        Bundle bundle = getIntent().getExtras();
+        Bundle bundle =  getArguments();
         mNotification = (MessageNotification) bundle.getSerializable(NotificationsFragment.EXTRA_NOTIFICATION);
 
-        name = findViewById(R.id.text_notification);
-        type = findViewById(R.id.value_type);
-        valid_value = findViewById(R.id.value_valid_values);
-        recommendations = findViewById(R.id.value_recommendations);
-        text_recommendations = findViewById(R.id.text_recommendations);
+        name = root.findViewById(R.id.text_notification);
+        type = root.findViewById(R.id.value_type);
+        valid_value = root.findViewById(R.id.value_valid_values);
+        recommendations = root.findViewById(R.id.value_recommendations);
+        text_recommendations = root.findViewById(R.id.text_recommendations);
 
 
         if (mNotification.isWarning()) {
@@ -77,6 +78,7 @@ public class NotificationDetailActivity extends AppCompatActivity implements Lis
         type.setText(stringType);
 
         setInformation();
+        return root;
     }
 
     private void setInformation() {
@@ -188,7 +190,7 @@ public class NotificationDetailActivity extends AppCompatActivity implements Lis
 
     }
 
-    @Override
+   /* @Override
     public void onNotificationClick(int position) {
 
     }
@@ -202,5 +204,5 @@ public class NotificationDetailActivity extends AppCompatActivity implements Lis
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 }

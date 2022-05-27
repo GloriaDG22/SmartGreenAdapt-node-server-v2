@@ -86,12 +86,10 @@ public class NotificationsFragment extends Fragment implements ListNotificationA
     public void onNotificationClick(int position) {
         mNotification = mListNotifications.getList().get(position);
 
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(EXTRA_NOTIFICATION, mNotification);
-
-        Intent intent = new Intent(mContext, NotificationDetailActivity.class);
-        intent.putExtras(bundle);
-        mContext.startActivity(intent);
+        if(isAdded()){
+            GreenhouseActivity activity = (GreenhouseActivity) requireActivity();
+            activity.onClickNotificacionDetalle(mNotification);
+        }
     }
 
     public void getNotifications(){
