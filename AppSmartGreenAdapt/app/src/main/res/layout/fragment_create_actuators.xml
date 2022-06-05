@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/vlactuators"
+        android:layout_width="414dp"
+        android:layout_height="721dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/titulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#7CAC64"
+            android:text="Crear Actuadores"
+            android:textAlignment="center"
+            android:textAppearance="@style/titleLarge"
+            android:textColor="#FFFFFF"
+            android:textSize="48sp" />
+
+        <LinearLayout
+            android:id="@+id/crearVentanaLY"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ventana:"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/nameVentanaC"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:layout_weight="1"
+                    android:text="Nombre:"
+                    android:textAlignment="center"
+                    android:textColor="@color/grey"
+                    android:textSize="22sp" />
+
+                <EditText
+                    android:id="@+id/windowNameEditText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="Name" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/botonGuardarVentana"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="70dp"
+                android:layout_marginRight="90dp"
+                android:layout_weight="1"
+                android:text="Crear Ventana"
+                app:cornerRadius="30dip" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/crearCalentador"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="Calefactor:"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/typeHDLY"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/nameWD"
+                    android:layout_width="match_parent"
+                    android:layout_height="57dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tipo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="32dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="60dp"
+                        android:layout_weight="1"
+                        android:text="Tipo:"
+                        android:textAlignment="center"
+                        android:textColor="@color/grey"
+                        android:textSize="22sp" />
+
+                    <EditText
+                        android:id="@+id/tipoEdittextCreacion"
+                        android:layout_width="236dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:minHeight="48dp"
+                        android:text="Tipo" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/botonGuardarCalefactor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="90dp"
+                android:layout_marginRight="85dp"
+                android:layout_weight="1"
+                android:text="Crear Calefactor"
+                app:cornerRadius="30dip" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/crearSprinklers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="Aspersores:"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/botonGuardarAspersor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="90dp"
+                android:layout_marginRight="85dp"
+                android:layout_weight="1"
+                android:text="Crear Aspersor"
+                app:cornerRadius="30dip" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/crearIrrigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="Riego:"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/botonCrearRiego"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="90dp"
+                android:layout_marginRight="85dp"
+                android:layout_weight="1"
+                android:text="Crear Riego"
+                app:cornerRadius="30dip" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/botonGuardarInvernadero"
+            android:layout_width="240dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="90dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="85dp"
+            android:layout_weight="1"
+            android:text="Crear Invernadero"
+            android:textColorHighlight="#00BCD4"
+            android:textColorLink="#00BCD4"
+            app:cornerRadius="30dip"
+            app:rippleColor="@color/green_700" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

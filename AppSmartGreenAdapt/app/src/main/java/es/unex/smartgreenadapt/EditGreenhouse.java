@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -22,7 +23,9 @@ import es.unex.smartgreenadapt.model.MessageResponse;
 import es.unex.smartgreenadapt.model.greenhouse.MessageGreenhouse;
 import es.unex.smartgreenadapt.model.login.MessageUser;
 import es.unex.smartgreenadapt.model.login.User;
+import es.unex.smartgreenadapt.ui.greenhouse.CreateActuators;
 import es.unex.smartgreenadapt.ui.login.LoginActivity;
+import es.unex.smartgreenadapt.ui.state.StateFragment;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -137,6 +140,15 @@ public class EditGreenhouse extends AppCompatActivity {
                         MessageResponse mgResponse = response.body();
                         if (mgResponse.getAffectedRows() == 1)
                             Log.println(Log.INFO, "Result", "The greenhouse has been added.");
+
+                        //insertid
+                        Bundle args = new Bundle();
+                        args.putSerializable("IDGREENHOUSE", mgResponse.getInsertId());
+                        args.putSerializable("GREENHOUSE", newGH);
+
+                        Intent i = new Intent(getApplicationContext(), CreateActuators.class);
+                        i.putExtras(args);
+                        startActivity(i);
                     }
                 }
 

@@ -26,12 +26,13 @@
         <activity android:name=".EditGreenhouse" />
         <activity android:name=".Profile" />
         <activity android:name=".About" />
-        <activity android:name=".ui.state.StateWindowDetail" />
-        <activity android:name=".ui.state.StateHeatingDetail" />
-        <activity android:name=".ui.state.StateIrrigationSprinklersDetail" />
-        <activity
-            android:name=".ui.notifications.NotificationDetailActivity"
-            android:theme="@style/Theme.SmartGreenAdapt.NoActionBar" />
+<!--        <activity android:name=".ui.state.StateWindowDetail" />-->
+<!--        <activity android:name=".ui.state.StateHeatingDetail" />-->
+<!--        <activity android:name=".ui.state.StateIrrigationSprinklersDetail" />-->
+        <activity android:name=".ui.greenhouse.CreateActuators" />
+<!--        <activity-->
+<!--            android:name=".ui.notifications.NotificationDetailActivity"-->
+<!--            android:theme="@style/Theme.SmartGreenAdapt.NoActionBar" />-->
     </application>
 
 </manifest>
