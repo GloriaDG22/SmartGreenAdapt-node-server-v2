@@ -1,10 +1,15 @@
 import requests
 
-# PARAMETERS RESTRICTIONS
+# PARAMETERS RESTRICTIONS DEFECT
 # temperature error < -7 | 8 > warning > 35 | error > 46
 # luminosity error < -1 | 0 > warning > 1000 | error > 1500
 # airquality error < -1 | 0 > warning > 50 | error > 200
 # humidity error < 0 | 50 > warning > 90 | error > 100
+
+# CONTENT FILE
+# Name sensor
+# [minimum value sensor]
+# [maximum value sensor]
 
 # DEFINITION
 # GET / pedir datos de la información para procesar los datos con los valores anteriores
@@ -16,6 +21,21 @@ import requests
 # cd D:Documents/Semestre9/CatedraTelefonica/SmartGreenAdapt/nodejs-server-server
 # python .\script.py
 
+with open('valoresSensores.py') as f:
+    f.readline() # temperature 
+    minTem = f.readline()
+    maxTem = f.readline()
+    
+    f.readline() # luminosity
+    maxLum = f.readline()
+    
+    f.readline() # airquality
+    maxAir = f.readline()
+
+    f.readline() # humidity
+    minHum = f.readline()
+    maxHum = f.readline()
+    
 # ----------------------- TEMPERATURE -----------------------
 information = requests.get('http://192.168.1.104:8080' + '/temperature').json()['message']
 
@@ -23,12 +43,12 @@ data = {}
 problem = False
 
 for item in information:
-    if -7 <= item['amount'] < 8 :
+    if -7 <= item['amount'] < minTem :
         problem = True
         data['is_warning'] = 0 #True
         data['status'] = 'low'
 
-    elif 35 < item['amount'] <= 46 :
+    elif maxTem < item['amount'] <= 46 :
         problem = True
         data['is_warning'] = True
         data['status'] = 'high'
@@ -57,7 +77,7 @@ problem = False
 
 for item in information:
     print(item)
-    if 1000 < item['amount'] <= 1500 :
+    if maxLum < item['amount'] <= 1500 :
         problem = True
         data['is_warning'] = 0 
         data['status'] = 'high'
@@ -84,7 +104,7 @@ problem = False
 
 for item in information:
     print(item)
-    if 50 < item['amount'] <= 200 :
+    if maxAir < item['amount'] <= 200 :
         problem = True
         data['is_warning'] = 0 
         data['status'] = 'high'
@@ -111,12 +131,12 @@ data = {}
 problem = False
 
 for item in information:
-    if 0 <= item['amount'] < 50 :
+    if 0 <= item['amount'] < minHum :
         problem = True
         data['is_warning'] = 0 #True
         data['status'] = 'low'
 
-    elif 90 < item['amount'] <= 100 :
+    elif maxHum < item['amount'] <= 100 :
         problem = True
         data['is_warning'] = True
         data['status'] = 'high'
