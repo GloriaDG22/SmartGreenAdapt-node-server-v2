@@ -220,6 +220,7 @@ VALUES (1, 1, 'Humidity,Temperature,', 1);
 INSERT INTO smartgreenadapt.heating (id, affects, type, value, idGreenhouse)
 VALUES (1, 'Temperature,Humidity,', 'Infrared', 20, 1);
 
+
 INSERT INTO smartgreenadapt.irrigation (id, is_on, affects, idGreenhouse)
 VALUES (2, 1, 'Humidity,', 2);
 INSERT INTO smartgreenadapt.windows (id, is_on, affects, name, idGreenhouse)

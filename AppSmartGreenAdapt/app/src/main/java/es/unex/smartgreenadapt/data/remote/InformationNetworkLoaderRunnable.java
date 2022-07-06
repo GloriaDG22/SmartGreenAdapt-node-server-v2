@@ -7,8 +7,7 @@ public class InformationNetworkLoaderRunnable {
 
     private static InformationNetworkLoaderRunnable mInstance;
     private Retrofit mRetrofit;
-    private String URLBase = "http://192.168.1.104:8080/"; //127.0.0.1
-    //"http://192.168.1.104:8080/temperature?idTemperature=1"
+    private String URLBase = "http://192.168.1.104:8080/";
 
     public InformationNetworkLoaderRunnable(){
 
