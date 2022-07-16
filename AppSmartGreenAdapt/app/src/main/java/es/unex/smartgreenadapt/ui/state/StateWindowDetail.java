@@ -88,7 +88,7 @@ public class StateWindowDetail extends Fragment {
         guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String affects  = "Luminosidad, Calidad de Aire, Temperatura";
+                String affects  = "Temperature,Airquality,Luminosity,Humidity";
 
 
                 String nameW = nombre.getText().toString();

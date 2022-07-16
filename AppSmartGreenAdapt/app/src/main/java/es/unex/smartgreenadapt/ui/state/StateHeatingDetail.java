@@ -82,7 +82,7 @@ public class StateHeatingDetail extends Fragment {
             @Override
             public void onClick(View view) {
 
-                String affects = "Temperatura, Humedad";
+                String affects = "Temperature,Humidity";
 
                 String tipoH = tipo.getText().toString();
                 int potenciaH = Integer.parseInt(potencia.getText().toString());

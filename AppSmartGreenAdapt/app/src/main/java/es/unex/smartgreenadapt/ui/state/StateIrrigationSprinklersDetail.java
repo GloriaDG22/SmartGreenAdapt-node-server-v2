@@ -55,12 +55,15 @@ public class StateIrrigationSprinklersDetail extends Fragment {
         switchAbierto = root.findViewById(R.id.isOnSwitchSID);
 
         // seteo de datos
+        String affects;
         if(actuatorData.getClassType().equals("Sprinklers")){
             titulo.setText("Aspersores");
             imagen.setImageResource(R.drawable.ic_irrigation_svgrepo_com);
+            affects = "Temperature,Humidity";
         } else {
             titulo.setText("Riego");
             imagen.setImageResource(R.drawable.ic_irrigation);
+            affects = "Humidity";
         }
 
         if(actuatorData.getIsOn() == 1){
@@ -83,7 +86,7 @@ public class StateIrrigationSprinklersDetail extends Fragment {
         guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String affects  = "Humedad";
+
 
                 int ison = 0;
                 if(switchAbierto.isChecked()){

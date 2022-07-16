@@ -68,7 +68,7 @@ public class CreateActuators extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(nombreVentana.getText().toString() != null && !nombreVentana.getText().toString().isEmpty()){
-                    WindowMessage wToSave = new WindowMessage(0, nombreVentana.getText().toString(), idGreenhouse, 0, "");
+                    WindowMessage wToSave = new WindowMessage(0, nombreVentana.getText().toString(), idGreenhouse, 0, "Temperature,Airquality,Luminosity,Humidity");
                     Call<MessageResponse> login = mInformNet.getApi().postWindow(wToSave);
 
                     login.enqueue(new Callback<MessageResponse>() {
@@ -78,6 +78,7 @@ public class CreateActuators extends AppCompatActivity {
                             if(mgResponse.getAffectedRows() == 1) {
                                 //GreenhouseActivity activity = (GreenhouseActivity) requireActivity();
                                 //activity.volverAlListado(mGreenhouse);
+                                Toast.makeText(getApplicationContext(), "Ventana creada", Toast.LENGTH_SHORT);
                             }
 
                         }
@@ -98,7 +99,7 @@ public class CreateActuators extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(tipo.getText().toString() != null && !tipo.getText().toString().isEmpty()){
-                    HeatingMessage hToSave = new HeatingMessage(0, tipo.getText().toString(), idGreenhouse, 0, "");
+                    HeatingMessage hToSave = new HeatingMessage(0, tipo.getText().toString(), idGreenhouse, 0, "Temperature,Humidity");
                     Call<MessageResponse> login = mInformNet.getApi().postHeating(hToSave);
 
                     login.enqueue(new Callback<MessageResponse>() {
@@ -108,6 +109,7 @@ public class CreateActuators extends AppCompatActivity {
                             if(mgResponse.getAffectedRows() == 1) {
                                 //GreenhouseActivity activity = (GreenhouseActivity) requireActivity();
                                 //activity.volverAlListado(mGreenhouse);
+                                Toast.makeText(getApplicationContext(), "Calefactor creado", Toast.LENGTH_SHORT);
                             }
 
                         }
@@ -128,7 +130,7 @@ public class CreateActuators extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(contadorAspersor == 0){
-                    ActuatorMessage wToSave = new ActuatorMessage(0,  idGreenhouse, 0, "");
+                    ActuatorMessage wToSave = new ActuatorMessage(0,  idGreenhouse, 0, "Temperature,Humidity");
                     Call<MessageResponse> login = mInformNet.getApi().postSprinklers(wToSave);
 
                     login.enqueue(new Callback<MessageResponse>() {
@@ -139,6 +141,7 @@ public class CreateActuators extends AppCompatActivity {
                                 contadorAspersor++;
                                 //GreenhouseActivity activity = (GreenhouseActivity) requireActivity();
                                 //activity.volverAlListado(mGreenhouse);
+                                Toast.makeText(getApplicationContext(), "Aspersores creados", Toast.LENGTH_SHORT);
                             }
 
                         }
@@ -162,7 +165,7 @@ public class CreateActuators extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(contadorRiego == 0){
-                    ActuatorMessage wToSave = new ActuatorMessage(0,  idGreenhouse, 0, "");
+                    ActuatorMessage wToSave = new ActuatorMessage(0,  idGreenhouse, 0, "Humidity");
                     Call<MessageResponse> login = mInformNet.getApi().postIrrigation(wToSave);
 
                     login.enqueue(new Callback<MessageResponse>() {
@@ -173,6 +176,7 @@ public class CreateActuators extends AppCompatActivity {
                                 contadorRiego++;
                                 //GreenhouseActivity activity = (GreenhouseActivity) requireActivity();
                                 //activity.volverAlListado(mGreenhouse);
+                                Toast.makeText(getApplicationContext(), "Riego creado", Toast.LENGTH_SHORT);
                             }
 
                         }
