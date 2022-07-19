@@ -127,7 +127,7 @@ module.exports.postSprinklers = function(req, res, next) {
  * returns String
  **/
 module.exports.putSprinklers = function(req, res, next) {
-    var query = 'UPDATE airquality SET ? WHERE id = ?';
+    var query = 'UPDATE sprinklers SET ? WHERE id = ?';
     var is_on;
     if(req.undefined.originalValue.is_on){
         is_on = 1;
@@ -136,12 +136,12 @@ module.exports.putSprinklers = function(req, res, next) {
     }
 
     var data = {
-        affects: req.undefined.originalValue.affects,
+        affects: req.undefined.originalValue.affects.toString(),
         is_on: is_on,
         idGreenhouse : req.undefined.originalValue.idGreenhouse
     }
 
-    connection.query(query, [data, req.undefined.originalValue.id], function (error, results) {
+    connection.query(query, [data, req.undefined.originalValue.idSprinklers], function (error, results) {
         if (error) throw error;
 
         res.send({
@@ -149,7 +149,3 @@ module.exports.putSprinklers = function(req, res, next) {
         });
     });
 };
-
-
-
-
